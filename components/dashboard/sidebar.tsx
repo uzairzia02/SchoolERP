@@ -9,7 +9,7 @@ import {
   Briefcase, Building2, UserPlus, Users2, CalendarOff, Bus,
   CreditCard, Banknote, Megaphone, CalendarDays, Newspaper,
   Image, BarChart3, Settings, Tag, Star, ChevronLeft,
-  ChevronRight,
+  ChevronRight, BookMarked, UserCog, Layers, DollarSign, Receipt,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NAV_CONFIG } from "@/config/nav.config";
@@ -26,7 +26,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Book, Calendar, ClipboardCheck, FileText, ClipboardList,
   Briefcase, Building2, UserPlus, Users2, CalendarOff, Bus,
   CreditCard, Banknote, Megaphone, CalendarDays, Newspaper,
-  Image, BarChart3, Settings, Tag, Star,
+  Image, BarChart3, Settings, Tag, Star, BookMarked, UserCog, Layers, DollarSign, Receipt,
 };
 
 // ─────────────────────────────────────────────────────────────
