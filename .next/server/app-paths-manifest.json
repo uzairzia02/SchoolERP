@@ -1,6 +1,8 @@
 {
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/dashboard/fees/page": "app/dashboard/fees/page.js",
+  "/dashboard/attendance/students/page": "app/dashboard/attendance/students/page.js",
+  "/dashboard/announcements/page": "app/dashboard/announcements/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
   "/dashboard/fees/types/page": "app/dashboard/fees/types/page.js",
-  "/dashboard/payroll/page": "app/dashboard/payroll/page.js",
-  "/dashboard/payroll/process/page": "app/dashboard/payroll/process/page.js"
+  "/dashboard/student/page": "app/dashboard/student/page.js"
 }

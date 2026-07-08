@@ -183,6 +183,11 @@ model School {
   announcements Announcement[]
   leaves        Leave[]
   holidays      Holiday[]
+  settings      SchoolSettings?
+  terms         Term[]
+  gradeScales   GradeScale[]
+  houses        House[]
+  
 
   @@map("schools")
 }
@@ -508,6 +513,7 @@ model Class {
   subjects     Subject[]
   timetables   Timetable[]
   exams        Exam[]
+  assignments  Assignment[]
 
   @@unique([schoolId, name])
   @@index([schoolId])
@@ -651,6 +657,7 @@ model Exam {
   totalMarks     Int
   passingMarks   Int
   isPublished    Boolean   @default(false)
+  attachments    String[]  @default([])
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   deletedAt      DateTime?
@@ -730,6 +737,7 @@ model Assignment {
   school      School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   teacher     Teacher  @relation(fields: [teacherId], references: [id])
   subject     Subject  @relation(fields: [subjectId], references: [id])
+  class       Class?   @relation(fields: [classId], references: [id])
   submissions AssignmentSubmission[]
 
   @@index([schoolId])
@@ -1030,6 +1038,11 @@ model Admission {
   phone           String?
   dateOfBirth     DateTime
   gender          Gender
+  religion        String?
+  nationality     String?
+  address         String?
+  city            String?
+  country         String?
   applyingForClass String
   status          AdmissionStatus @default(APPLIED)
   documents       String[]
@@ -1086,4 +1099,90 @@ model AuditLog {
   @@index([userId])
   @@index([createdAt])
   @@map("audit_logs")
+}
+
+// ─────────────────────────────────────────────────────────────
+// SETTINGS
+// ─────────────────────────────────────────────────────────────
+
+model SchoolSettings {
+  id                String   @id @default(cuid())
+  schoolId          String   @unique
+  // Academic
+  currentSession    String   @default("2025-2026")
+  sessionStartDate  DateTime?
+  sessionEndDate    DateTime?
+  termsCount        Int      @default(3)
+  // Grading
+  gradingSystem     Json?
+  passingMarks      Int      @default(33)
+  // Finance
+  bankName          String?
+  bankAccountNumber String?
+  bankBranch        String?
+  // Notifications
+  smsApiKey         String?
+  smsApiUrl         String?
+  smsMasking        String?
+  smsAbsentTemplate String?
+  smsFeeTemplate    String?
+  smsResultTemplate String?
+  // System
+  timezone          String   @default("Asia/Karachi")
+  currency          String   @default("PKR")
+  dateFormat        String   @default("DD/MM/YYYY")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@map("school_settings")
+}
+
+model Term {
+  id          String   @id @default(cuid())
+  schoolId    String
+  name        String
+  startDate   DateTime
+  endDate     DateTime
+  session     String
+  weightage   Int      @default(33)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId])
+  @@map("terms")
+}
+
+model GradeScale {
+  id         String   @id @default(cuid())
+  schoolId   String
+  grade      String
+  minMarks   Int
+  maxMarks   Int
+  gpa        Float
+  remarks    String?
+  createdAt  DateTime @default(now())
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId])
+  @@map("grade_scales")
+}
+
+model House {
+  id        String   @id @default(cuid())
+  schoolId  String
+  name      String
+  color     String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId])
+  @@map("houses")
 }

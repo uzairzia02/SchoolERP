@@ -4,6 +4,9 @@ import { auth } from "@/lib/auth";
 import { SessionProvider } from "@/providers/session-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { APP_CONFIG } from "@/config/app.config";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "@/app/api/uploadthing/core";
 import "@/app/globals.css";
 
 const inter = Inter({
@@ -43,10 +46,11 @@ export default async function RootLayout({
       className={`${inter.variable} ${plusJakarta.variable}`}
     >
       <body className="font-sans antialiased">
-        <SessionProvider session={session}>
-          {children}
-          <Toaster richColors position="top-right" />
-        </SessionProvider>
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+          <SessionProvider session={session}>
+            {children}
+            <Toaster richColors position="top-right" />
+          </SessionProvider>
       </body>
     </html>
   );

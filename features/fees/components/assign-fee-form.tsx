@@ -1,13 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Loader2, X, UserPlus, Search } from "lucide-react";
 
-import { assignFeeSchema, type AssignFeeInput } from "@/features/fees/schemas/fee.schema";
 import { assignFeeAction, getFeeTypes } from "@/features/fees/actions/fee.actions";
 import { getStudents } from "@/features/students/actions/student.actions";
 import { getClassesForSelect } from "@/features/students/actions/student.actions";
@@ -37,40 +34,23 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
   const [selectedClassId, setSelectedClassId] = useState("");
   const [studentSearch, setStudentSearch] = useState("");
   const [loadingStudents, setLoadingStudents] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    setError,
-    formState: { errors, isSubmitting },
-  } = useForm<AssignFeeInput>({
-    resolver: zodResolver(assignFeeSchema),
-    defaultValues: {
-      studentIds: [],
-      discount: 0,
-      dueDate: new Date(new Date().setDate(new Date().getDate() + 30))
-        .toISOString()
-        .split("T")[0],
-    },
-  });
-
-  const selectedFeeTypeId = watch("feeTypeId");
+  // Form fields
+  const [feeTypeId, setFeeTypeId] = useState("");
+  const [amount, setAmount] = useState("");
+  const [dueDate, setDueDate] = useState(
+    new Date(new Date().setDate(new Date().getDate() + 30))
+      .toISOString()
+      .split("T")[0]
+  );
+  const [discount, setDiscount] = useState("0");
+  const [remarks, setRemarks] = useState("");
 
   useEffect(() => {
     getFeeTypes().then(setFeeTypes);
     getClassesForSelect().then(setClasses);
   }, []);
-
-  useEffect(() => {
-    if (selectedFeeTypeId) {
-      const feeType = feeTypes.find((f) => f.id === selectedFeeTypeId);
-      if (feeType) {
-        setValue("amount", feeType.amount);
-      }
-    }
-  }, [selectedFeeTypeId, feeTypes, setValue]);
 
   useEffect(() => {
     setLoadingStudents(true);
@@ -83,6 +63,12 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
       setLoadingStudents(false);
     });
   }, [selectedClassId, studentSearch]);
+
+  function handleFeeTypeChange(id: string) {
+    setFeeTypeId(id);
+    const feeType = feeTypes.find((f) => f.id === id);
+    if (feeType) setAmount(String(feeType.amount));
+  }
 
   function toggleStudent(id: string) {
     setSelectedStudents((prev) =>
@@ -98,23 +84,24 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
     }
   }
 
-  async function onSubmit(values: AssignFeeInput) {
-    if (selectedStudents.length === 0) {
-      toast.error("Please select at least one student.");
-      return;
-    }
+  async function handleSubmit() {
+    if (!feeTypeId) { toast.error("Please select a fee type."); return; }
+    if (!amount || Number(amount) <= 0) { toast.error("Please enter a valid amount."); return; }
+    if (!dueDate) { toast.error("Please select a due date."); return; }
+    if (selectedStudents.length === 0) { toast.error("Please select at least one student."); return; }
 
+    setIsSubmitting(true);
     const result = await assignFeeAction({
-      ...values,
       studentIds: selectedStudents,
+      feeTypeId,
+      amount: Number(amount),
+      dueDate,
+      discount: Number(discount) || 0,
+      remarks: remarks || undefined,
     });
+    setIsSubmitting(false);
 
     if (!result.success) {
-      if (result.fieldErrors) {
-        Object.entries(result.fieldErrors).forEach(([field, messages]) => {
-          setError(field as keyof AssignFeeInput, { message: messages[0] });
-        });
-      }
       toast.error(result.error);
       return;
     }
@@ -146,11 +133,9 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
               <div className="space-y-1.5">
                 <Label>Fee Type *</Label>
                 <select
-                  {...register("feeTypeId")}
-                  className={cn(
-                    "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                    errors.feeTypeId && "border-destructive"
-                  )}
+                  value={feeTypeId}
+                  onChange={(e) => handleFeeTypeChange(e.target.value)}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <option value="">Select fee type</option>
                   {feeTypes.map((f) => (
@@ -159,9 +144,6 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
                     </option>
                   ))}
                 </select>
-                {errors.feeTypeId && (
-                  <p className="text-xs text-destructive">{errors.feeTypeId.message}</p>
-                )}
               </div>
 
               <div className="space-y-1.5">
@@ -169,24 +151,18 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
                 <Input
                   type="number"
                   placeholder="0"
-                  {...register("amount")}
-                  className={cn(errors.amount && "border-destructive")}
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
                 />
-                {errors.amount && (
-                  <p className="text-xs text-destructive">{errors.amount.message}</p>
-                )}
               </div>
 
               <div className="space-y-1.5">
                 <Label>Due Date *</Label>
                 <Input
                   type="date"
-                  {...register("dueDate")}
-                  className={cn(errors.dueDate && "border-destructive")}
+                  value={dueDate}
+                  onChange={(e) => setDueDate(e.target.value)}
                 />
-                {errors.dueDate && (
-                  <p className="text-xs text-destructive">{errors.dueDate.message}</p>
-                )}
               </div>
 
               <div className="space-y-1.5">
@@ -194,7 +170,8 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
                 <Input
                   type="number"
                   placeholder="0"
-                  {...register("discount")}
+                  value={discount}
+                  onChange={(e) => setDiscount(e.target.value)}
                 />
               </div>
 
@@ -202,7 +179,8 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
                 <Label>Remarks</Label>
                 <Input
                   placeholder="Optional note..."
-                  {...register("remarks")}
+                  value={remarks}
+                  onChange={(e) => setRemarks(e.target.value)}
                 />
               </div>
             </div>
@@ -219,7 +197,6 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
               )}
             </h4>
 
-            {/* Filters */}
             <div className="flex items-center gap-3">
               <select
                 value={selectedClassId}
@@ -228,9 +205,7 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
               >
                 <option value="">All Classes</option>
                 {classes.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.displayName}
-                  </option>
+                  <option key={c.id} value={c.id}>{c.displayName}</option>
                 ))}
               </select>
               <div className="relative flex-1">
@@ -244,19 +219,14 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
               </div>
             </div>
 
-            {/* Student List */}
             <div className="rounded-xl border bg-card overflow-hidden max-h-64 overflow-y-auto">
-              {/* Select All */}
               <div
                 className="flex items-center gap-3 px-4 py-2.5 border-b bg-muted/30 cursor-pointer hover:bg-muted/50"
                 onClick={toggleAll}
               >
                 <input
                   type="checkbox"
-                  checked={
-                    students.length > 0 &&
-                    selectedStudents.length === students.length
-                  }
+                  checked={students.length > 0 && selectedStudents.length === students.length}
                   onChange={toggleAll}
                   className="h-4 w-4 rounded border-input"
                   onClick={(e) => e.stopPropagation()}
@@ -322,17 +292,11 @@ export function AssignFeeForm({ onClose }: { onClose: () => void }) {
               : "No students selected"}
           </p>
           <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={onClose}
-              disabled={isSubmitting}
-            >
+            <Button type="button" variant="outline" size="sm" onClick={onClose} disabled={isSubmitting}>
               Cancel
             </Button>
             <Button
-              onClick={handleSubmit(onSubmit)}
+              onClick={handleSubmit}
               disabled={isSubmitting || selectedStudents.length === 0}
               size="sm"
               className="gap-2"

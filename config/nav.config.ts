@@ -180,9 +180,9 @@ export const NAV_CONFIG: Record<UserRole, NavGroup[]> = {
       items: [
         { title: "Attendance", href: "/dashboard/attendance/students", icon: "ClipboardCheck" },
         { title: "Timetable", href: "/dashboard/timetable", icon: "Calendar" },
-        { title: "Assignments", href: "/dashboard/assignments", icon: "ClipboardList" },
-        { title: "Examinations", href: "/dashboard/exams", icon: "FileText" },
-        { title: "Results", href: "/dashboard/grades", icon: "Star" },
+        { title: "Assignments", href: "/dashboard/student/assignments", icon: "ClipboardList" },
+        { title: "Examinations", href: "/dashboard/student/exams", icon: "FileText" },
+        { title: "Results", href: "/dashboard/student/grades", icon: "Star" },
         { title: "Fee Status", href: "/dashboard/fees", icon: "CreditCard" },
         { title: "Announcements", href: "/dashboard/announcements", icon: "Megaphone" },
       ],
