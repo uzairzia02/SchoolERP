@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import Link from "next/link";
 import { CreditCard, Settings, UserPlus } from "lucide-react";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { getFees, getFeeSummary } from "@/features/fees/actions/fee.actions";
 import { FeeTable } from "@/features/fees/components/fee-table";
 import { FeeSummaryCards } from "@/features/fees/components/fee-summary-cards";
@@ -10,6 +12,8 @@ import { Button } from "@/components/ui/button";
 import type { FeeStatus } from "@prisma/client";
 
 export const metadata: Metadata = { title: "Fee Management" };
+
+const ALLOWED_ROLES = ["ACCOUNTANT", "PRINCIPAL", "SUPER_ADMIN"];
 
 interface PageProps {
   searchParams: Promise<{
@@ -22,6 +26,10 @@ interface PageProps {
 }
 
 export default async function FeesPage({ searchParams }: PageProps) {
+  const session = await auth();
+  if (!session?.user) redirect("/login");
+  if (!ALLOWED_ROLES.includes(session.user.role)) redirect("/login");
+
   const params = await searchParams;
 
   const [feesData, summary] = await Promise.all([

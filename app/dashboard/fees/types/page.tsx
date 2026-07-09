@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, CreditCard } from "lucide-react";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 import { getFeeTypes } from "@/features/fees/actions/fee.actions";
 import { FeeTypeTable } from "@/features/fees/components/fee-type-table";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = { title: "Fee Types" };
 
+const ALLOWED_ROLES = ["ACCOUNTANT", "PRINCIPAL", "SUPER_ADMIN"];
+
 export default async function FeeTypesPage() {
+  const session = await auth();
+  if (!session?.user) redirect("/login");
+  if (!ALLOWED_ROLES.includes(session.user.role)) redirect("/login");
+
   const feeTypes = await getFeeTypes();
 
   return (
