@@ -1,8 +1,9 @@
 {
-  "/dashboard/fees/page": "app/dashboard/fees/page.js",
-  "/dashboard/attendance/students/page": "app/dashboard/attendance/students/page.js",
-  "/dashboard/announcements/page": "app/dashboard/announcements/page.js",
+  "/page": "app/page.js",
+  "/dashboard/parents/page": "app/dashboard/parents/page.js",
+  "/dashboard/parents/[id]/page": "app/dashboard/parents/[id]/page.js",
   "/(auth)/login/page": "app/(auth)/login/page.js",
-  "/dashboard/fees/types/page": "app/dashboard/fees/types/page.js",
-  "/dashboard/student/page": "app/dashboard/student/page.js"
+  "/dashboard/parent/page": "app/dashboard/parent/page.js",
+  "/dashboard/timetable/page": "app/dashboard/timetable/page.js",
+  "/dashboard/super-admin/page": "app/dashboard/super-admin/page.js"
 }

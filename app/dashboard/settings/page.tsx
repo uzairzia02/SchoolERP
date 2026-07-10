@@ -4,6 +4,8 @@ import {
   Building2, Calendar, Star, Users, Shield,
   CreditCard, Bell, FileText, Settings,
 } from "lucide-react";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = { title: "Settings" };
 
@@ -66,7 +68,14 @@ const SETTINGS_SECTIONS = [
   },
 ];
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const session = await auth();
+
+  if (!session?.user) redirect("/login");
+  if (!["PRINCIPAL", "SUPER_ADMIN"].includes(session.user.role)) {
+    redirect("/login");
+  }
+
   return (
     <div className="space-y-6 page-enter">
       <div className="flex items-center gap-3">

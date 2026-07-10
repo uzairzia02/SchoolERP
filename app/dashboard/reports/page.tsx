@@ -4,6 +4,8 @@ import {
   BarChart3, ClipboardCheck, GraduationCap,
   CreditCard, Banknote, Users,
 } from "lucide-react";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = { title: "Reports" };
 
@@ -50,7 +52,14 @@ const REPORT_CARDS = [
   },
 ];
 
-export default function ReportsPage() {
+export default async function ReportsPage() {
+  const session = await auth();
+
+  if (!session?.user) redirect("/login");
+  if (!["PRINCIPAL", "HR", "ACCOUNTANT", "SUPER_ADMIN"].includes(session.user.role)) {
+    redirect("/login");
+  }
+
   return (
     <div className="space-y-6 page-enter">
       <div className="flex items-center gap-3">

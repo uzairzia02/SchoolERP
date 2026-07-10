@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 import { getFees, getFeeSummary } from "@/features/fees/actions/fee.actions";
 import { FeeTable } from "@/features/fees/components/fee-table";
 import { FeeSummaryCards } from "@/features/fees/components/fee-summary-cards";
+import { GenerateMonthlyFeesButton } from "@/features/fees/components/generate-monthly-fees-button";
 import { AssignFeeButton } from "@/features/fees/components/assign-fee-button";
 import { Button } from "@/components/ui/button";
 import type { FeeStatus } from "@prisma/client";
@@ -58,6 +59,7 @@ export default async function FeesPage({ searchParams }: PageProps) {
           </div>
         </div>
         <div className="flex items-center gap-2">
+          <GenerateMonthlyFeesButton />
           <AssignFeeButton />
           <Button asChild variant="outline" size="sm">
             <Link href="/dashboard/fees/types">

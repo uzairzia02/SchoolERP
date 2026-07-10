@@ -177,11 +177,26 @@ export async function getStudentById(
 // Create Student
 // ─────────────────────────────────────────────────────────────
 
+// ─────────────────────────────────────────────────────────────
+// Create Student
+// ─────────────────────────────────────────────────────────────
+
+const PHONE_REGEX = /^03\d{2}-?\d{7}$/;
+
+function normalizePhone(phone: string): string {
+  const digitsOnly = phone.replace(/[^0-9]/g, "");
+  return `${digitsOnly.slice(0, 4)}-${digitsOnly.slice(4)}`;
+}
+
 export async function createStudentAction(
   values: unknown
-): Promise<ActionResult<{ id: string }>> {
+): Promise<ActionResult<{ id: string; admissionNumber: string; studentEmail: string }>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+
+  if (!["PRINCIPAL", "HR", "SUPER_ADMIN"].includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to create students." };
+  }
 
   const schoolId = session.user.schoolId;
 
@@ -196,35 +211,41 @@ export async function createStudentAction(
 
   const data = parsed.data;
 
-  // Check duplicate admission number
-  const existing = await db.student.findFirst({
-    where: { schoolId, admissionNumber: data.admissionNumber, deletedAt: null },
-  });
-  if (existing) {
+  if (data.parentPhone && !PHONE_REGEX.test(data.parentPhone)) {
     return {
       success: false,
-      error: "Admission number already exists.",
-      fieldErrors: { admissionNumber: ["This admission number is already taken."] },
+      error: "Please fix the errors below.",
+      fieldErrors: { parentPhone: ["Phone must be in the format 03xx-xxxxxxx"] },
     };
   }
 
-  // Generate email and password for student user account
-  const email = `${data.admissionNumber.toLowerCase()}@student.school.com`;
-  const hashedPassword = await hash("Student@123", 12);
+  const school = await db.school.findUnique({ where: { id: schoolId } });
+  if (!school) {
+    return { success: false, error: "School not found." };
+  }
 
   try {
     const result = await db.$transaction(async (tx) => {
-      // Create user account
+      // ── Generate the next student ID for this school ──
+      const updatedSchool = await tx.school.update({
+        where: { id: schoolId },
+        data: { studentSequence: { increment: 1 } },
+        select: { studentSequence: true },
+      });
+
+      const admissionNumber = `STU-${String(updatedSchool.studentSequence).padStart(4, "0")}`;
+      const studentEmail = `${admissionNumber.toLowerCase()}@${school.code.toLowerCase()}.scholarsync.com`;
+      const hashedPassword = await hash("Test@123", 12);
+
       const user = await tx.user.create({
         data: {
           schoolId,
-          email,
+          email: studentEmail,
           password: hashedPassword,
           role: "STUDENT",
         },
       });
 
-      // Create student
       const student = await tx.student.create({
         data: {
           schoolId,
@@ -245,53 +266,96 @@ export async function createStudentAction(
           classId: data.classId ?? null,
           sectionId: data.sectionId ?? null,
           rollNumber: data.rollNumber ?? null,
-          admissionNumber: data.admissionNumber,
+          admissionNumber,
           admissionDate: new Date(data.admissionDate),
           createdBy: session.user.id,
         },
       });
 
-      // Create parent if provided
+      // ── Parent handling: link to existing parent by phone, or create new ──
       if (data.parentFirstName && data.parentPhone) {
-        const parentEmail =
-          data.parentEmail ||
-          `parent.${data.admissionNumber.toLowerCase()}@school.com`;
-        const parentPassword = await hash("Parent@123", 12);
+        const normalizedPhone = normalizePhone(data.parentPhone);
 
-        const parentUser = await tx.user.create({
-          data: {
-            schoolId,
-            email: parentEmail,
-            password: parentPassword,
-            role: "PARENT",
-          },
+        const existingParent = await tx.parent.findFirst({
+          where: { schoolId, phone: normalizedPhone },
         });
 
-        const parent = await tx.parent.create({
-          data: {
-            schoolId,
-            userId: parentUser.id,
-            firstName: data.parentFirstName,
-            lastName: data.parentLastName ?? "",
-            email: parentEmail,
-            phone: data.parentPhone,
-          },
-        });
+        let parentId: string;
+
+        if (existingParent) {
+          parentId = existingParent.id;
+        } else {
+          const parentEmail = `${normalizedPhone.replace("-", "")}@${school.code.toLowerCase()}.scholarsync.com`;
+          const parentPassword = await hash("Test@123", 12);
+
+          const parentUser = await tx.user.create({
+            data: {
+              schoolId,
+              email: parentEmail,
+              password: parentPassword,
+              role: "PARENT",
+            },
+          });
+
+          const newParent = await tx.parent.create({
+            data: {
+              schoolId,
+              userId: parentUser.id,
+              firstName: data.parentFirstName,
+              lastName: data.parentLastName ?? "",
+              email: parentEmail,
+              phone: normalizedPhone,
+            },
+          });
+
+          parentId = newParent.id;
+        }
 
         await tx.studentParent.create({
           data: {
             studentId: student.id,
-            parentId: parent.id,
+            parentId,
             relation: data.parentRelation ?? "Guardian",
           },
         });
       }
 
-      return student;
+      // ── Auto-assign fees: all recurring fee types + any "Admission Fee" ──
+      const schoolFeeTypes = await tx.feeType.findMany({ where: { schoolId } });
+
+      const feeTypesToAssign = schoolFeeTypes.filter(
+        (ft) => ft.isRecurring || /admission/i.test(ft.name)
+      );
+
+      if (feeTypesToAssign.length > 0) {
+        const dueDate = new Date(data.admissionDate);
+        dueDate.setDate(dueDate.getDate() + 7);
+
+        await tx.fee.createMany({
+          data: feeTypesToAssign.map((ft) => ({
+            schoolId,
+            studentId: student.id,
+            feeTypeId: ft.id,
+            amount: ft.amount,
+            dueDate,
+          })),
+        });
+      }
+
+      return { student, admissionNumber, studentEmail, feesAssigned: feeTypesToAssign.length };
     });
 
     revalidatePath("/dashboard/students");
-    return { success: true, data: { id: result.id }, message: "Student created successfully." };
+    revalidatePath("/dashboard/fees");
+    return {
+      success: true,
+      data: {
+        id: result.student.id,
+        admissionNumber: result.admissionNumber,
+        studentEmail: result.studentEmail,
+      },
+      message: `Student created successfully. ${result.feesAssigned} fee record(s) assigned. Login: ${result.studentEmail} / Test@123`,
+    };
   } catch (error) {
     console.error("Create student error:", error);
     return { success: false, error: "Failed to create student. Please try again." };

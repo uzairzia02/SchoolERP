@@ -3,10 +3,19 @@ import { SubjectForm } from "@/features/subjects/components/subject-form";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = { title: "Add Subject" };
 
-export default function NewSubjectPage() {
+export default async function NewSubjectPage() {
+  const session = await auth();
+
+  if (!session?.user) redirect("/login");
+  if (!["PRINCIPAL", "SUPER_ADMIN"].includes(session.user.role)) {
+    redirect("/login");
+  }
+
   return (
     <div className="space-y-6 page-enter">
       <div className="flex items-center gap-3">

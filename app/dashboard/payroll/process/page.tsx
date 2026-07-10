@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect, useTransition } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 import {
   getEmployeesForPayroll,
   bulkProcessPayrollAction,
-  processPayrollAction,
 } from "@/features/payroll/actions/payroll.actions";
 import { ProcessPayrollForm } from "@/features/payroll/components/process-payroll-form";
 import { Button } from "@/components/ui/button";
@@ -26,6 +26,8 @@ type EmployeeForPayroll = Awaited<ReturnType<typeof getEmployeesForPayroll>>[0];
 
 export default function ProcessPayrollPage() {
   const router = useRouter();
+  const { data: session, status } = useSession();
+  
   const now = new Date();
   const [selectedMonth, setSelectedMonth] = useState(now.getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(now.getFullYear());
@@ -35,13 +37,34 @@ export default function ProcessPayrollPage() {
   const [processingEmployee, setProcessingEmployee] = useState<EmployeeForPayroll | null>(null);
   const [isBulkProcessing, setIsBulkProcessing] = useState(false);
 
+  // Client Side Auth Guard
   useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+    
+    if (session?.user && !["ACCOUNTANT", "HR", "PRINCIPAL", "SUPER_ADMIN"].includes(session.user.role as string)) {
+      router.push("/login");
+    }
+  }, [status, session, router]);
+
+  useEffect(() => {
+    if (status !== "authenticated") return;
+    
     setLoading(true);
     getEmployeesForPayroll(selectedMonth, selectedYear).then((data) => {
       setEmployees(data);
       setLoading(false);
     });
-  }, [selectedMonth, selectedYear]);
+  }, [selectedMonth, selectedYear, status]);
+
+  if (status === "loading" || !session?.user) {
+    return (
+      <div className="flex h-[50vh] items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+      </div>
+    );
+  }
 
   function toggleSelect(id: string) {
     setSelectedIds((prev) =>
@@ -235,14 +258,14 @@ export default function ProcessPayrollPage() {
 
                 <div className="flex items-center gap-6">
                   <span className="text-sm font-medium hidden sm:block">
-                    {emp.salary ? formatCurrency(emp.salary) : "—"}
+                    {emp.salary ? formatCurrency(Number(emp.salary)) : "—"}
                   </span>
 
                   {emp.payroll ? (
                     <div className="flex items-center gap-1">
                       <CheckCircle className="h-3.5 w-3.5 text-emerald-500" />
                       <Badge variant="default" className="text-[10px] bg-emerald-500">
-                        Paid {formatCurrency(emp.payroll.netSalary)}
+                        Paid {formatCurrency(Number(emp.payroll.netSalary))}
                       </Badge>
                     </div>
                   ) : (

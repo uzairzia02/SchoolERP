@@ -3,10 +3,19 @@ import { AdmissionForm } from "@/features/admissions/components/admission-form";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export const metadata: Metadata = { title: "New Application" };
 
-export default function NewAdmissionPage() {
+export default async function NewAdmissionPage() {
+  const session = await auth();
+
+  if (!session?.user) redirect("/login");
+  if (!["PRINCIPAL", "HR", "SUPER_ADMIN"].includes(session.user.role)) {
+    redirect("/login");
+  }
+
   return (
     <div className="space-y-6 page-enter">
       <div className="flex items-center gap-3">

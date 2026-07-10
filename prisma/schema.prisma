@@ -150,6 +150,7 @@ model School {
   zipCode     String
   website     String?
   logo        String?
+  studentSequence  Int  @default(0)
   isActive    Boolean  @default(true)
   timezone    String   @default("UTC")
   currency    String   @default("PKR")
