@@ -11,6 +11,7 @@ import {
   sectionUpdateSchema,
 } from "@/features/classes/schemas/class.schema";
 import type { ActionResult } from "@/types/globals.types";
+import { requireRoles } from "@/lib/auth-guards";
 
 // ─────────────────────────────────────────────────────────────
 // Types
@@ -124,6 +125,7 @@ export async function getClassById(
 export async function createClassAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -164,6 +166,7 @@ export async function createClassAction(
 export async function updateClassAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -200,6 +203,7 @@ export async function deleteClassAction(
   id: string
 ): Promise<ActionResult<null>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   if (!session?.user) redirect("/login");
 
   const schoolId = session.user.schoolId;
@@ -238,6 +242,7 @@ export async function toggleClassStatusAction(
   isActive: boolean
 ): Promise<ActionResult<null>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   if (!session?.user) redirect("/login");
 
   await db.class.update({
@@ -256,6 +261,7 @@ export async function toggleClassStatusAction(
 export async function createSectionAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -299,6 +305,7 @@ export async function createSectionAction(
 export async function updateSectionAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -335,6 +342,7 @@ export async function deleteSectionAction(
   id: string
 ): Promise<ActionResult<null>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   if (!session?.user) redirect("/login");
 
   const section = await db.section.findFirst({

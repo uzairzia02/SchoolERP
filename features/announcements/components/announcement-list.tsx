@@ -97,19 +97,26 @@ export function AnnouncementList({ initialData, canManage }: AnnouncementListPro
             className="pl-9"
           />
         </div>
-        <select
-          defaultValue={searchParams.get("isActive") ?? ""}
-          onChange={(e) => {
-            startTransition(() => {
-              router.push(`${pathname}?${createQueryString({ isActive: e.target.value || null, page: 1 })}`);
-            });
-          }}
-          className="h-10 rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        >
-          <option value="">All</option>
-          <option value="true">Published</option>
-          <option value="false">Hidden</option>
-        </select>
+
+        {/* Published/Hidden filter — managers only. Non-managers should never
+            see hidden announcements, so this control (and the underlying
+            query) is restricted to canManage. */}
+        {canManage && (
+          <select
+            defaultValue={searchParams.get("isActive") ?? ""}
+            onChange={(e) => {
+              startTransition(() => {
+                router.push(`${pathname}?${createQueryString({ isActive: e.target.value || null, page: 1 })}`);
+              });
+            }}
+            className="h-10 rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <option value="">All</option>
+            <option value="true">Published</option>
+            <option value="false">Hidden</option>
+          </select>
+        )}
+
         {canManage && (
           <Button asChild>
             <Link href="/dashboard/announcements/new">
@@ -152,12 +159,14 @@ export function AnnouncementList({ initialData, canManage }: AnnouncementListPro
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1.5">
-                    <Badge
-                      variant={announcement.isActive ? "default" : "secondary"}
-                      className="text-[10px]"
-                    >
-                      {announcement.isActive ? "Published" : "Hidden"}
-                    </Badge>
+                    {canManage && (
+                      <Badge
+                        variant={announcement.isActive ? "default" : "secondary"}
+                        className="text-[10px]"
+                      >
+                        {announcement.isActive ? "Published" : "Hidden"}
+                      </Badge>
+                    )}
                     <span className="text-xs text-muted-foreground">
                       {formatRelative(announcement.createdAt)}
                     </span>

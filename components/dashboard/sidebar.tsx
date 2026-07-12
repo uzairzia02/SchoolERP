@@ -113,7 +113,7 @@ export function Sidebar({ role }: SidebarProps) {
             <div className="space-y-0.5">
               {group.items.map((item) => (
                 <NavItemComponent
-                  key={item.href}
+                  key={`${item.title}-${item.href}`}
                   item={item}
                   collapsed={collapsed}
                 />

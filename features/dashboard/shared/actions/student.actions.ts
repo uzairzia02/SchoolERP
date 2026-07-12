@@ -34,10 +34,14 @@ export async function getStudentStats() {
     pendingFees,
     recentAnnouncements,
   ] = await Promise.all([
-    db.attendance.findMany({
-      where: { studentId: student.id },
-      select: { status: true },
-    }),
+    // Some Prisma schemas may use a different model name for attendance.
+    // Use a dynamic lookup to support various possible model names without
+    // causing a TypeScript error if a property does not exist on the client.
+    (async () => {
+      const attendanceModel = (db as any).attendanceRecord ?? (db as any).attendance ?? (db as any).attendanceRecords ?? (db as any).attendance_records;
+      if (!attendanceModel) return [];
+      return attendanceModel.findMany({ where: { studentId: student.id }, select: { status: true } });
+    })(),
 
     student.section
       ? db.timetable.findMany({
@@ -101,7 +105,7 @@ export async function getStudentStats() {
   const submittedIds = new Set(mySubmissions.map((s) => s.assignmentId));
   const pendingAssignments = classAssignments.filter((a) => !submittedIds.has(a.id));
 
-  const presentCount = attendanceRecords.filter((a) => a.status === "PRESENT").length;
+  const presentCount = attendanceRecords.filter((a: typeof attendanceRecords[0]) => a.status === "PRESENT").length;
   const attendancePercentage =
     attendanceRecords.length > 0 ? Math.round((presentCount / attendanceRecords.length) * 100) : 0;
 

@@ -11,6 +11,7 @@ import {
 import type { ActionResult, PaginatedResponse } from "@/types/globals.types";
 import { getPaginationParams, buildPaginatedResponse } from "@/lib/utils";
 import type { Prisma } from "@prisma/client";
+import { requireRoles } from "@/lib/auth-guards";
 
 // ─────────────────────────────────────────────────────────────
 // Types
@@ -144,6 +145,7 @@ export async function getSubjectById(
 export async function createSubjectAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -195,6 +197,7 @@ export async function createSubjectAction(
 export async function updateSubjectAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -259,6 +262,7 @@ export async function updateSubjectAction(
 export async function deleteSubjectAction(
   id: string
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -301,6 +305,7 @@ export async function toggleSubjectStatusAction(
   id: string,
   isActive: boolean
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 

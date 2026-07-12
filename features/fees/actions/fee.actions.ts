@@ -13,6 +13,7 @@ import {
 import type { ActionResult, PaginatedResponse } from "@/types/globals.types";
 import { getPaginationParams, buildPaginatedResponse } from "@/lib/utils";
 import type { FeeStatus, PaymentMethod, Prisma } from "@prisma/client";
+import { requireRoles } from "@/lib/auth-guards";
 
 // ─────────────────────────────────────────────────────────────
 // Types
@@ -86,6 +87,8 @@ export async function getFeeTypes(): Promise<FeeTypeItem[]> {
 export async function createFeeTypeAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "ACCOUNTANT"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -113,6 +116,7 @@ export async function createFeeTypeAction(
 export async function updateFeeTypeAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "ACCOUNTANT"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -140,6 +144,7 @@ export async function updateFeeTypeAction(
 export async function deleteFeeTypeAction(
   id: string
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "ACCOUNTANT"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -299,6 +304,7 @@ export async function getFeeSummary(): Promise<FeeSummary> {
 export async function assignFeeAction(
   values: unknown
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "ACCOUNTANT"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -344,6 +350,7 @@ export async function assignFeeAction(
 export async function collectFeeAction(
   values: unknown
 ): Promise<ActionResult<{ receiptNumber: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "ACCOUNTANT"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 

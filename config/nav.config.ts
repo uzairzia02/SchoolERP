@@ -190,22 +190,19 @@ export const NAV_CONFIG: Record<UserRole, NavGroup[]> = {
   ],
 
   PARENT: [
-    {
-      title: "Overview",
-      items: [
-        { title: "Dashboard", href: "/dashboard/parent", icon: "LayoutDashboard" },
-      ],
-    },
-    {
-      title: "My Child",
-      items: [
-        { title: "Attendance", href: "/dashboard/attendance/students", icon: "ClipboardCheck" },
-        { title: "Timetable", href: "/dashboard/timetable", icon: "Calendar" },
-        { title: "Assignments", href: "/dashboard/assignments", icon: "ClipboardList" },
-        { title: "Results", href: "/dashboard/grades", icon: "Star" },
-        { title: "Fee Status", href: "/dashboard/fees", icon: "CreditCard" },
-        { title: "Announcements", href: "/dashboard/announcements", icon: "Megaphone" },
-      ],
-    },
-  ],
+  {
+    title: "Overview",
+    items: [
+      { title: "Dashboard", href: "/dashboard/parent", icon: "LayoutDashboard" },
+    ],
+  },
+  {
+    title: "My Family",
+    items: [
+      { title: "My Children", href: "/dashboard/parent/children", icon: "Users" },
+      { title: "Assignments", href: "/dashboard/parent/assignments", icon: "ClipboardList" },
+      { title: "Announcements", href: "/dashboard/announcements", icon: "Megaphone" },
+    ],
+  },
+],
 };

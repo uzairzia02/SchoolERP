@@ -15,7 +15,7 @@ export async function getParentStats() {
         include: {
           student: {
             include: {
-              class: { select: { displayName: true } },
+              class: { select: { id: true, displayName: true } },
               section: { select: { id: true, name: true } },
             },
           },
@@ -31,7 +31,8 @@ export async function getParentStats() {
   const children = await Promise.all(
     parent.students.map(async ({ student, relation }) => {
       const [attendanceRecords, outstandingFees, upcomingExamCount] = await Promise.all([
-        db.attendance.findMany({
+        // StudentAttendance model ke mutabiq database call fixed
+        db.studentAttendance.findMany({
           where: { studentId: student.id },
           select: { status: true },
         }),
@@ -55,14 +56,14 @@ export async function getParentStats() {
           : 0,
       ]);
 
-      const presentCount = attendanceRecords.filter((a) => a.status === "PRESENT").length;
+      const presentCount = attendanceRecords.filter((a:any) => a.status === "PRESENT").length;
       const attendancePercentage =
         attendanceRecords.length > 0
           ? Math.round((presentCount / attendanceRecords.length) * 100)
           : 0;
 
       const outstandingTotal = outstandingFees.reduce(
-        (sum, f) =>
+        (sum: number, f: { amount: any; fine: any; discount: any; paidAmount: any }) =>
           sum + Number(f.amount) + Number(f.fine) - Number(f.discount) - Number(f.paidAmount),
         0
       );

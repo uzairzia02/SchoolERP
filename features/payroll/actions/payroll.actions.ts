@@ -11,6 +11,7 @@ import {
 import type { ActionResult, PaginatedResponse } from "@/types/globals.types";
 import { getPaginationParams, buildPaginatedResponse } from "@/lib/utils";
 import type { PaymentMethod, Prisma } from "@prisma/client";
+import { requireRoles } from "@/lib/auth-guards";
 
 // ─────────────────────────────────────────────────────────────
 // Types
@@ -212,6 +213,7 @@ export async function getEmployeesForPayroll(month: number, year: number) {
 export async function processPayrollAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "ACCOUNTANT"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -287,6 +289,7 @@ export async function processPayrollAction(
 export async function bulkProcessPayrollAction(
   values: unknown
 ): Promise<ActionResult<{ count: number }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "ACCOUNTANT"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -359,6 +362,7 @@ export async function bulkProcessPayrollAction(
 export async function deletePayrollAction(
   id: string
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "ACCOUNTANT"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 

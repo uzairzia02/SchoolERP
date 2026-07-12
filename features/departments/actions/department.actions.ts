@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import type { ActionResult } from "@/types/globals.types";
+import { requireRoles } from "@/lib/auth-guards";
 
 // ─────────────────────────────────────────────────────────────
 // Schemas
@@ -194,6 +195,7 @@ export async function getDepartmentById(
 export async function createDepartmentAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -238,6 +240,7 @@ export async function createDepartmentAction(
 export async function updateDepartmentAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -271,6 +274,7 @@ export async function deleteDepartmentAction(
   id: string
 ): Promise<ActionResult<null>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   if (!session?.user) redirect("/login");
 
   const dept = await db.department.findFirst({
@@ -313,6 +317,7 @@ export async function toggleDepartmentStatusAction(
   isActive: boolean
 ): Promise<ActionResult<null>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   if (!session?.user) redirect("/login");
 
   await db.department.update({
@@ -367,6 +372,7 @@ export async function createDesignationAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   if (!session?.user) redirect("/login");
 
   const parsed = designationSchema.safeParse(values);
@@ -404,6 +410,7 @@ export async function updateDesignationAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   if (!session?.user) redirect("/login");
 
   const parsed = designationUpdateSchema.safeParse(values);
@@ -443,6 +450,7 @@ export async function deleteDesignationAction(
   id: string
 ): Promise<ActionResult<null>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   if (!session?.user) redirect("/login");
 
   const desig = await db.designation.findFirst({
@@ -486,6 +494,7 @@ export async function toggleDesignationStatusAction(
   isActive: boolean
 ): Promise<ActionResult<null>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   if (!session?.user) redirect("/login");
 
   await db.designation.update({

@@ -204,6 +204,7 @@ const updateParentSchema = z.object({
 export async function updateParentAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -236,6 +237,7 @@ export async function toggleParentStatusAction(
   id: string,
   isActive: boolean
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -253,11 +255,13 @@ export async function toggleParentStatusAction(
 // ─────────────────────────────────────────────────────────────
 
 import { hash } from "bcryptjs";
+import { requireRoles } from "@/lib/auth-guards";
 
 export async function resetParentPasswordAction(
   parentId: string,
   newPassword: string
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -287,6 +291,7 @@ export async function resetParentPasswordAction(
 // ─────────────────────────────────────────────────────────────
 
 export async function getParentSummary() {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 

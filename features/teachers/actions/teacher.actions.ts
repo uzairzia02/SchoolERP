@@ -13,6 +13,7 @@ import type { ActionResult, PaginatedResponse } from "@/types/globals.types";
 import { getPaginationParams, buildPaginatedResponse } from "@/lib/utils";
 import type { Prisma } from "@prisma/client";
 import { teacherStatusSchema } from "@/features/teachers/schemas/teacher.schema";
+import { requireRoles } from "@/lib/auth-guards";
 
 
 // ─────────────────────────────────────────────────────────────
@@ -154,6 +155,7 @@ export async function getTeacherById(
 export async function createTeacherAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -252,6 +254,7 @@ export async function updateTeacherAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   if (!session?.user) redirect("/login");
 
   const schoolId = session.user.schoolId;
@@ -313,6 +316,7 @@ export async function deleteTeacherAction(
   id: string
 ): Promise<ActionResult<null>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   if (!session?.user) redirect("/login");
 
   const schoolId = session.user.schoolId;
@@ -381,6 +385,7 @@ export async function updateTeacherStatusAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   if (!session?.user) redirect("/login");
 
   const schoolId = session.user.schoolId;

@@ -9,6 +9,7 @@ import { studentSchema, studentUpdateSchema } from "@/features/students/schemas/
 import type { ActionResult, PaginatedResponse } from "@/types/globals.types";
 import { getPaginationParams, buildPaginatedResponse } from "@/lib/utils";
 import type { Prisma } from "@prisma/client";
+import { requireRoles } from "@/lib/auth-guards";
 
 // ─────────────────────────────────────────────────────────────
 // Types
@@ -191,6 +192,7 @@ function normalizePhone(phone: string): string {
 export async function createStudentAction(
   values: unknown
 ): Promise<ActionResult<{ id: string; admissionNumber: string; studentEmail: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -369,6 +371,7 @@ export async function createStudentAction(
 export async function updateStudentAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -427,6 +430,7 @@ export async function updateStudentAction(
 export async function deleteStudentAction(
   id: string
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 

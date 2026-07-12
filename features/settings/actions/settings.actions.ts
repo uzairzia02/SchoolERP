@@ -9,28 +9,30 @@ import { hash } from "bcryptjs";
 import type { ActionResult } from "@/types/globals.types";
 
 // ─────────────────────────────────────────────────────────────
-// Get or Create School Settings
+// Role guard helper
+// ─────────────────────────────────────────────────────────────
+
+const ADMIN_ONLY: string[] = ["SUPER_ADMIN", "PRINCIPAL"];
+const SUPER_ADMIN_ONLY: string[] = ["SUPER_ADMIN"];
+
+// ─────────────────────────────────────────────────────────────
+// Get or Create School Settings (read — any authenticated staff can view)
 // ─────────────────────────────────────────────────────────────
 
 export async function getSchoolSettings() {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) redirect("/login");
 
   const schoolId = session.user.schoolId;
 
-  let settings = await db.schoolSettings.findUnique({
-    where: { schoolId },
-  });
+  let settings = await db.schoolSettings.findUnique({ where: { schoolId } });
 
   if (!settings) {
-    settings = await db.schoolSettings.create({
-      data: { schoolId },
-    });
+    settings = await db.schoolSettings.create({ data: { schoolId } });
   }
 
-  const school = await db.school.findUnique({
-    where: { id: schoolId },
-  });
+  const school = await db.school.findUnique({ where: { id: schoolId } });
 
   return { settings, school };
 }
@@ -56,6 +58,9 @@ export async function updateSchoolProfileAction(
 ): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!SUPER_ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   const parsed = schoolProfileSchema.safeParse(values);
   if (!parsed.success) {
@@ -94,6 +99,9 @@ export async function updateAcademicSettingsAction(
 ): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   const parsed = academicSchema.safeParse(values);
   if (!parsed.success) {
@@ -148,6 +156,7 @@ const termSchema = z.object({
 export async function getTerms() {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) redirect("/login");
 
   return db.term.findMany({
     where: { schoolId: session.user.schoolId },
@@ -160,6 +169,9 @@ export async function createTermAction(
 ): Promise<ActionResult<{ id: string }>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   const parsed = termSchema.safeParse(values);
   if (!parsed.success) {
@@ -188,6 +200,9 @@ export async function createTermAction(
 export async function deleteTermAction(id: string): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   await db.term.delete({
     where: { id, schoolId: session.user.schoolId },
@@ -204,6 +219,7 @@ export async function deleteTermAction(id: string): Promise<ActionResult<null>> 
 export async function getGradeScales() {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) redirect("/login");
 
   return db.gradeScale.findMany({
     where: { schoolId: session.user.schoolId },
@@ -224,6 +240,9 @@ export async function createGradeScaleAction(
 ): Promise<ActionResult<{ id: string }>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   const parsed = gradeScaleSchema.safeParse(values);
   if (!parsed.success) {
@@ -245,6 +264,9 @@ export async function createGradeScaleAction(
 export async function deleteGradeScaleAction(id: string): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   await db.gradeScale.delete({
     where: { id, schoolId: session.user.schoolId },
@@ -257,6 +279,9 @@ export async function deleteGradeScaleAction(id: string): Promise<ActionResult<n
 export async function seedDefaultGradeScales(): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   const schoolId = session.user.schoolId;
 
@@ -287,12 +312,13 @@ export async function seedDefaultGradeScales(): Promise<ActionResult<null>> {
 }
 
 // ─────────────────────────────────────────────────────────────
-// User Management
+// User Management — SUPER_ADMIN ONLY
 // ─────────────────────────────────────────────────────────────
 
 export async function getUsers() {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!SUPER_ADMIN_ONLY.includes(session.user.role)) redirect("/login");
 
   return db.user.findMany({
     where: {
@@ -329,6 +355,9 @@ export async function createUserAction(
 ): Promise<ActionResult<{ id: string }>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!SUPER_ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   const parsed = createUserSchema.safeParse(values);
   if (!parsed.success) {
@@ -372,6 +401,9 @@ export async function toggleUserStatusAction(
 ): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!SUPER_ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   if (id === session.user.id) {
     return { success: false, error: "You cannot deactivate your own account." };
@@ -396,6 +428,9 @@ export async function resetUserPasswordAction(
 ): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!SUPER_ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   if (newPassword.length < 8) {
     return { success: false, error: "Password must be at least 8 characters." };
@@ -429,6 +464,9 @@ export async function updateNotificationSettingsAction(
 ): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!SUPER_ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   const parsed = notificationSchema.safeParse(values);
   if (!parsed.success) {
@@ -463,6 +501,7 @@ export async function updateFeeSettingsAction(
 ): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) redirect("/login");
 
   const parsed = feeSettingsSchema.safeParse(values);
   if (!parsed.success) {
@@ -482,7 +521,7 @@ export async function updateFeeSettingsAction(
 }
 
 // ─────────────────────────────────────────────────────────────
-// Audit Logs
+// Audit Logs — Super Admin only
 // ─────────────────────────────────────────────────────────────
 
 export async function getAuditLogs(params: {
@@ -492,6 +531,7 @@ export async function getAuditLogs(params: {
 }) {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!SUPER_ADMIN_ONLY.includes(session.user.role)) redirect("/login");
 
   const schoolId = session.user.schoolId;
   const page = params.page ?? 1;
@@ -550,6 +590,7 @@ export async function getAuditLogs(params: {
 export async function getHouses() {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) redirect("/login");
 
   return db.house.findMany({
     where: { schoolId: session.user.schoolId },
@@ -567,6 +608,9 @@ export async function createHouseAction(
 ): Promise<ActionResult<{ id: string }>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   const parsed = houseSchema.safeParse(values);
   if (!parsed.success) {
@@ -584,6 +628,9 @@ export async function createHouseAction(
 export async function deleteHouseAction(id: string): Promise<ActionResult<null>> {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!ADMIN_ONLY.includes(session.user.role)) {
+    return { success: false, error: "You don't have permission to perform this action." };
+  }
 
   await db.house.delete({
     where: { id, schoolId: session.user.schoolId },

@@ -119,25 +119,24 @@ export async function markStudentAttendanceAction(
     };
   }
 
-  const { date, classId, sectionId, records } = parsed.data;
+  const { date, sectionId, records } = parsed.data;
   const attendanceDate = new Date(date);
   attendanceDate.setHours(0, 0, 0, 0);
 
   try {
     await db.$transaction(async (tx) => {
       for (const record of records) {
-        await tx.attendance.upsert({
+        const existing = await tx.studentAttendance.findFirst({
           where: {
-            // Composite unique — we use findFirst + upsert pattern
-            id: (
-              await tx.attendance.findFirst({
-                where: {
-                  studentId: record.studentId,
-                  date: attendanceDate,
-                },
-                select: { id: true },
-              })
-            )?.id ?? "new",
+            studentId: record.studentId,
+            date: attendanceDate,
+          },
+          select: { id: true },
+        });
+
+        await tx.studentAttendance.upsert({
+          where: {
+            id: existing?.id ?? "new",
           },
           update: {
             status: record.status as AttendanceStatus,
@@ -258,7 +257,7 @@ export async function markStaffAttendanceAction(
       for (const record of records) {
         const isTeacher = record.staffType === "TEACHER";
 
-        const existing = await tx.attendance.findFirst({
+        const existing = await tx.staffAttendance.findFirst({
           where: {
             ...(isTeacher
               ? { teacherId: record.staffId }
@@ -268,7 +267,7 @@ export async function markStaffAttendanceAction(
           select: { id: true },
         });
 
-        await tx.attendance.upsert({
+        await tx.staffAttendance.upsert({
           where: { id: existing?.id ?? "new" },
           update: {
             status: record.status as AttendanceStatus,
@@ -316,11 +315,10 @@ export async function getAttendanceSummary(params: {
   const attendanceDate = new Date(params.date);
   attendanceDate.setHours(0, 0, 0, 0);
 
-  const records = await db.attendance.findMany({
+  const records = await db.studentAttendance.findMany({
     where: {
       schoolId,
       date: attendanceDate,
-      studentId: { not: null },
       student: {
         classId: params.classId,
         ...(params.sectionId && { sectionId: params.sectionId }),

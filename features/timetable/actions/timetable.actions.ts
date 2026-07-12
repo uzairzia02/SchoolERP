@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import type { ActionResult } from "@/types/globals.types";
 import type { DayOfWeek } from "@prisma/client";
+import { requireRoles } from "@/lib/auth-guards";
 
 // ─────────────────────────────────────────────────────────────
 // Types
@@ -133,6 +134,7 @@ export async function getTimetableSlots(params: {
 export async function createTimetableSlotAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -241,6 +243,7 @@ export async function createTimetableSlotAction(
 export async function deleteTimetableSlotAction(
   id: string
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 

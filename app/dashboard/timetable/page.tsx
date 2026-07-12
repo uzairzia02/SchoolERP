@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { getTimetable } from "@/features/timetable/actions/timetable.actions";
 import { TimetableGrid } from "@/features/timetable/components/timetable-grid";
+import { TimetableFilters } from "@/features/timetable/components/timetable-filters";
 import { AddSlotForm } from "@/features/timetable/components/add-slot-form";
 import { getClassesForSelect } from "@/features/students/actions/student.actions";
 import { Calendar } from "lucide-react";
@@ -16,10 +17,12 @@ interface PageProps {
 }
 
 const ADMIN_ROLES: UserRole[] = ["SUPER_ADMIN", "PRINCIPAL", "HR"];
+const VIEW_ROLES: UserRole[] = ["SUPER_ADMIN", "PRINCIPAL", "HR", "TEACHER", "FACULTY", "STUDENT"];
 
 export default async function TimetablePage({ searchParams }: PageProps) {
   const session = await auth();
   if (!session?.user) redirect("/login");
+  if (!VIEW_ROLES.includes(session.user.role as UserRole)) redirect("/login");
 
   const params = await searchParams;
   const schoolId = session.user.schoolId;
@@ -28,8 +31,8 @@ export default async function TimetablePage({ searchParams }: PageProps) {
 
   const classes = await getClassesForSelect();
 
-  let selectedClassId = params.classId ?? classes[0]?.id ?? "";
-  let selectedSectionId = params.sectionId;
+  const selectedClassId = params.classId ?? classes[0]?.id ?? "";
+  const selectedSectionId = params.sectionId;
 
   const sections = selectedClassId
     ? await db.section.findMany({
@@ -71,51 +74,12 @@ export default async function TimetablePage({ searchParams }: PageProps) {
         {canEdit && <AddSlotForm teachers={teachers} />}
       </div>
 
-      {/* Filters */}
-      <div className="rounded-xl border bg-card p-4">
-        <form className="flex items-center gap-4 flex-wrap">
-          <div className="space-y-1">
-            <label className="text-xs text-muted-foreground">Class</label>
-            <select
-              name="classId"
-              defaultValue={selectedClassId}
-              onChange={(e) => {
-                const url = new URL(window.location.href);
-                url.searchParams.set("classId", e.target.value);
-                url.searchParams.delete("sectionId");
-                window.location.href = url.toString();
-              }}
-              className="flex h-9 rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <option value="">All Classes</option>
-              {classes.map((c) => (
-                <option key={c.id} value={c.id}>{c.displayName}</option>
-              ))}
-            </select>
-          </div>
-
-          {sections.length > 0 && (
-            <div className="space-y-1">
-              <label className="text-xs text-muted-foreground">Section</label>
-              <select
-                name="sectionId"
-                defaultValue={selectedSectionId ?? ""}
-                onChange={(e) => {
-                  const url = new URL(window.location.href);
-                  url.searchParams.set("sectionId", e.target.value);
-                  window.location.href = url.toString();
-                }}
-                className="flex h-9 rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <option value="">All Sections</option>
-                {sections.map((s) => (
-                  <option key={s.id} value={s.id}>Section {s.name}</option>
-                ))}
-              </select>
-            </div>
-          )}
-        </form>
-      </div>
+      <TimetableFilters
+        classes={classes}
+        sections={sections}
+        selectedClassId={selectedClassId}
+        selectedSectionId={selectedSectionId}
+      />
 
       <TimetableGrid
         timetable={timetable}

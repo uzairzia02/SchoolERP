@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { hash } from "bcryptjs";
+import { requireRoles } from "@/lib/auth-guards";
 import {
   admissionSchema,
   enrollStudentSchema,
@@ -12,7 +13,7 @@ import {
 } from "@/features/admissions/schemas/admission.schema";
 import type { ActionResult, PaginatedResponse } from "@/types/globals.types";
 import { getPaginationParams, buildPaginatedResponse } from "@/lib/utils";
-import type { AdmissionStatus, Prisma } from "@prisma/client";
+import type { AdmissionStatus, Prisma, UserRole } from "@prisma/client";
 
 // ─────────────────────────────────────────────────────────────
 // Types
@@ -179,7 +180,37 @@ export async function getAdmissionById(
     return { success: false, error: "Admission not found." };
   }
 
-  return { success: true, data: admission as AdmissionDetail };
+  // 1. Array ke andar se target JSON string ko find aur parse karein
+  let previousSchoolInfo: any = {};
+
+  if (admission.documents && Array.isArray(admission.documents)) {
+    const previousSchoolStr = admission.documents.find((docStr) => {
+      try {
+        return JSON.parse(docStr as string).type === "previous_school";
+      } catch {
+        return false;
+      }
+    });
+
+    if (previousSchoolStr) {
+      try {
+        previousSchoolInfo = JSON.parse(previousSchoolStr as string);
+      } catch (e) {
+        console.error("Failed to parse previous school JSON", e);
+      }
+    }
+  }
+
+  // 2. Sirf wahi missing fields merge karein jo AdmissionDetail type demand kar raha hai
+  const admissionDetail: AdmissionDetail = {
+    ...admission,
+    previousSchool: previousSchoolInfo.previousSchool || null,
+    previousClass: previousSchoolInfo.previousClass || null,
+    previousGrade: previousSchoolInfo.previousGrade || null,
+    documents: admission.documents as string[],
+  };
+
+  return { success: true, data: admissionDetail };
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -189,11 +220,15 @@ export async function getAdmissionById(
 export async function createAdmissionAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  // 1. Air-tight Role Guard: Sirf management teams hi admission form execute kar sakti hain
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
+
   const session = await auth();
   if (!session?.user) redirect("/login");
 
   const schoolId = session.user.schoolId;
 
+  // 2. Data Validation Check
   const parsed = admissionSchema.safeParse(values);
   if (!parsed.success) {
     return {
@@ -205,6 +240,7 @@ export async function createAdmissionAction(
 
   const data = parsed.data;
 
+  // 3. Database Insertion
   const admission = await db.admission.create({
     data: {
       schoolId,
@@ -222,7 +258,7 @@ export async function createAdmissionAction(
       country: data.country || null,
       remarks: data.remarks || null,
       status: "APPLIED",
-      // Store parent + previous school info in documents array as JSON
+      // Store parent + previous school info in documents array as JSON strings
       documents: [
         JSON.stringify({
           type: "parent_info",
@@ -243,7 +279,9 @@ export async function createAdmissionAction(
     },
   });
 
+  // 4. Cache Clearing
   revalidatePath("/dashboard/admissions");
+  
   return {
     success: true,
     data: { id: admission.id },
@@ -258,6 +296,7 @@ export async function createAdmissionAction(
 export async function updateAdmissionStatusAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 

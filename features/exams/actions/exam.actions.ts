@@ -8,6 +8,7 @@ import { z } from "zod";
 import type { ActionResult, PaginatedResponse } from "@/types/globals.types";
 import { getPaginationParams, buildPaginatedResponse } from "@/lib/utils";
 import type { ExamType, Prisma } from "@prisma/client";
+import { requireRoles } from "@/lib/auth-guards";
 
 // ─────────────────────────────────────────────────────────────
 // Schemas
@@ -225,11 +226,15 @@ export async function getExamById(
 export async function createExamAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  // 1. Management Roles Verification Guard
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "TEACHER"]);
+
   const session = await auth();
   if (!session?.user) redirect("/login");
 
   const schoolId = session.user.schoolId;
 
+  // 2. Data Validation
   const parsed = examSchema.safeParse(values);
   if (!parsed.success) {
     return {
@@ -241,37 +246,54 @@ export async function createExamAction(
 
   const data = parsed.data;
 
-  const exam = await db.exam.create({
-    data: {
-      schoolId,
-      name: data.name,
-      type: data.type,
-      classId: data.classId,
-      startDate: new Date(data.startDate),
-      endDate: new Date(data.endDate),
-      totalMarks: data.totalMarks,
-      passingMarks: data.passingMarks,
-      attachments: data.attachments,
-      createdBy: session.user.id,
-    },
-  });
+  try {
+  
+    const exam = await db.$transaction(async (tx) => {
+      // Step A: Create the core Exam record
+      const newExam = await tx.exam.create({
+        data: {
+          schoolId,
+          name: data.name,
+          type: data.type,
+          classId: data.classId,
+          startDate: new Date(data.startDate),
+          endDate: new Date(data.endDate),
+          totalMarks: data.totalMarks,
+          passingMarks: data.passingMarks,
+          attachments: data.attachments || [],
+          createdBy: session.user.id,
+        },
+      });
 
-  // Create exam subjects
-  await db.examSubject.createMany({
-    data: data.subjectIds.map((subjectId) => ({
-      examId: exam.id,
-      subjectId,
-      totalMarks: data.totalMarks,
-      passingMarks: data.passingMarks,
-    })),
-  });
+      // Step B: Bulk-insert related exam subjects linking to the newly created exam ID
+      await tx.examSubject.createMany({
+        data: data.subjectIds.map((subjectId) => ({
+          examId: newExam.id,
+          subjectId,
+          totalMarks: data.totalMarks, // Agar har subject ke marks dynamic hain toh schema ke mutabiq map karein
+          passingMarks: data.passingMarks,
+        })),
+      });
 
-  revalidatePath("/dashboard/exams");
-  return {
-    success: true,
-    data: { id: exam.id },
-    message: "Exam created successfully.",
-  };
+      return newExam;
+    });
+
+    // 4. Cache Purge & Success Response
+    revalidatePath("/dashboard/exams");
+    
+    return {
+      success: true,
+      data: { id: exam.id },
+      message: "Exam created successfully along with scheduled subjects.",
+    };
+
+  } catch (error) {
+    console.error("Failed to create exam transaction:", error);
+    return {
+      success: false,
+      error: "Something went wrong while setting up the exam data. Please try again.",
+    };
+  }
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -281,6 +303,7 @@ export async function createExamAction(
 export async function deleteExamAction(
   id: string
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "TEACHER"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -301,6 +324,7 @@ export async function toggleExamPublishAction(
   id: string,
   isPublished: boolean
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "TEACHER"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -385,6 +409,7 @@ export async function getStudentsForGradeEntry(examId: string) {
 export async function saveGradesAction(
   values: unknown
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "TEACHER"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 

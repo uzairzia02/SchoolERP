@@ -30,12 +30,16 @@ export default async function AnnouncementsPage({ searchParams }: PageProps) {
   const data = await getAnnouncements({
     page: params.page ? parseInt(params.page) : 1,
     search: params.search,
-    isActive:
-      params.isActive === "true"
+    // Non-managers can NEVER see hidden announcements, regardless of what
+    // they pass in the URL — force isActive: true for them server-side.
+    // Only managers may toggle between all/published/hidden.
+    isActive: canManage
+      ? params.isActive === "true"
         ? true
         : params.isActive === "false"
         ? false
-        : undefined,
+        : undefined
+      : true,
     // Non-managers only see announcements targeted at their role
     role: canManage ? undefined : (session.user.role as UserRole),
   });

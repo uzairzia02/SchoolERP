@@ -8,6 +8,7 @@ import { z } from "zod";
 import type { ActionResult, PaginatedResponse } from "@/types/globals.types";
 import { getPaginationParams, buildPaginatedResponse } from "@/lib/utils";
 import type { UserRole, Prisma } from "@prisma/client";
+import { requireRoles } from "@/lib/auth-guards";
 
 // ─────────────────────────────────────────────────────────────
 // Schema
@@ -96,6 +97,7 @@ export async function getAnnouncements(params: {
 export async function createAnnouncementAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -140,6 +142,7 @@ const updateAnnouncementSchema = announcementSchema.extend({
 export async function updateAnnouncementAction(
   values: unknown
 ): Promise<ActionResult<{ id: string }>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -176,6 +179,7 @@ export async function toggleAnnouncementAction(
   id: string,
   isActive: boolean
 ): Promise<ActionResult<null>> {
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
 
@@ -196,6 +200,7 @@ export async function deleteAnnouncementAction(
   id: string
 ): Promise<ActionResult<null>> {
   const session = await auth();
+  await requireRoles(["SUPER_ADMIN", "PRINCIPAL"]);
   if (!session?.user) redirect("/login");
 
   await db.announcement.delete({
