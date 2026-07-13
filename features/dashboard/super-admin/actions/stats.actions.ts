@@ -45,21 +45,19 @@ export async function getSuperAdminStats() {
     }),
 
     // Today present students
-    db.attendance.count({
+    db.studentAttendance.count({
       where: {
         schoolId,
         date: new Date(new Date().setHours(0, 0, 0, 0)),
         status: "PRESENT",
-        studentId: { not: null },
       },
     }),
 
     // Today total attendance marked
-    db.attendance.count({
+    db.studentAttendance.count({
       where: {
         schoolId,
         date: new Date(new Date().setHours(0, 0, 0, 0)),
-        studentId: { not: null },
       },
     }),
 

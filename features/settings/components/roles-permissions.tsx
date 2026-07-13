@@ -3,6 +3,7 @@ import { ROLE_PERMISSIONS } from "@/config/roles.config";
 import { USER_ROLE_LABELS } from "@/constants/enums";
 import { Shield, CheckCircle, XCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import * as React from "react";
 
 const PERMISSION_GROUPS = [
   {
@@ -85,36 +86,36 @@ export function RolesPermissions() {
             </thead>
             <tbody>
               {PERMISSION_GROUPS.map((group) => (
-                <>
-                  <tr key={`group-${group.group}`} className="bg-muted/30">
-                    <td
-                      colSpan={ROLES.length + 1}
-                      className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide"
-                    >
-                      {group.group}
-                    </td>
-                  </tr>
-                  {group.permissions.map((permission) => (
-                    <tr key={permission} className="border-b last:border-0 hover:bg-muted/10">
-                      <td className="px-3 py-2 font-mono text-[10px] text-muted-foreground sticky left-0 bg-card">
-                        {permission}
-                      </td>
-                      {ROLES.map((role) => {
-                        const hasIt = ROLE_PERMISSIONS[role]?.includes(permission as any);
-                        return (
-                          <td key={role} className="px-3 py-2 text-center">
-                            {hasIt ? (
-                              <CheckCircle className="h-3.5 w-3.5 text-emerald-500 mx-auto" />
-                            ) : (
-                              <XCircle className="h-3.5 w-3.5 text-muted-foreground/30 mx-auto" />
-                            )}
-                          </td>
-                        );
-                      })}
-                    </tr>
-                  ))}
-                </>
-              ))}
+  <React.Fragment key={group.group}>
+    <tr key={`group-${group.group}`} className="bg-muted/30">
+      <td
+        colSpan={ROLES.length + 1}
+        className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide"
+      >
+        {group.group}
+      </td>
+    </tr>
+    {group.permissions.map((permission) => (
+      <tr key={permission} className="border-b last:border-0 hover:bg-muted/10">
+        <td className="px-3 py-2 font-mono text-[10px] text-muted-foreground sticky left-0 bg-card">
+          {permission}
+        </td>
+        {ROLES.map((role) => {
+          const hasIt = ROLE_PERMISSIONS[role]?.includes(permission as any);
+          return (
+            <td key={role} className="px-3 py-2 text-center">
+              {hasIt ? (
+                <CheckCircle className="h-3.5 w-3.5 text-emerald-500 mx-auto" />
+              ) : (
+                <XCircle className="h-3.5 w-3.5 text-muted-foreground/30 mx-auto" />
+              )}
+            </td>
+          );
+        })}
+      </tr>
+    ))}
+  </React.Fragment>
+))}
             </tbody>
           </table>
         </div>

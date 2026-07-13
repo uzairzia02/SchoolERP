@@ -16,11 +16,11 @@ async function main() {
   // Create school
   const school = await db.school.create({
     data: {
-      name: "Greenwood International School",
-      code: "GIS",
-      email: "info@greenwood.edu",
-      phone: "+92-21-1234567",
-      address: "123 Education Avenue",
+      name: "Metropolitan Academy",
+      code: "MA",
+      email: "info@metropolitan.com",
+      phone: "+92-21-36363629",
+      address: "Naseerabad",
       city: "Karachi",
       state: "Sindh",
       country: "Pakistan",
@@ -36,7 +36,7 @@ async function main() {
   const admin = await db.user.create({
     data: {
       schoolId: school.id,
-      email: "admin@greenwood.edu",
+      email: "admin@metropolitan.com",
       password: hashedPassword,
       role: "SUPER_ADMIN",
     },
@@ -46,7 +46,7 @@ async function main() {
   console.log("");
   console.log("─────────────────────────────────");
   console.log("Login credentials:");
-  console.log("  Email:    admin@greenwood.edu");
+  console.log("  Email:    admin@metropolitan.com");
   console.log("  Password: Admin@123456");
   console.log("─────────────────────────────────");
 }
