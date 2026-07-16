@@ -1,4 +1,4 @@
-9import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getClassById } from "@/features/classes/actions/class.actions";
 import { ClassForm } from "@/features/classes/components/class-form";

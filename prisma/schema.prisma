@@ -513,11 +513,11 @@ model Class {
   updatedAt      DateTime  @updatedAt
   deletedAt      DateTime?
 
-  school       School        @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  academicYear AcademicYear? @relation(fields: [academicYearId], references: [id])
+  school       School         @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  academicYear AcademicYear?  @relation(fields: [academicYearId], references: [id])
   sections     Section[]
   students     Student[]
-  subjects     Subject[]
+  subjects     ClassSubject[]
   timetables   Timetable[]
   exams        Exam[]
   assignments  Assignment[]
@@ -553,7 +553,6 @@ model Section {
 model Subject {
   id          String    @id @default(cuid())
   schoolId    String
-  classId     String?
   name        String
   code        String
   description String?
@@ -564,7 +563,7 @@ model Subject {
   deletedAt   DateTime?
 
   school      School           @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  class       Class?           @relation(fields: [classId], references: [id])
+  classes     ClassSubject[]
   teachers    TeacherSubject[]
   timetables  Timetable[]
   grades      Grade[]
@@ -574,6 +573,27 @@ model Subject {
   @@unique([schoolId, code])
   @@index([schoolId])
   @@map("subjects")
+}
+
+// ─────────────────────────────────────────────
+// CLASS SUBJECT MAPPING
+// ─────────────────────────────────────────────
+
+model ClassSubject {
+  id String @id @default(cuid())
+
+  classId   String
+  subjectId String
+
+  class   Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([classId, subjectId])
+  @@index([classId])
+  @@index([subjectId])
+  @@map("class_subjects")
 }
 
 model TeacherSubject {
@@ -881,7 +901,6 @@ model Transport {
   school   School             @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   students StudentTransport[]
 
-  
   @@unique([schoolId, routeNumber])
   @@index([schoolId])
   @@map("transport")

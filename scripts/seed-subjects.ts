@@ -1,100 +1,126 @@
 import { PrismaClient } from "@prisma/client";
 
-
-interface Context {
- prisma:PrismaClient;
- schoolId:string;
-}
-
+const prisma = new PrismaClient();
 
 export async function seedSubjects({
- prisma,
- schoolId
-}:Context){
+  prisma,
+  schoolId,
+}:{
+  prisma:PrismaClient;
+  schoolId:string;
+}) {
+
+console.log("📚 Seeding Subjects...");
 
 
-console.log("\n📖 Seeding Subjects...");
-
-
-const classes =
-await prisma.class.findMany({
-where:{
-schoolId
-}
-});
-
-
-const subjects=[
-{
-name:"English",
-code:"ENG"
-},
-{
-name:"Mathematics",
-code:"MATH"
-},
-{
-name:"Urdu",
-code:"URD"
-},
-{
-name:"Science",
-code:"SCI"
-},
-{
-name:"Computer Science",
-code:"CS"
-},
-{
-name:"Islamiat",
-code:"ISL"
-},
-{
-name:"Social Studies",
-code:"SST"
-}
+const subjects = [
+  {
+    name:"English",
+    code:"ENG",
+    description:"English Language"
+  },
+  {
+    name:"Urdu",
+    code:"URD",
+    description:"Urdu Language"
+  },
+  {
+    name:"Mathematics",
+    code:"MATH",
+    description:"Mathematics"
+  },
+  {
+    name:"Science",
+    code:"SCI",
+    description:"General Science"
+  },
+  {
+    name:"Computer Science",
+    code:"CS",
+    description:"Computer Science"
+  },
+  {
+    name:"Islamiyat",
+    code:"ISL",
+    description:"Islamic Studies"
+  },
+  {
+    name:"Social Studies",
+    code:"SST",
+    description:"Social Studies"
+  }
 ];
 
 
-for(const cls of classes){
+// Create Master Subjects
 
+const createdSubjects:any = {};
 
 for(const subject of subjects){
 
-
-await prisma.subject.upsert({
+const record = await prisma.subject.upsert({
 
 where:{
-schoolId_code:{
-schoolId,
-code:`${subject.code}-${cls.name}`
-}
+ schoolId_code:{
+   schoolId,
+   code:subject.code
+ }
 },
 
 update:{},
 
 create:{
-schoolId,
-classId:cls.id,
-name:subject.name,
-code:`${subject.code}-${cls.name}`,
-description:`${subject.name} for ${cls.name}`,
-creditHours:1
+ schoolId,
+ ...subject
 }
 
+});
+
+
+createdSubjects[subject.code]=record;
+
+}
+
+
+// Assign Subjects To Classes
+
+const classes = await prisma.class.findMany({
+where:{
+ schoolId
+}
+});
+
+
+for(const cls of classes){
+
+
+for(const subject of Object.values(createdSubjects)){
+
+
+await prisma.classSubject.upsert({
+
+where:{
+ classId_subjectId:{
+   classId:cls.id,
+   subjectId:(subject as any).id
+ }
+},
+
+update:{},
+
+create:{
+ classId:cls.id,
+ subjectId:(subject as any).id
+}
 
 });
 
 
 }
 
-
-console.log(
-`✅ Subjects Added: ${cls.name}`
-);
-
-
 }
 
+
+console.log("✅ Subjects + Class Mapping Completed");
 
 }

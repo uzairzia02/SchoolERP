@@ -15,6 +15,11 @@ import { seedHouses } from "./seed-houses";
 import { seedHolidays } from "./seed-holidays";
 import { seedTransportRoutes } from "./seed-transport-routes";
 import { seedSchoolSettings } from "./seed-school-settings";
+import { seedEmployees } from "./seed-employees";
+import { seedTeachers } from "./seed-teachers";
+import { seedParents } from "./seed-parents";
+import { seedStudents } from "./seed-students";
+import { seedFees } from "./seed-fees";
 
 const prisma = new PrismaClient();
 
@@ -54,6 +59,11 @@ async function main() {
   await seedSubjects(context);
   await seedDepartments(context);
   await seedDesignations(context);
+  await seedEmployees(context);
+  await seedTeachers(context);
+  await seedParents(context);
+  await seedStudents(context);
+  await seedFees(context);
   await seedFeeTypes(context);
   await seedGradeScale(context);
   seedLeaveTypes();
