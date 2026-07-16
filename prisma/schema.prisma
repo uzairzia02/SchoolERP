@@ -138,56 +138,62 @@ enum DayOfWeek {
 // ─────────────────────────────────────────────────────────────
 
 model School {
-  id              String   @id @default(cuid())
-  name            String
-  code            String   @unique
-  email           String   @unique
-  phone           String
-  address         String
-  city            String
-  state           String
-  country         String
-  zipCode         String
-  website         String?
-  logo            String?
-  studentSequence Int      @default(0)
-  isActive        Boolean  @default(true)
-  timezone        String   @default("UTC")
-  currency        String   @default("PKR")
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+  id               String   @id @default(cuid())
+  name             String
+  code             String   @unique
+  email            String   @unique
+  phone            String
+  address          String
+  city             String
+  state            String
+  country          String
+  zipCode          String
+  website          String?
+  logo             String?
+  studentSequence  Int      @default(0)
+  teacherSequence  Int      @default(0)
+  employeeSequence Int      @default(0)
+  isActive         Boolean  @default(true)
+  timezone         String   @default("UTC")
+  currency         String   @default("PKR")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   // Relations
-  users         User[]
-  students      Student[]
-  parents       Parent[]
-  teachers      Teacher[]
-  employees     Employee[]
-  departments   Department[]
-  designations  Designation[]
-  classes       Class[]
-  sections      Section[]
-  subjects      Subject[]
-  timetables    Timetable[]
-  exams         Exam[]
-  assignments   Assignment[]
-  fees          Fee[]
-  payroll       Payroll[]
-  transport     Transport[]
-  events        Event[]
-  news          News[]
-  gallery       GalleryItem[]
-  notifications Notification[]
-  documents     Document[]
-  auditLogs     AuditLog[]
-  admissions    Admission[]
-  announcements Announcement[]
-  leaves        Leave[]
-  holidays      Holiday[]
-  settings      SchoolSettings?
-  terms         Term[]
-  gradeScales   GradeScale[]
-  houses        House[]
+  users              User[]
+  students           Student[]
+  parents            Parent[]
+  teachers           Teacher[]
+  employees          Employee[]
+  departments        Department[]
+  designations       Designation[]
+  classes            Class[]
+  sections           Section[]
+  subjects           Subject[]
+  timetables         Timetable[]
+  exams              Exam[]
+  assignments        Assignment[]
+  fees               Fee[]
+  payroll            Payroll[]
+  transport          Transport[]
+  events             Event[]
+  news               News[]
+  gallery            GalleryItem[]
+  notifications      Notification[]
+  documents          Document[]
+  auditLogs          AuditLog[]
+  admissions         Admission[]
+  announcements      Announcement[]
+  leaves             Leave[]
+  holidays           Holiday[]
+  settings           SchoolSettings?
+  terms              Term[]
+  gradeScales        GradeScale[]
+  houses             House[]
+  paymentSubmissions PaymentSubmission[]
+  workingDays        WorkingDay[]
+  schoolTimings      SchoolTiming[]
+  Period             Period[]
 
   @@map("schools")
 }
@@ -275,18 +281,19 @@ model Student {
   updatedBy       String?
 
   // Relations
-  school        School                 @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  user          User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  class         Class?                 @relation(fields: [classId], references: [id])
-  section       Section?               @relation(fields: [sectionId], references: [id])
-  parents       StudentParent[]
-  attendance    StudentAttendance[]
-  grades        Grade[]
-  fees          Fee[]
-  assignments   AssignmentSubmission[]
-  documents     Document[]
-  transport     StudentTransport?
-  notifications Notification[]
+  school             School                 @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  user               User                   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  class              Class?                 @relation(fields: [classId], references: [id])
+  section            Section?               @relation(fields: [sectionId], references: [id])
+  parents            StudentParent[]
+  attendance         StudentAttendance[]
+  grades             Grade[]
+  fees               Fee[]
+  assignments        AssignmentSubmission[]
+  documents          Document[]
+  transport          StudentTransport?
+  notifications      Notification[]
+  paymentSubmissions PaymentSubmission[]
 
   @@unique([schoolId, admissionNumber])
   @@index([schoolId])
@@ -586,28 +593,41 @@ model TeacherSubject {
 // ─────────────────────────────────────────────────────────────
 
 model Timetable {
-  id        String    @id @default(cuid())
+  id String @id @default(cuid())
+
   schoolId  String
   classId   String
   sectionId String?
+
   subjectId String
   teacherId String
+  periodId  String
+
   dayOfWeek DayOfWeek
-  startTime String
-  endTime   String
-  room      String?
-  isActive  Boolean   @default(true)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
 
-  school  School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  class   Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
+  room String?
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  class Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+
   section Section? @relation(fields: [sectionId], references: [id])
-  subject Subject  @relation(fields: [subjectId], references: [id])
-  teacher Teacher  @relation(fields: [teacherId], references: [id])
 
+  subject Subject @relation(fields: [subjectId], references: [id])
+
+  teacher Teacher @relation(fields: [teacherId], references: [id])
+
+  period Period @relation(fields: [periodId], references: [id], onDelete: Cascade)
+
+  @@unique([classId, sectionId, dayOfWeek, periodId])
   @@index([schoolId])
   @@index([classId])
+  @@index([teacherId])
   @@map("timetables")
 }
 
@@ -802,9 +822,10 @@ model Fee {
   updatedAt     DateTime       @updatedAt
   createdBy     String?
 
-  school  School  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
-  student Student @relation(fields: [studentId], references: [id])
-  feeType FeeType @relation(fields: [feeTypeId], references: [id])
+  school             School              @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  student            Student             @relation(fields: [studentId], references: [id])
+  feeType            FeeType             @relation(fields: [feeTypeId], references: [id])
+  paymentSubmissions PaymentSubmission[]
 
   @@index([schoolId])
   @@index([studentId])
@@ -860,6 +881,8 @@ model Transport {
   school   School             @relation(fields: [schoolId], references: [id], onDelete: Cascade)
   students StudentTransport[]
 
+  
+  @@unique([schoolId, routeNumber])
   @@index([schoolId])
   @@map("transport")
 }
@@ -1139,6 +1162,56 @@ model SchoolSettings {
   @@map("school_settings")
 }
 
+// ─────────────────────────────────────────────
+// WORKING DAYS
+// ─────────────────────────────────────────────
+
+model WorkingDay {
+  id          String    @id @default(cuid())
+  schoolId    String
+  day         DayOfWeek
+  isWorking   Boolean   @default(true)
+  startTime   String?
+  endTime     String?
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@unique([schoolId, day])
+  @@index([schoolId])
+  @@map("working_days")
+}
+
+// ─────────────────────────────────────────────
+// SCHOOL TIMINGS
+// ─────────────────────────────────────────────
+
+model SchoolTiming {
+  id       String @id @default(cuid())
+  schoolId String
+
+  name      String
+  startTime String
+  endTime   String
+
+  breakStart String?
+  breakEnd   String?
+
+  isDefault Boolean @default(false)
+  isActive  Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@index([schoolId])
+  @@map("school_timings")
+}
+
 model Term {
   id        String   @id @default(cuid())
   schoolId  String
@@ -1230,4 +1303,66 @@ model StaffAttendance {
 
   @@index([schoolId, date])
   @@map("staff_attendance")
+}
+
+enum PaymentSubmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model PaymentSubmission {
+  id                String                  @id @default(cuid())
+  schoolId          String
+  feeId             String
+  studentId         String
+  submittedBy       String // Parent's User id
+  paymentMethod     PaymentMethod
+  referenceNumber   String
+  amount            Decimal                 @db.Decimal(10, 2)
+  status            PaymentSubmissionStatus @default(PENDING)
+  transactionNumber String? // generated only upon approval
+  reviewedBy        String?
+  reviewedAt        DateTime?
+  rejectionReason   String?
+  createdAt         DateTime                @default(now())
+  updatedAt         DateTime                @updatedAt
+
+  school  School  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  fee     Fee     @relation(fields: [feeId], references: [id])
+  student Student @relation(fields: [studentId], references: [id])
+
+  @@index([schoolId])
+  @@index([feeId])
+  @@map("payment_submissions")
+}
+
+// ─────────────────────────────────────────────
+// PERIOD MASTER
+// ─────────────────────────────────────────────
+
+model Period {
+  id       String @id @default(cuid())
+  schoolId String
+
+  name     String
+  periodNo Int
+
+  startTime String
+  endTime   String
+
+  duration Int
+  isBreak  Boolean @default(false)
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  school School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  timetables Timetable[]
+
+  @@unique([schoolId, periodNo])
+  @@index([schoolId])
+  @@map("periods")
 }

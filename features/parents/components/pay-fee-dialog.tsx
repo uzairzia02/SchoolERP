@@ -2,9 +2,10 @@
 
 import { useState, useTransition, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { submitFeePayment } from "@/features/parents/actions/pay-fee.actions";
+import { submitPaymentForVerification } from "@/features/parents/actions/submit-payment.actions";
 import { getSchoolBankDetails } from "@/features/parents/actions/school-bank.actions";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
@@ -13,7 +14,7 @@ import {
   Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger,
 } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { Loader2, Wallet, CheckCircle2, Printer, Landmark, Copy } from "lucide-react";
+import { Loader2, Wallet, Clock, Landmark, Copy } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 
 interface PayFeeDialogProps {
@@ -22,18 +23,6 @@ interface PayFeeDialogProps {
   feeTypeName: string;
   amountDue: number;
 }
-
-type Receipt = {
-  transactionNumber: string;
-  studentName: string;
-  className: string;
-  sectionName: string;
-  schoolName: string;
-  feeType: string;
-  amount: number;
-  paidAt: Date;
-  paymentMethod: string;
-};
 
 type BankDetails = {
   schoolName: string;
@@ -47,31 +36,44 @@ export function PayFeeDialog({ feeId, studentId, feeTypeName, amountDue }: PayFe
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [method, setMethod] = useState<"BANK_TRANSFER" | "ONLINE">("BANK_TRANSFER");
-  const [receipt, setReceipt] = useState<Receipt | null>(null);
+  const [referenceNumber, setReferenceNumber] = useState("");
+  const [submitted, setSubmitted] = useState(false);
   const [bankDetails, setBankDetails] = useState<BankDetails | null>(null);
 
   useEffect(() => {
-    if (open && !receipt) {
+    if (open && !submitted) {
       getSchoolBankDetails().then(setBankDetails);
     }
-  }, [open, receipt]);
+  }, [open, submitted]);
 
-  function handleConfirm() {
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!referenceNumber.trim()) {
+      toast.error("Please enter your bank transaction/reference number.");
+      return;
+    }
+
     startTransition(async () => {
-      const result = await submitFeePayment({ feeId, studentId, paymentMethod: method });
+      const result = await submitPaymentForVerification({
+        feeId,
+        studentId,
+        referenceNumber,
+        paymentMethod: method,
+      });
 
       if (result.success) {
-        setReceipt(result.data);
+        setSubmitted(true);
         router.refresh();
       } else {
-        toast.error(result.error ?? "Payment failed");
+        toast.error(result.error ?? "Submission failed");
       }
     });
   }
 
   function handleClose() {
     setOpen(false);
-    setReceipt(null);
+    setSubmitted(false);
+    setReferenceNumber("");
   }
 
   function copyToClipboard(text: string) {
@@ -88,37 +90,22 @@ export function PayFeeDialog({ feeId, studentId, feeTypeName, amountDue }: PayFe
         </Button>
       </DialogTrigger>
       <DialogContent>
-        {!receipt ? (
+        {!submitted ? (
           <>
             <DialogHeader>
               <DialogTitle>Pay {feeTypeName}</DialogTitle>
             </DialogHeader>
-
-            <div className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div className="rounded-lg bg-muted/50 p-3 flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Amount Due</span>
                 <span className="text-lg font-semibold">{formatCurrency(amountDue)}</span>
               </div>
 
-              <div className="space-y-2">
-                <Label>Payment Method</Label>
-                <Select value={method} onValueChange={(v) => setMethod(v as typeof method)}>
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="BANK_TRANSFER">Bank Transfer</SelectItem>
-                    <SelectItem value="ONLINE">Online Payment</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* School bank details */}
               {bankDetails?.bankAccountNumber ? (
                 <div className="rounded-lg border border-dashed p-3 space-y-1.5">
                   <p className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
                     <Landmark className="h-3.5 w-3.5" />
-                    School Bank Account
+                    Transfer to this account
                   </p>
                   <div className="text-sm space-y-1">
                     {bankDetails.bankName && (
@@ -131,10 +118,7 @@ export function PayFeeDialog({ feeId, studentId, feeTypeName, amountDue }: PayFe
                       <span className="text-muted-foreground">Account No.</span>
                       <div className="flex items-center gap-1">
                         <span className="font-mono font-medium">{bankDetails.bankAccountNumber}</span>
-                        <button
-                          type="button"
-                          onClick={() => copyToClipboard(bankDetails.bankAccountNumber!)}
-                        >
+                        <button type="button" onClick={() => copyToClipboard(bankDetails.bankAccountNumber!)}>
                           <Copy className="h-3 w-3 text-muted-foreground" />
                         </button>
                       </div>
@@ -149,79 +133,70 @@ export function PayFeeDialog({ feeId, studentId, feeTypeName, amountDue }: PayFe
                 </div>
               ) : (
                 <p className="text-xs text-amber-600 bg-amber-500/10 rounded-md px-3 py-2">
-                  Bank account details haven&apos;t been configured by the school yet.
+                  Bank account details haven&apos;t been configured yet. Contact the accounts office.
                 </p>
               )}
-            </div>
 
-            <DialogFooter>
-              <Button onClick={handleConfirm} disabled={isPending}>
-                {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                Confirm Payment
-              </Button>
-            </DialogFooter>
+              <div className="space-y-2">
+                <Label>Payment Method</Label>
+                <Select value={method} onValueChange={(v) => setMethod(v as typeof method)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="BANK_TRANSFER">Bank Transfer</SelectItem>
+                    <SelectItem value="ONLINE">Online Payment</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="ref">Your Bank Transaction / Reference Number</Label>
+                <Input
+                  id="ref"
+                  value={referenceNumber}
+                  onChange={(e) => setReferenceNumber(e.target.value)}
+                  placeholder="e.g. TXN123456789"
+                  required
+                />
+                <p className="text-xs text-muted-foreground">
+                  After transferring, enter your bank&apos;s transaction number here. The accounts
+                  office will verify it before marking this fee as paid.
+                </p>
+              </div>
+
+              <DialogFooter>
+                <Button type="submit" disabled={isPending}>
+                  {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  Submit for Verification
+                </Button>
+              </DialogFooter>
+            </form>
           </>
         ) : (
-          <PaymentSlip receipt={receipt} onClose={handleClose} />
+          <>
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-amber-600" />
+                Submitted — Awaiting Verification
+              </DialogTitle>
+            </DialogHeader>
+            <div className="space-y-3 py-2">
+              <p className="text-sm text-muted-foreground">
+                Your payment details have been sent to the accounts office. Once verified, this
+                fee will be marked as paid and you&apos;ll receive a notification with your
+                transaction number.
+              </p>
+              <p className="text-xs text-amber-600 bg-amber-500/10 rounded-md px-3 py-2">
+                This may take some time depending on the school&apos;s verification process.
+              </p>
+            </div>
+            <DialogFooter>
+              <Button onClick={handleClose}>Done</Button>
+            </DialogFooter>
+          </>
         )}
       </DialogContent>
     </Dialog>
-  );
-}
-
-function PaymentSlip({ receipt, onClose }: { receipt: Receipt; onClose: () => void }) {
-  const paidAtStr = new Date(receipt.paidAt).toLocaleString("en-US", {
-    dateStyle: "medium",
-    timeStyle: "short",
-  });
-
-  return (
-    <>
-      <DialogHeader>
-        <DialogTitle className="flex items-center gap-2">
-          <CheckCircle2 className="h-5 w-5 text-emerald-600" />
-          Payment Recorded
-        </DialogTitle>
-      </DialogHeader>
-
-      <div id="payment-slip" className="space-y-3 py-2">
-        <div className="rounded-lg border-2 border-dashed p-4 space-y-2">
-          <div className="text-center pb-2 border-b">
-            <p className="text-xs text-muted-foreground">{receipt.schoolName}</p>
-            <p className="text-xs text-muted-foreground">Transaction Number</p>
-            <p className="font-mono font-semibold text-sm">{receipt.transactionNumber}</p>
-          </div>
-
-          <Row label="Student" value={receipt.studentName} />
-          <Row label="Class" value={`${receipt.className} - ${receipt.sectionName}`} />
-          <Row label="Fee Type" value={receipt.feeType} />
-          <Row label="Amount Paid" value={formatCurrency(receipt.amount)} bold />
-          <Row label="Payment Method" value={receipt.paymentMethod.replace("_", " ")} />
-          <Row label="Date & Time" value={paidAtStr} />
-        </div>
-
-        <p className="text-xs text-amber-600 bg-amber-500/10 rounded-md px-3 py-2">
-          Keep this transaction number (<span className="font-mono font-medium">{receipt.transactionNumber}</span>).
-          The accounts office and school administration have been notified with the same number.
-        </p>
-      </div>
-
-      <DialogFooter className="gap-2">
-        <Button variant="outline" onClick={() => window.print()}>
-          <Printer className="h-4 w-4 mr-2" />
-          Print
-        </Button>
-        <Button onClick={onClose}>Done</Button>
-      </DialogFooter>
-    </>
-  );
-}
-
-function Row({ label, value, bold }: { label: string; value: string; bold?: boolean }) {
-  return (
-    <div className="flex items-center justify-between text-sm">
-      <span className="text-muted-foreground">{label}</span>
-      <span className={bold ? "font-semibold" : "font-medium"}>{value}</span>
-    </div>
   );
 }

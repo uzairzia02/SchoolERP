@@ -21,6 +21,7 @@ export const NAV_CONFIG: Record<UserRole, NavGroup[]> = {
         { title: "Attendance", href: "/dashboard/attendance/students", icon: "ClipboardCheck" },
         { title: "Examinations", href: "/dashboard/exams", icon: "FileText" },
         { title: "Assignments", href: "/dashboard/assignments", icon: "ClipboardList" },
+        { title: "Verify Payments", href: "/dashboard/fees/verify", icon: "ShieldCheck" },
       ],
     },
     {
@@ -76,6 +77,7 @@ export const NAV_CONFIG: Record<UserRole, NavGroup[]> = {
         { title: "Attendance", href: "/dashboard/attendance/students", icon: "ClipboardCheck" },
         { title: "Examinations", href: "/dashboard/exams", icon: "FileText" },
         { title: "Admissions", href: "/dashboard/admissions", icon: "UserPlus" },
+        { title: "Verify Payments", href: "/dashboard/fees/verify", icon: "ShieldCheck" },
       ],
     },
     {
@@ -125,6 +127,7 @@ export const NAV_CONFIG: Record<UserRole, NavGroup[]> = {
         { title: "Payroll", href: "/dashboard/payroll", icon: "Banknote" },
         { title: "Students", href: "/dashboard/students", icon: "GraduationCap" },
         { title: "Reports", href: "/dashboard/reports", icon: "BarChart3" },
+        { title: "Verify Payments", href: "/dashboard/fees/verify", icon: "ShieldCheck" },
       ],
     },
   ],

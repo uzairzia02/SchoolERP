@@ -154,7 +154,7 @@ export async function getTeacherById(
 
 export async function createTeacherAction(
   values: unknown
-): Promise<ActionResult<{ id: string }>> {
+): Promise<ActionResult<{ id: string; employeeId: string; teacherEmail: string }>> {
   await requireRoles(["SUPER_ADMIN", "PRINCIPAL", "HR"]);
   const session = await auth();
   if (!session?.user) redirect("/login");
@@ -172,34 +172,28 @@ export async function createTeacherAction(
 
   const data = parsed.data;
 
-  const existingEmployeeId = await db.teacher.findFirst({
-    where: { schoolId, employeeId: data.employeeId, deletedAt: null },
-  });
-  if (existingEmployeeId) {
-    return {
-      success: false,
-      error: "Employee ID already exists.",
-      fieldErrors: { employeeId: ["This employee ID is already taken."] },
-    };
+  const school = await db.school.findUnique({ where: { id: schoolId } });
+  if (!school) {
+    return { success: false, error: "School not found." };
   }
-
-  const existingEmail = await db.user.findUnique({ where: { email: data.email.toLowerCase() } });
-  if (existingEmail) {
-    return {
-      success: false,
-      error: "Email already in use.",
-      fieldErrors: { email: ["This email is already registered."] },
-    };
-  }
-
-  const hashedPassword = await hash("Teacher@123", 12);
 
   try {
     const result = await db.$transaction(async (tx) => {
+      // ── Atomically generate the next teacher ID for this school ──
+      const updatedSchool = await tx.school.update({
+        where: { id: schoolId },
+        data: { teacherSequence: { increment: 1 } },
+        select: { teacherSequence: true },
+      });
+
+      const employeeId = `TEA-${String(updatedSchool.teacherSequence).padStart(4, "0")}`;
+      const teacherEmail = `${employeeId.toLowerCase()}@${school.code.toLowerCase()}.scholarsync.com`;
+      const hashedPassword = await hash("Test@123", 12);
+
       const user = await tx.user.create({
         data: {
           schoolId,
-          email: data.email.toLowerCase(),
+          email: teacherEmail,
           password: hashedPassword,
           role: "TEACHER",
         },
@@ -209,10 +203,10 @@ export async function createTeacherAction(
         data: {
           schoolId,
           userId: user.id,
-          employeeId: data.employeeId,
+          employeeId,
           firstName: data.firstName,
           lastName: data.lastName,
-          email: data.email.toLowerCase(),
+          email: teacherEmail,
           phone: data.phone,
           gender: data.gender,
           dateOfBirth: data.dateOfBirth ? new Date(data.dateOfBirth) : null,
@@ -235,11 +229,19 @@ export async function createTeacherAction(
         });
       }
 
-      return teacher;
+      return { teacher, employeeId, teacherEmail };
     });
 
     revalidatePath("/dashboard/teachers");
-    return { success: true, data: { id: result.id }, message: "Teacher created successfully." };
+    return {
+      success: true,
+      data: {
+        id: result.teacher.id,
+        employeeId: result.employeeId,
+        teacherEmail: result.teacherEmail,
+      },
+      message: `Teacher created successfully. Login: ${result.teacherEmail} / Test@123`,
+    };
   } catch (error) {
     console.error("Create teacher error:", error);
     return { success: false, error: "Failed to create teacher. Please try again." };

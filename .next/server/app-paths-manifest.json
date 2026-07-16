@@ -1,5 +1,10 @@
 {
   "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
-  "/page": "app/page.js",
-  "/dashboard/super-admin/page": "app/dashboard/super-admin/page.js"
+  "/dashboard/departments/page": "app/dashboard/departments/page.js",
+  "/dashboard/departments/[id]/page": "app/dashboard/departments/[id]/page.js",
+  "/dashboard/classes/page": "app/dashboard/classes/page.js",
+  "/dashboard/classes/[id]/page": "app/dashboard/classes/[id]/page.js",
+  "/dashboard/subjects/page": "app/dashboard/subjects/page.js",
+  "/dashboard/subjects/[id]/page": "app/dashboard/subjects/[id]/page.js",
+  "/dashboard/subjects/[id]/edit/page": "app/dashboard/subjects/[id]/edit/page.js"
 }
