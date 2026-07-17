@@ -1,8 +1,7 @@
 {
-  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/dashboard/super-admin/page": "app/dashboard/super-admin/page.js",
-  "/dashboard/classes/page": "app/dashboard/classes/page.js",
-  "/dashboard/teachers/[id]/page": "app/dashboard/teachers/[id]/page.js",
+  "/(auth)/login/page": "app/(auth)/login/page.js",
   "/dashboard/teachers/page": "app/dashboard/teachers/page.js",
-  "/dashboard/teachers/[id]/edit/page": "app/dashboard/teachers/[id]/edit/page.js"
+  "/dashboard/teachers/[id]/edit/page": "app/dashboard/teachers/[id]/edit/page.js",
+  "/dashboard/teachers/[id]/page": "app/dashboard/teachers/[id]/page.js"
 }

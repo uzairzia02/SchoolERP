@@ -2,125 +2,141 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export async function seedSubjects({
-  prisma,
-  schoolId,
-}:{
-  prisma:PrismaClient;
-  schoolId:string;
+export async function seedSubjects(context?: {
+  prisma: PrismaClient;
+  schoolId: string;
 }) {
+  const db = context?.prisma ?? prisma;
 
-console.log("📚 Seeding Subjects...");
+  const schoolId =
+    context?.schoolId ??
+    (
+      await db.school.findFirst({
+        where: { code: "DEMO-SCHOOL" },
+        select: { id: true },
+      })
+    )?.id;
 
-
-const subjects = [
-  {
-    name:"English",
-    code:"ENG",
-    description:"English Language"
-  },
-  {
-    name:"Urdu",
-    code:"URD",
-    description:"Urdu Language"
-  },
-  {
-    name:"Mathematics",
-    code:"MATH",
-    description:"Mathematics"
-  },
-  {
-    name:"Science",
-    code:"SCI",
-    description:"General Science"
-  },
-  {
-    name:"Computer Science",
-    code:"CS",
-    description:"Computer Science"
-  },
-  {
-    name:"Islamiyat",
-    code:"ISL",
-    description:"Islamic Studies"
-  },
-  {
-    name:"Social Studies",
-    code:"SST",
-    description:"Social Studies"
+  if (!schoolId) {
+    throw new Error("Demo school not found.");
   }
-];
 
+  console.log("📚 Seeding Subjects...");
 
-// Create Master Subjects
+  const subjects = [
+    {
+      name: "English",
+      code: "ENG",
+      creditHours: 5,
+      description: "English Language",
+    },
+    {
+      name: "Urdu",
+      code: "URD",
+      creditHours: 5,
+      description: "Urdu Language",
+    },
+    {
+      name: "Mathematics",
+      code: "MATH",
+      creditHours: 6,
+      description: "Mathematics",
+    },
+    {
+      name: "General Science",
+      code: "SCI",
+      creditHours: 4,
+      description: "General Science",
+    },
+    {
+      name: "Physics",
+      code: "PHY",
+      creditHours: 5,
+      description: "Physics",
+    },
+    {
+      name: "Chemistry",
+      code: "CHEM",
+      creditHours: 5,
+      description: "Chemistry",
+    },
+    {
+      name: "Biology",
+      code: "BIO",
+      creditHours: 5,
+      description: "Biology",
+    },
+    {
+      name: "Computer Science",
+      code: "COMP",
+      creditHours: 4,
+      description: "Computer Science",
+    },
+    {
+      name: "Pakistan Studies",
+      code: "PAK",
+      creditHours: 3,
+      description: "Pakistan Studies",
+    },
+    {
+      name: "Islamiat",
+      code: "ISL",
+      creditHours: 3,
+      description: "Islamic Studies",
+    },
+    {
+      name: "Social Studies",
+      code: "SST",
+      creditHours: 3,
+      description: "Social Studies",
+    },
+    {
+      name: "General Knowledge",
+      code: "GK",
+      creditHours: 2,
+      description: "General Knowledge",
+    },
+    {
+      name: "Drawing",
+      code: "DRAW",
+      creditHours: 2,
+      description: "Drawing & Art",
+    },
+  ];
 
-const createdSubjects:any = {};
+  for (const subject of subjects) {
+    await db.subject.upsert({
+      where: {
+        schoolId_code: {
+          schoolId,
+          code: subject.code,
+        },
+      },
+      update: {
+        name: subject.name,
+        description: subject.description,
+        creditHours: subject.creditHours,
+        isActive: true,
+      },
+      create: {
+        schoolId,
+        name: subject.name,
+        code: subject.code,
+        description: subject.description,
+        creditHours: subject.creditHours,
+        isActive: true,
+      },
+    });
+  }
 
-for(const subject of subjects){
-
-const record = await prisma.subject.upsert({
-
-where:{
- schoolId_code:{
-   schoolId,
-   code:subject.code
- }
-},
-
-update:{},
-
-create:{
- schoolId,
- ...subject
+  console.log(`✅ ${subjects.length} Subjects Seeded`);
 }
 
-});
-
-
-createdSubjects[subject.code]=record;
-
-}
-
-
-// Assign Subjects To Classes
-
-const classes = await prisma.class.findMany({
-where:{
- schoolId
-}
-});
-
-
-for(const cls of classes){
-
-
-for(const subject of Object.values(createdSubjects)){
-
-
-await prisma.classSubject.upsert({
-
-where:{
- classId_subjectId:{
-   classId:cls.id,
-   subjectId:(subject as any).id
- }
-},
-
-update:{},
-
-create:{
- classId:cls.id,
- subjectId:(subject as any).id
-}
-
-});
-
-
-}
-
-}
-
-
-console.log("✅ Subjects + Class Mapping Completed");
-
-}
+seedSubjects()
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
