@@ -1,102 +1,9 @@
 {
   "node": {
-    "002861881fc3c7fd559cad24feb2a38df872df7efe": {
-      "workers": {
-        "app/(auth)/login/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/super-admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/teachers/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/(auth)/login/page": "action-browser",
-        "app/dashboard/super-admin/page": "action-browser",
-        "app/dashboard/teachers/page": "action-browser",
-        "app/dashboard/teachers/[id]/page": "action-browser",
-        "app/dashboard/teachers/[id]/edit/page": "action-browser"
-      }
-    },
-    "40bf13e218c2b7c858126421b2278cad7e1c14439c": {
-      "workers": {
-        "app/(auth)/login/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/super-admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/teachers/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/(auth)/login/page": "action-browser",
-        "app/dashboard/super-admin/page": "action-browser",
-        "app/dashboard/teachers/page": "action-browser",
-        "app/dashboard/teachers/[id]/page": "action-browser",
-        "app/dashboard/teachers/[id]/edit/page": "action-browser"
-      }
-    },
-    "40c7f4c98d45fddce780fa56871ad9953570419754": {
-      "workers": {
-        "app/(auth)/login/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/super-admin/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/teachers/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%22002861881fc3c7fd559cad24feb2a38df872df7efe%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%2240bf13e218c2b7c858126421b2278cad7e1c14439c%22%2C%22exportedName%22%3A%22loginAction%22%7D%2C%7B%22id%22%3A%2240c7f4c98d45fddce780fa56871ad9953570419754%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%5D%5D%5D&__client_imported__=true!",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/(auth)/login/page": "action-browser",
-        "app/dashboard/super-admin/page": "action-browser",
-        "app/dashboard/teachers/page": "action-browser",
-        "app/dashboard/teachers/[id]/page": "action-browser",
-        "app/dashboard/teachers/[id]/edit/page": "action-browser"
-      }
-    },
-    "00839eb03a60f0a2b33d85ea78a022fae1f1503cfa": {
+    "00105a5833f86324f091656a77b9264f103aea9ec0": {
       "workers": {
         "app/dashboard/super-admin/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cdashboard%5C%5Csuper-admin%5C%5Cactions%5C%5Cstats.actions.ts%22%2C%5B%7B%22id%22%3A%2200839eb03a60f0a2b33d85ea78a022fae1f1503cfa%22%2C%22exportedName%22%3A%22getMonthlyEnrollment%22%7D%2C%7B%22id%22%3A%2200c21338b6a2f5446dfc21ed5f8be463a65cf94bf9%22%2C%22exportedName%22%3A%22getSuperAdminStats%22%7D%2C%7B%22id%22%3A%2200eaef20dac6fad68339c1b26d95bd6f82327e9ea1%22%2C%22exportedName%22%3A%22getMonthlyFeeCollection%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cdashboard%5C%5Csuper-admin%5C%5Cactions%5C%5Cstats.actions.ts%22%2C%5B%7B%22id%22%3A%2200105a5833f86324f091656a77b9264f103aea9ec0%22%2C%22exportedName%22%3A%22getSuperAdminStats%22%7D%2C%7B%22id%22%3A%220030cd0b1390922eedd3331e5dcd20773bd25278a7%22%2C%22exportedName%22%3A%22getMonthlyEnrollment%22%7D%2C%7B%22id%22%3A%2200ad047f8fbc09104d69b6b5308235d3a49167e478%22%2C%22exportedName%22%3A%22getMonthlyFeeCollection%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
@@ -104,10 +11,10 @@
         "app/dashboard/super-admin/page": "rsc"
       }
     },
-    "00c21338b6a2f5446dfc21ed5f8be463a65cf94bf9": {
+    "0030cd0b1390922eedd3331e5dcd20773bd25278a7": {
       "workers": {
         "app/dashboard/super-admin/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cdashboard%5C%5Csuper-admin%5C%5Cactions%5C%5Cstats.actions.ts%22%2C%5B%7B%22id%22%3A%2200839eb03a60f0a2b33d85ea78a022fae1f1503cfa%22%2C%22exportedName%22%3A%22getMonthlyEnrollment%22%7D%2C%7B%22id%22%3A%2200c21338b6a2f5446dfc21ed5f8be463a65cf94bf9%22%2C%22exportedName%22%3A%22getSuperAdminStats%22%7D%2C%7B%22id%22%3A%2200eaef20dac6fad68339c1b26d95bd6f82327e9ea1%22%2C%22exportedName%22%3A%22getMonthlyFeeCollection%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cdashboard%5C%5Csuper-admin%5C%5Cactions%5C%5Cstats.actions.ts%22%2C%5B%7B%22id%22%3A%2200105a5833f86324f091656a77b9264f103aea9ec0%22%2C%22exportedName%22%3A%22getSuperAdminStats%22%7D%2C%7B%22id%22%3A%220030cd0b1390922eedd3331e5dcd20773bd25278a7%22%2C%22exportedName%22%3A%22getMonthlyEnrollment%22%7D%2C%7B%22id%22%3A%2200ad047f8fbc09104d69b6b5308235d3a49167e478%22%2C%22exportedName%22%3A%22getMonthlyFeeCollection%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
@@ -115,10 +22,10 @@
         "app/dashboard/super-admin/page": "rsc"
       }
     },
-    "00eaef20dac6fad68339c1b26d95bd6f82327e9ea1": {
+    "00ad047f8fbc09104d69b6b5308235d3a49167e478": {
       "workers": {
         "app/dashboard/super-admin/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cdashboard%5C%5Csuper-admin%5C%5Cactions%5C%5Cstats.actions.ts%22%2C%5B%7B%22id%22%3A%2200839eb03a60f0a2b33d85ea78a022fae1f1503cfa%22%2C%22exportedName%22%3A%22getMonthlyEnrollment%22%7D%2C%7B%22id%22%3A%2200c21338b6a2f5446dfc21ed5f8be463a65cf94bf9%22%2C%22exportedName%22%3A%22getSuperAdminStats%22%7D%2C%7B%22id%22%3A%2200eaef20dac6fad68339c1b26d95bd6f82327e9ea1%22%2C%22exportedName%22%3A%22getMonthlyFeeCollection%22%7D%5D%5D%5D&__client_imported__=!",
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cdashboard%5C%5Csuper-admin%5C%5Cactions%5C%5Cstats.actions.ts%22%2C%5B%7B%22id%22%3A%2200105a5833f86324f091656a77b9264f103aea9ec0%22%2C%22exportedName%22%3A%22getSuperAdminStats%22%7D%2C%7B%22id%22%3A%220030cd0b1390922eedd3331e5dcd20773bd25278a7%22%2C%22exportedName%22%3A%22getMonthlyEnrollment%22%7D%2C%7B%22id%22%3A%2200ad047f8fbc09104d69b6b5308235d3a49167e478%22%2C%22exportedName%22%3A%22getMonthlyFeeCollection%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
@@ -126,196 +33,264 @@
         "app/dashboard/super-admin/page": "rsc"
       }
     },
-    "0031164e67a483a43baa3c73f12cd300404d1df686": {
+    "00ab125dfbd380c789568bba6617382622b64e3c7e": {
       "workers": {
-        "app/dashboard/teachers/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/super-admin/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/timetable/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Csubjects%5C%5Cactions%5C%5Csubject.actions.ts%22%2C%5B%7B%22id%22%3A%2240166c4123720252997c69db6cf75617f66ae48188%22%2C%22exportedName%22%3A%22getSubjectById%22%7D%2C%7B%22id%22%3A%22401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe%22%2C%22exportedName%22%3A%22getSubjects%22%7D%2C%7B%22id%22%3A%22402c9047db40b4a58dd308763fa4f87ee27434ccbf%22%2C%22exportedName%22%3A%22deleteSubjectAction%22%7D%2C%7B%22id%22%3A%22402f9ab6432441a7256ab06eceb9ca8626b25ee5bb%22%2C%22exportedName%22%3A%22updateSubjectAction%22%7D%2C%7B%22id%22%3A%2240c07aee46b3ebf4bca303a60cdb4c958e625dd625%22%2C%22exportedName%22%3A%22createSubjectAction%22%7D%2C%7B%22id%22%3A%226054e3ae96b453df85c8b46fb6cbd655318c5ae0d6%22%2C%22exportedName%22%3A%22toggleSubjectStatusAction%22%7D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
-        "app/dashboard/teachers/page": "rsc",
-        "app/dashboard/teachers/[id]/page": "rsc",
-        "app/dashboard/teachers/[id]/edit/page": "rsc"
+        "app/dashboard/super-admin/page": "action-browser",
+        "app/dashboard/timetable/page": "action-browser"
       }
     },
-    "008584f5b671da0dd20b4ddd8041b8a346f047b7f2": {
+    "400765098883e69c7a7d857d75fad552c063a1ff7a": {
       "workers": {
-        "app/dashboard/teachers/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/super-admin/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/timetable/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Csubjects%5C%5Cactions%5C%5Csubject.actions.ts%22%2C%5B%7B%22id%22%3A%2240166c4123720252997c69db6cf75617f66ae48188%22%2C%22exportedName%22%3A%22getSubjectById%22%7D%2C%7B%22id%22%3A%22401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe%22%2C%22exportedName%22%3A%22getSubjects%22%7D%2C%7B%22id%22%3A%22402c9047db40b4a58dd308763fa4f87ee27434ccbf%22%2C%22exportedName%22%3A%22deleteSubjectAction%22%7D%2C%7B%22id%22%3A%22402f9ab6432441a7256ab06eceb9ca8626b25ee5bb%22%2C%22exportedName%22%3A%22updateSubjectAction%22%7D%2C%7B%22id%22%3A%2240c07aee46b3ebf4bca303a60cdb4c958e625dd625%22%2C%22exportedName%22%3A%22createSubjectAction%22%7D%2C%7B%22id%22%3A%226054e3ae96b453df85c8b46fb6cbd655318c5ae0d6%22%2C%22exportedName%22%3A%22toggleSubjectStatusAction%22%7D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
-        "app/dashboard/teachers/page": "rsc",
-        "app/dashboard/teachers/[id]/page": "rsc",
-        "app/dashboard/teachers/[id]/edit/page": "rsc"
+        "app/dashboard/super-admin/page": "action-browser",
+        "app/dashboard/timetable/page": "action-browser"
       }
     },
-    "4019c59ff8aff8bb6f9cba62dedfcf7a69629fa788": {
+    "40653d793eb397fd676d9bb9e5074f721869e07172": {
       "workers": {
-        "app/dashboard/teachers/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/super-admin/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%5D&__client_imported__=true!",
           "async": false
         },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/timetable/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Csubjects%5C%5Cactions%5C%5Csubject.actions.ts%22%2C%5B%7B%22id%22%3A%2240166c4123720252997c69db6cf75617f66ae48188%22%2C%22exportedName%22%3A%22getSubjectById%22%7D%2C%7B%22id%22%3A%22401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe%22%2C%22exportedName%22%3A%22getSubjects%22%7D%2C%7B%22id%22%3A%22402c9047db40b4a58dd308763fa4f87ee27434ccbf%22%2C%22exportedName%22%3A%22deleteSubjectAction%22%7D%2C%7B%22id%22%3A%22402f9ab6432441a7256ab06eceb9ca8626b25ee5bb%22%2C%22exportedName%22%3A%22updateSubjectAction%22%7D%2C%7B%22id%22%3A%2240c07aee46b3ebf4bca303a60cdb4c958e625dd625%22%2C%22exportedName%22%3A%22createSubjectAction%22%7D%2C%7B%22id%22%3A%226054e3ae96b453df85c8b46fb6cbd655318c5ae0d6%22%2C%22exportedName%22%3A%22toggleSubjectStatusAction%22%7D%5D%5D%5D&__client_imported__=true!",
           "async": false
         }
       },
       "layer": {
-        "app/dashboard/teachers/page": "rsc",
-        "app/dashboard/teachers/[id]/page": "rsc",
-        "app/dashboard/teachers/[id]/edit/page": "rsc"
+        "app/dashboard/super-admin/page": "action-browser",
+        "app/dashboard/timetable/page": "action-browser"
       }
     },
-    "408be447add617c0c23755d982397aaebf16ac4ef1": {
+    "0056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a": {
       "workers": {
-        "app/dashboard/teachers/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
-        "app/dashboard/teachers/page": "rsc",
-        "app/dashboard/teachers/[id]/page": "rsc",
-        "app/dashboard/teachers/[id]/edit/page": "rsc"
+        "app/dashboard/timetable/page": "rsc"
       }
     },
-    "409a0928d3e1b4d7020281ba5e7ade7997553df978": {
+    "009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da": {
       "workers": {
-        "app/dashboard/teachers/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
-        "app/dashboard/teachers/page": "rsc",
-        "app/dashboard/teachers/[id]/page": "rsc",
-        "app/dashboard/teachers/[id]/edit/page": "rsc"
+        "app/dashboard/timetable/page": "rsc"
       }
     },
-    "40a15052eaf0f1df8c14d747b9ecbb782b31290d80": {
+    "4047d56fbe0581593baec94720cfd3819ce0c8c105": {
       "workers": {
-        "app/dashboard/teachers/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
-        "app/dashboard/teachers/page": "rsc",
-        "app/dashboard/teachers/[id]/page": "rsc",
-        "app/dashboard/teachers/[id]/edit/page": "rsc"
+        "app/dashboard/timetable/page": "rsc"
       }
     },
-    "40cff95ed361fd432b370b789f3effb0df42f83054": {
+    "40836aa48ac5e18529a82998e0a1f83fd44b526e77": {
       "workers": {
-        "app/dashboard/teachers/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
-        "app/dashboard/teachers/page": "rsc",
-        "app/dashboard/teachers/[id]/page": "rsc",
-        "app/dashboard/teachers/[id]/edit/page": "rsc"
+        "app/dashboard/timetable/page": "rsc"
       }
     },
-    "40dfc5e769a0624b0ef5b268a62bdd11e5345d743e": {
+    "40e4f2a29080bfb8b6a0d598780e45af7e30593675": {
       "workers": {
-        "app/dashboard/teachers/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
-        "app/dashboard/teachers/page": "rsc",
-        "app/dashboard/teachers/[id]/page": "rsc",
-        "app/dashboard/teachers/[id]/edit/page": "rsc"
+        "app/dashboard/timetable/page": "rsc"
       }
     },
-    "40f96e6689e487d2dc70c694af4b3e390bc19efd5c": {
+    "40f6b29db2f4dcbfe2c8404532c38543388084b831": {
       "workers": {
-        "app/dashboard/teachers/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
-          "async": false
-        },
-        "app/dashboard/teachers/[id]/edit/page": {
-          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cteachers%5C%5Cactions%5C%5Cteacher.actions.ts%22%2C%5B%7B%22id%22%3A%220031164e67a483a43baa3c73f12cd300404d1df686%22%2C%22exportedName%22%3A%22getDepartmentsForSelect%22%7D%2C%7B%22id%22%3A%22008584f5b671da0dd20b4ddd8041b8a346f047b7f2%22%2C%22exportedName%22%3A%22getSubjectsForSelect%22%7D%2C%7B%22id%22%3A%224019c59ff8aff8bb6f9cba62dedfcf7a69629fa788%22%2C%22exportedName%22%3A%22deleteTeacherAction%22%7D%2C%7B%22id%22%3A%22408be447add617c0c23755d982397aaebf16ac4ef1%22%2C%22exportedName%22%3A%22getTeachers%22%7D%2C%7B%22id%22%3A%22409a0928d3e1b4d7020281ba5e7ade7997553df978%22%2C%22exportedName%22%3A%22createTeacherAction%22%7D%2C%7B%22id%22%3A%2240a15052eaf0f1df8c14d747b9ecbb782b31290d80%22%2C%22exportedName%22%3A%22updateTeacherAction%22%7D%2C%7B%22id%22%3A%2240cff95ed361fd432b370b789f3effb0df42f83054%22%2C%22exportedName%22%3A%22getDesignationsForSelect%22%7D%2C%7B%22id%22%3A%2240dfc5e769a0624b0ef5b268a62bdd11e5345d743e%22%2C%22exportedName%22%3A%22getTeacherById%22%7D%2C%7B%22id%22%3A%2240f96e6689e487d2dc70c694af4b3e390bc19efd5c%22%2C%22exportedName%22%3A%22updateTeacherStatusAction%22%7D%5D%5D%5D&__client_imported__=!",
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
           "async": false
         }
       },
       "layer": {
-        "app/dashboard/teachers/page": "rsc",
-        "app/dashboard/teachers/[id]/page": "rsc",
-        "app/dashboard/teachers/[id]/edit/page": "rsc"
+        "app/dashboard/timetable/page": "rsc"
+      }
+    },
+    "00da447bad8990b6a5f3f6b7559d0bb507b7c1df5b": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "rsc"
+      }
+    },
+    "40956dd93b1f9100a977353e2662e4947aff7c5079": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "rsc"
+      }
+    },
+    "40a2bef25e8805473f021a4e83b19c7890c3cd7e6a": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "rsc"
+      }
+    },
+    "40ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "rsc"
+      }
+    },
+    "40df4f547752043c3c5c8b3db17233473f03fa5194": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "rsc"
+      }
+    },
+    "40f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "rsc"
+      }
+    },
+    "40fee6a38b6960c9c74e79732795d6e4010e5fabf6": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Ctimetable%5C%5Cactions%5C%5Ctimetable.actions.ts%22%2C%5B%7B%22id%22%3A%220056d16b2f5547c0b34184f1d59cb2b76c0ddeae1a%22%2C%22exportedName%22%3A%22getMyTimetable%22%7D%2C%7B%22id%22%3A%22009bcf4563f383d4eaf5ae7fc14b44fea5dbe6d8da%22%2C%22exportedName%22%3A%22getStudentTimetable%22%7D%2C%7B%22id%22%3A%224047d56fbe0581593baec94720cfd3819ce0c8c105%22%2C%22exportedName%22%3A%22deleteTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240836aa48ac5e18529a82998e0a1f83fd44b526e77%22%2C%22exportedName%22%3A%22createTimetableSlotAction%22%7D%2C%7B%22id%22%3A%2240e4f2a29080bfb8b6a0d598780e45af7e30593675%22%2C%22exportedName%22%3A%22getTimetable%22%7D%2C%7B%22id%22%3A%2240f6b29db2f4dcbfe2c8404532c38543388084b831%22%2C%22exportedName%22%3A%22getTimetableSlots%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cstudents%5C%5Cactions%5C%5Cstudent.actions.ts%22%2C%5B%7B%22id%22%3A%2200da447bad8990b6a5f3f6b7559d0bb507b7c1df5b%22%2C%22exportedName%22%3A%22getClassesForSelect%22%7D%2C%7B%22id%22%3A%2240956dd93b1f9100a977353e2662e4947aff7c5079%22%2C%22exportedName%22%3A%22updateStudentAction%22%7D%2C%7B%22id%22%3A%2240a2bef25e8805473f021a4e83b19c7890c3cd7e6a%22%2C%22exportedName%22%3A%22getStudents%22%7D%2C%7B%22id%22%3A%2240ba86e393243b22ea4cad80c1f4b1ca5d3be2ea93%22%2C%22exportedName%22%3A%22createStudentAction%22%7D%2C%7B%22id%22%3A%2240df4f547752043c3c5c8b3db17233473f03fa5194%22%2C%22exportedName%22%3A%22deleteStudentAction%22%7D%2C%7B%22id%22%3A%2240f29db15bf60f9d29b27c76b3aac25fcd8ddb19c5%22%2C%22exportedName%22%3A%22getSectionsForSelect%22%7D%2C%7B%22id%22%3A%2240fee6a38b6960c9c74e79732795d6e4010e5fabf6%22%2C%22exportedName%22%3A%22getStudentById%22%7D%5D%5D%5D&__client_imported__=!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "rsc"
+      }
+    },
+    "40166c4123720252997c69db6cf75617f66ae48188": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Csubjects%5C%5Cactions%5C%5Csubject.actions.ts%22%2C%5B%7B%22id%22%3A%2240166c4123720252997c69db6cf75617f66ae48188%22%2C%22exportedName%22%3A%22getSubjectById%22%7D%2C%7B%22id%22%3A%22401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe%22%2C%22exportedName%22%3A%22getSubjects%22%7D%2C%7B%22id%22%3A%22402c9047db40b4a58dd308763fa4f87ee27434ccbf%22%2C%22exportedName%22%3A%22deleteSubjectAction%22%7D%2C%7B%22id%22%3A%22402f9ab6432441a7256ab06eceb9ca8626b25ee5bb%22%2C%22exportedName%22%3A%22updateSubjectAction%22%7D%2C%7B%22id%22%3A%2240c07aee46b3ebf4bca303a60cdb4c958e625dd625%22%2C%22exportedName%22%3A%22createSubjectAction%22%7D%2C%7B%22id%22%3A%226054e3ae96b453df85c8b46fb6cbd655318c5ae0d6%22%2C%22exportedName%22%3A%22toggleSubjectStatusAction%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "action-browser"
+      }
+    },
+    "401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Csubjects%5C%5Cactions%5C%5Csubject.actions.ts%22%2C%5B%7B%22id%22%3A%2240166c4123720252997c69db6cf75617f66ae48188%22%2C%22exportedName%22%3A%22getSubjectById%22%7D%2C%7B%22id%22%3A%22401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe%22%2C%22exportedName%22%3A%22getSubjects%22%7D%2C%7B%22id%22%3A%22402c9047db40b4a58dd308763fa4f87ee27434ccbf%22%2C%22exportedName%22%3A%22deleteSubjectAction%22%7D%2C%7B%22id%22%3A%22402f9ab6432441a7256ab06eceb9ca8626b25ee5bb%22%2C%22exportedName%22%3A%22updateSubjectAction%22%7D%2C%7B%22id%22%3A%2240c07aee46b3ebf4bca303a60cdb4c958e625dd625%22%2C%22exportedName%22%3A%22createSubjectAction%22%7D%2C%7B%22id%22%3A%226054e3ae96b453df85c8b46fb6cbd655318c5ae0d6%22%2C%22exportedName%22%3A%22toggleSubjectStatusAction%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "action-browser"
+      }
+    },
+    "402c9047db40b4a58dd308763fa4f87ee27434ccbf": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Csubjects%5C%5Cactions%5C%5Csubject.actions.ts%22%2C%5B%7B%22id%22%3A%2240166c4123720252997c69db6cf75617f66ae48188%22%2C%22exportedName%22%3A%22getSubjectById%22%7D%2C%7B%22id%22%3A%22401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe%22%2C%22exportedName%22%3A%22getSubjects%22%7D%2C%7B%22id%22%3A%22402c9047db40b4a58dd308763fa4f87ee27434ccbf%22%2C%22exportedName%22%3A%22deleteSubjectAction%22%7D%2C%7B%22id%22%3A%22402f9ab6432441a7256ab06eceb9ca8626b25ee5bb%22%2C%22exportedName%22%3A%22updateSubjectAction%22%7D%2C%7B%22id%22%3A%2240c07aee46b3ebf4bca303a60cdb4c958e625dd625%22%2C%22exportedName%22%3A%22createSubjectAction%22%7D%2C%7B%22id%22%3A%226054e3ae96b453df85c8b46fb6cbd655318c5ae0d6%22%2C%22exportedName%22%3A%22toggleSubjectStatusAction%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "action-browser"
+      }
+    },
+    "402f9ab6432441a7256ab06eceb9ca8626b25ee5bb": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Csubjects%5C%5Cactions%5C%5Csubject.actions.ts%22%2C%5B%7B%22id%22%3A%2240166c4123720252997c69db6cf75617f66ae48188%22%2C%22exportedName%22%3A%22getSubjectById%22%7D%2C%7B%22id%22%3A%22401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe%22%2C%22exportedName%22%3A%22getSubjects%22%7D%2C%7B%22id%22%3A%22402c9047db40b4a58dd308763fa4f87ee27434ccbf%22%2C%22exportedName%22%3A%22deleteSubjectAction%22%7D%2C%7B%22id%22%3A%22402f9ab6432441a7256ab06eceb9ca8626b25ee5bb%22%2C%22exportedName%22%3A%22updateSubjectAction%22%7D%2C%7B%22id%22%3A%2240c07aee46b3ebf4bca303a60cdb4c958e625dd625%22%2C%22exportedName%22%3A%22createSubjectAction%22%7D%2C%7B%22id%22%3A%226054e3ae96b453df85c8b46fb6cbd655318c5ae0d6%22%2C%22exportedName%22%3A%22toggleSubjectStatusAction%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "action-browser"
+      }
+    },
+    "40c07aee46b3ebf4bca303a60cdb4c958e625dd625": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Csubjects%5C%5Cactions%5C%5Csubject.actions.ts%22%2C%5B%7B%22id%22%3A%2240166c4123720252997c69db6cf75617f66ae48188%22%2C%22exportedName%22%3A%22getSubjectById%22%7D%2C%7B%22id%22%3A%22401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe%22%2C%22exportedName%22%3A%22getSubjects%22%7D%2C%7B%22id%22%3A%22402c9047db40b4a58dd308763fa4f87ee27434ccbf%22%2C%22exportedName%22%3A%22deleteSubjectAction%22%7D%2C%7B%22id%22%3A%22402f9ab6432441a7256ab06eceb9ca8626b25ee5bb%22%2C%22exportedName%22%3A%22updateSubjectAction%22%7D%2C%7B%22id%22%3A%2240c07aee46b3ebf4bca303a60cdb4c958e625dd625%22%2C%22exportedName%22%3A%22createSubjectAction%22%7D%2C%7B%22id%22%3A%226054e3ae96b453df85c8b46fb6cbd655318c5ae0d6%22%2C%22exportedName%22%3A%22toggleSubjectStatusAction%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "action-browser"
+      }
+    },
+    "6054e3ae96b453df85c8b46fb6cbd655318c5ae0d6": {
+      "workers": {
+        "app/dashboard/timetable/page": {
+          "moduleId": "(action-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Cauth%5C%5Cactions%5C%5Cauth.actions.ts%22%2C%5B%7B%22id%22%3A%2200ab125dfbd380c789568bba6617382622b64e3c7e%22%2C%22exportedName%22%3A%22logoutAction%22%7D%2C%7B%22id%22%3A%22400765098883e69c7a7d857d75fad552c063a1ff7a%22%2C%22exportedName%22%3A%22seedSuperAdminAction%22%7D%2C%7B%22id%22%3A%2240653d793eb397fd676d9bb9e5074f721869e07172%22%2C%22exportedName%22%3A%22loginAction%22%7D%5D%5D%2C%5B%22C%3A%5C%5CWork%5C%5CSMSyst%5C%5Cschool-erp%5C%5Cfeatures%5C%5Csubjects%5C%5Cactions%5C%5Csubject.actions.ts%22%2C%5B%7B%22id%22%3A%2240166c4123720252997c69db6cf75617f66ae48188%22%2C%22exportedName%22%3A%22getSubjectById%22%7D%2C%7B%22id%22%3A%22401dafe6b68f5a0cfc8436d67fd8ec1e0437ca02fe%22%2C%22exportedName%22%3A%22getSubjects%22%7D%2C%7B%22id%22%3A%22402c9047db40b4a58dd308763fa4f87ee27434ccbf%22%2C%22exportedName%22%3A%22deleteSubjectAction%22%7D%2C%7B%22id%22%3A%22402f9ab6432441a7256ab06eceb9ca8626b25ee5bb%22%2C%22exportedName%22%3A%22updateSubjectAction%22%7D%2C%7B%22id%22%3A%2240c07aee46b3ebf4bca303a60cdb4c958e625dd625%22%2C%22exportedName%22%3A%22createSubjectAction%22%7D%2C%7B%22id%22%3A%226054e3ae96b453df85c8b46fb6cbd655318c5ae0d6%22%2C%22exportedName%22%3A%22toggleSubjectStatusAction%22%7D%5D%5D%5D&__client_imported__=true!",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/dashboard/timetable/page": "action-browser"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "Zk+4lpBR0qleEO74dTTa1xvQh9Ve+kCk2jSwqbG4sb8="
+  "encryptionKey": "btPov3ZuvQGR8dz4OlW3E0jAq+4lB4F+UYXGYAf4m6w="
 }

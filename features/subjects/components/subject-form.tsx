@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { Loader2, Save } from "lucide-react";
 
 import {
@@ -16,7 +16,7 @@ import {
   updateSubjectAction,
 } from "@/features/subjects/actions/subject.actions";
 import type { SubjectDetail } from "@/features/subjects/actions/subject.actions";
-import { getClassesForSelect } from "@/features/students/actions/student.actions";
+// import { getClassesForSelect } from "@/features/students/actions/student.actions";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,12 +27,12 @@ interface SubjectFormProps {
   subject?: SubjectDetail;
 }
 
-type ClassOption = { id: string; name: string; displayName: string };
+// type ClassOption = { id: string; name: string; displayName: string };
 
 export function SubjectForm({ subject }: SubjectFormProps) {
   const router = useRouter();
   const isEdit = !!subject;
-  const [classes, setClasses] = useState<ClassOption[]>([]);
+  // const [classes, setClasses] = useState<ClassOption[]>([]);
 
   const {
     register,
@@ -41,20 +41,17 @@ export function SubjectForm({ subject }: SubjectFormProps) {
     formState: { errors, isSubmitting },
   } = useForm<SubjectInput>({
     resolver: zodResolver(subjectSchema),
-    defaultValues: subject
-      ? {
-          name: subject.name,
-          code: subject.code,
-          description: subject.description ?? "",
-          creditHours: subject.creditHours,
-          classId: subject.class?.id ?? "",
-        }
-      : { creditHours: 1 },
+    defaultValues: {
+    name: subject?.name ?? "",
+    code: subject?.code ?? "",
+    description: subject?.description ?? "",
+    creditHours: subject?.creditHours ?? 1,
+  },
   });
 
-  useEffect(() => {
-    getClassesForSelect().then(setClasses);
-  }, []);
+  // useEffect(() => {
+  //   getClassesForSelect().then(setClasses);
+  // }, []);
 
   async function onSubmit(values: SubjectInput) {
     const result = isEdit
@@ -116,7 +113,7 @@ export function SubjectForm({ subject }: SubjectFormProps) {
           )}
         </div>
 
-        <div className="space-y-1.5">
+        {/* <div className="space-y-1.5">
           <Label htmlFor="classId">Class (Optional)</Label>
           <select
             id="classId"
@@ -134,7 +131,7 @@ export function SubjectForm({ subject }: SubjectFormProps) {
           <p className="text-xs text-muted-foreground">
             Leave empty if this subject is taught across multiple classes.
           </p>
-        </div>
+        </div> */}
 
         <div className="space-y-1.5">
           <Label htmlFor="creditHours">Credit Hours</Label>
@@ -145,7 +142,9 @@ export function SubjectForm({ subject }: SubjectFormProps) {
             max={10}
             placeholder="1"
             disabled={isSubmitting}
-            {...register("creditHours")}
+            {...register("creditHours", {
+              valueAsNumber: true,
+            })}
             className={cn(errors.creditHours && "border-destructive")}
           />
           {errors.creditHours && (

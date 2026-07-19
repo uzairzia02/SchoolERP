@@ -11,15 +11,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/not-found.js"
     ],
-    "/(auth)/layout": [
+    "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(auth)/layout.js"
-    ],
-    "/(auth)/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(auth)/login/page.js"
+      "static/chunks/app/page.js"
     ],
     "/dashboard/layout": [
       "static/chunks/webpack.js",
@@ -31,20 +26,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/super-admin/page.js"
     ],
-    "/dashboard/teachers/page": [
+    "/dashboard/timetable/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/teachers/page.js"
+      "static/chunks/app/dashboard/timetable/page.js"
     ],
-    "/dashboard/teachers/[id]/page": [
+    "/api/auth/[...nextauth]/route": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/teachers/[id]/page.js"
+      "static/chunks/app/api/auth/[...nextauth]/route.js"
     ],
-    "/dashboard/teachers/[id]/edit/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/teachers/[id]/edit/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }

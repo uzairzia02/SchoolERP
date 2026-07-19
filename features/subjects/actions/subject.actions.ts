@@ -24,7 +24,13 @@ export type SubjectListItem = {
   description: string | null;
   creditHours: number;
   isActive: boolean;
-  class: { id: string; name: string; displayName: string } | null;
+  classes: {
+    class: {
+      id: string;
+      name: string;
+      displayName: string;
+    };
+  }[];
   _count: {
     teachers: number;
     grades: number;
@@ -67,7 +73,13 @@ export async function getSubjects(params: {
         { code: { contains: params.search, mode: "insensitive" } },
       ],
     }),
-    ...(params.classId && { classId: params.classId }),
+    ...(params.classId && {
+        classes: {
+          some: {
+            classId: params.classId,
+          },
+        },
+      }),
   };
 
   const [data, total] = await Promise.all([
@@ -83,7 +95,17 @@ export async function getSubjects(params: {
         description: true,
         creditHours: true,
         isActive: true,
-        class: { select: { id: true, name: true, displayName: true } },
+        classes: {
+    select: {
+      class: {                    // ClassSubject -> class relation
+        select: {
+          id: true,
+          name: true,
+          displayName: true
+        }
+      }
+    }
+  },
         _count: { select: { teachers: true, grades: true } },
       },
     }),
@@ -114,7 +136,17 @@ export async function getSubjectById(
       description: true,
       creditHours: true,
       isActive: true,
-      class: { select: { id: true, name: true, displayName: true } },
+      classes: {
+    select: {
+      class: {                    // ClassSubject -> class relation
+        select: {
+          id: true,
+          name: true,
+          displayName: true
+        }
+      }
+    }
+  },
       _count: { select: { teachers: true, grades: true } },
       teachers: {
         select: {
@@ -172,15 +204,14 @@ export async function createSubjectAction(
   }
 
   const subject = await db.subject.create({
-    data: {
-      schoolId,
-      name: parsed.data.name,
-      code: parsed.data.code,
-      description: parsed.data.description ?? null,
-      creditHours: parsed.data.creditHours,
-      classId: parsed.data.classId || null,
-    },
-  });
+  data: {
+    schoolId,
+    name: parsed.data.name,
+    code: parsed.data.code,
+    description: parsed.data.description ?? null,
+    creditHours: parsed.data.creditHours,
+  },
+});
 
   revalidatePath("/dashboard/subjects");
   return {
@@ -242,7 +273,7 @@ export async function updateSubjectAction(
       code: data.code,
       description: data.description ?? null,
       creditHours: data.creditHours,
-      classId: data.classId || null,
+      
     },
   });
 

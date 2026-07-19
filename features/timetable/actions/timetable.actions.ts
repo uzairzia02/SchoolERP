@@ -16,8 +16,15 @@ import { requireRoles } from "@/lib/auth-guards";
 export type TimetableSlot = {
   id: string;
   dayOfWeek: DayOfWeek;
+  period: {
+  id: string;
+  name: string;
+  periodNo: number;
   startTime: string;
   endTime: string;
+  duration: number;
+  isBreak: boolean;
+  };
   room: string | null;
   isActive: boolean;
   class: { id: string; name: string; displayName: string };
@@ -38,8 +45,7 @@ const timetableSchema = z.object({
   subjectId: z.string().min(1, "Subject is required"),
   teacherId: z.string().min(1, "Teacher is required"),
   dayOfWeek: z.enum(["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]),
-  startTime: z.string().min(1, "Start time is required"),
-  endTime: z.string().min(1, "End time is required"),
+  periodId: z.string().min(1, "Period is required"),
   room: z.string().optional(),
 });
 
@@ -65,21 +71,61 @@ export async function getTimetable(params: {
       ...(params.sectionId && { sectionId: params.sectionId }),
       ...(params.teacherId && { teacherId: params.teacherId }),
     },
-    orderBy: { startTime: "asc" },
+    orderBy: {
+      period: {
+        periodNo: "asc",
+      },
+    },
     select: {
       id: true,
       dayOfWeek: true,
-      startTime: true,
-      endTime: true,
       room: true,
       isActive: true,
-      class: { select: { id: true, name: true, displayName: true } },
-      section: { select: { id: true, name: true } },
-      subject: { select: { id: true, name: true, code: true } },
-      teacher: {
-        select: { id: true, firstName: true, lastName: true, employeeId: true },
+
+      period: {
+        select: {
+          id: true,
+          name: true,
+          periodNo: true,
+          startTime: true,
+          endTime: true,
+          duration: true,
+          isBreak: true,
+        },
       },
-    },
+
+      class: {
+        select: {
+          id: true,
+          name: true,
+          displayName: true,
+        },
+      },
+
+      section: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+
+      subject: {
+        select: {
+          id: true,
+          name: true,
+          code: true,
+        },
+      },
+
+      teacher: {
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          employeeId: true,
+        },
+      },
+    }
   });
 
   // Group by day
@@ -103,28 +149,67 @@ export async function getTimetableSlots(params: {
   if (!session?.user) redirect("/login");
 
   return db.timetable.findMany({
-    where: {
-      schoolId: session.user.schoolId,
-      isActive: true,
-      ...(params.classId && { classId: params.classId }),
-      ...(params.teacherId && { teacherId: params.teacherId }),
-    },
-    orderBy: [{ dayOfWeek: "asc" }, { startTime: "asc" }],
-    select: {
-      id: true,
-      dayOfWeek: true,
-      startTime: true,
-      endTime: true,
-      room: true,
-      isActive: true,
-      class: { select: { id: true, name: true, displayName: true } },
-      section: { select: { id: true, name: true } },
-      subject: { select: { id: true, name: true, code: true } },
-      teacher: {
-        select: { id: true, firstName: true, lastName: true, employeeId: true },
+  where: {
+    schoolId: session.user.schoolId,
+    isActive: true,
+    ...(params.classId && { classId: params.classId }),
+    ...(params.teacherId && { teacherId: params.teacherId }),
+  },
+  orderBy: [
+    { dayOfWeek: "asc" },
+    { period: { periodNo: "asc" } },
+  ],
+  select: {
+    id: true,
+    dayOfWeek: true,
+    room: true,
+    isActive: true,
+
+    period: {
+      select: {
+        id: true,
+        name: true,
+        periodNo: true,
+        startTime: true,
+        endTime: true,
+        duration: true,
+        isBreak: true,
       },
     },
-  }) as unknown as TimetableSlot[];
+
+    class: {
+      select: {
+        id: true,
+        name: true,
+        displayName: true,
+      },
+    },
+
+    section: {
+      select: {
+        id: true,
+        name: true,
+      },
+    },
+
+    subject: {
+      select: {
+        id: true,
+        name: true,
+        code: true,
+      },
+    },
+
+    teacher: {
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        employeeId: true,
+      },
+    },
+  },
+}) as unknown as TimetableSlot[];
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -142,12 +227,15 @@ export async function createTimetableSlotAction(
 
   const parsed = timetableSchema.safeParse(values);
   if (!parsed.success) {
-    return {
-      success: false,
-      error: "Please fix the errors below.",
-      fieldErrors: parsed.error.flatten().fieldErrors as Record<string, string[]>,
-    };
-  }
+  console.log("TIMETABLE VALIDATION ERROR:", parsed.error.flatten());
+  console.log("RECEIVED VALUES:", values);
+
+  return {
+    success: false,
+    error: "Please fix the errors below.",
+    fieldErrors: parsed.error.flatten().fieldErrors as Record<string, string[]>,
+  };
+}
 
   const data = parsed.data;
 
@@ -157,21 +245,8 @@ export async function createTimetableSlotAction(
       schoolId,
       teacherId: data.teacherId,
       dayOfWeek: data.dayOfWeek,
+      periodId: data.periodId,
       isActive: true,
-      OR: [
-        {
-          startTime: { lte: data.startTime },
-          endTime: { gt: data.startTime },
-        },
-        {
-          startTime: { lt: data.endTime },
-          endTime: { gte: data.endTime },
-        },
-        {
-          startTime: { gte: data.startTime },
-          endTime: { lte: data.endTime },
-        },
-      ],
     },
   });
 
@@ -184,28 +259,15 @@ export async function createTimetableSlotAction(
 
   // Check class/section conflict
   const classConflict = await db.timetable.findFirst({
-    where: {
-      schoolId,
-      classId: data.classId,
-      ...(data.sectionId && { sectionId: data.sectionId }),
-      dayOfWeek: data.dayOfWeek,
-      isActive: true,
-      OR: [
-        {
-          startTime: { lte: data.startTime },
-          endTime: { gt: data.startTime },
-        },
-        {
-          startTime: { lt: data.endTime },
-          endTime: { gte: data.endTime },
-        },
-        {
-          startTime: { gte: data.startTime },
-          endTime: { lte: data.endTime },
-        },
-      ],
-    },
-  });
+  where: {
+    schoolId,
+    classId: data.classId,
+    sectionId: data.sectionId || null,
+    dayOfWeek: data.dayOfWeek,
+    periodId: data.periodId,
+    isActive: true,
+  },
+});
 
   if (classConflict) {
     return {
@@ -222,8 +284,7 @@ export async function createTimetableSlotAction(
       subjectId: data.subjectId,
       teacherId: data.teacherId,
       dayOfWeek: data.dayOfWeek,
-      startTime: data.startTime,
-      endTime: data.endTime,
+      periodId: data.periodId,
       room: data.room || null,
     },
   });

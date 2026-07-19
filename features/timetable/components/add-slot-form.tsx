@@ -10,6 +10,7 @@ import { getSubjects } from "@/features/subjects/actions/subject.actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { getPeriodsForSelect } from "@/features/periods/actions/period.actions";
 
 type Option = { id: string; name: string; displayName?: string };
 type TeacherOption = { id: string; firstName: string; lastName: string };
@@ -17,6 +18,8 @@ type TeacherOption = { id: string; firstName: string; lastName: string };
 interface AddSlotFormProps {
   teachers: TeacherOption[];
 }
+
+const [periods, setPeriods] = useState([]);
 
 const DAYS = [
   { value: "MONDAY", label: "Monday" },
@@ -99,8 +102,7 @@ export function AddSlotForm({ teachers }: AddSlotFormProps) {
       subjectId: "",
       teacherId: "",
       dayOfWeek: "MONDAY",
-      startTime: "08:00",
-      endTime: "09:00",
+      periodId: "",
       room: "",
     });
     router.refresh();
