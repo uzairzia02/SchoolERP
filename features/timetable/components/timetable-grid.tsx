@@ -134,7 +134,7 @@ export function TimetableGrid({
 
                     <div className="flex items-center gap-1 text-[10px] opacity-80">
                       <Clock className="h-3 w-3 shrink-0" />
-                      {slot.startTime} — {slot.endTime}
+                      {slot.period.startTime} — {slot.period.endTime}
                     </div>
 
                     {showTeacher && (

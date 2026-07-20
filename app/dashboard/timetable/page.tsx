@@ -85,7 +85,7 @@ export default async function TimetablePage({ searchParams }: PageProps) {
         timetable={timetable}
         canEdit={canEdit}
         showTeacher={true}
-        showClass={false}
+        showClass={!selectedClassId || params.classId === "all"}
       />
     </div>
   );

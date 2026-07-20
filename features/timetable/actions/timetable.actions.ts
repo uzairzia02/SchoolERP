@@ -8,6 +8,7 @@ import { z } from "zod";
 import type { ActionResult } from "@/types/globals.types";
 import type { DayOfWeek } from "@prisma/client";
 import { requireRoles } from "@/lib/auth-guards";
+import { Prisma } from "@prisma/client";
 
 // ─────────────────────────────────────────────────────────────
 // Types
@@ -276,6 +277,7 @@ export async function createTimetableSlotAction(
     };
   }
 
+  try {
   const slot = await db.timetable.create({
     data: {
       schoolId,
@@ -295,6 +297,19 @@ export async function createTimetableSlotAction(
     data: { id: slot.id },
     message: "Timetable slot added.",
   };
+} catch (error) {
+  if (
+    error instanceof Prisma.PrismaClientKnownRequestError &&
+    error.code === "P2002"
+  ) {
+    return {
+      success: false,
+      error: "This exact period is already assigned to this class/section.",
+    };
+  }
+  throw error;
+}
+
 }
 
 // ─────────────────────────────────────────────────────────────

@@ -7,19 +7,18 @@ import { Loader2, Plus, X } from "lucide-react";
 import { createTimetableSlotAction } from "@/features/timetable/actions/timetable.actions";
 import { getClassesForSelect, getSectionsForSelect } from "@/features/students/actions/student.actions";
 import { getSubjects } from "@/features/subjects/actions/subject.actions";
+import { getPeriodsForSelect } from "@/features/periods/actions/period.actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getPeriodsForSelect } from "@/features/periods/actions/period.actions";
 
 type Option = { id: string; name: string; displayName?: string };
 type TeacherOption = { id: string; firstName: string; lastName: string };
+type PeriodOption = { id: string; name?: string; periodNo: number; startTime: string; endTime: string };
 
 interface AddSlotFormProps {
   teachers: TeacherOption[];
 }
-
-const [periods, setPeriods] = useState([]);
 
 const DAYS = [
   { value: "MONDAY", label: "Monday" },
@@ -30,13 +29,6 @@ const DAYS = [
   { value: "SATURDAY", label: "Saturday" },
 ];
 
-const TIME_SLOTS = [
-  "07:00", "07:30", "08:00", "08:30", "09:00", "09:30",
-  "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
-  "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
-  "16:00", "16:30",
-];
-
 export function AddSlotForm({ teachers }: AddSlotFormProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -44,6 +36,7 @@ export function AddSlotForm({ teachers }: AddSlotFormProps) {
   const [classes, setClasses] = useState<Option[]>([]);
   const [sections, setSections] = useState<Option[]>([]);
   const [subjects, setSubjects] = useState<Option[]>([]);
+  const [periods, setPeriods] = useState<PeriodOption[]>([]);
 
   const [form, setForm] = useState({
     classId: "",
@@ -51,13 +44,13 @@ export function AddSlotForm({ teachers }: AddSlotFormProps) {
     subjectId: "",
     teacherId: "",
     dayOfWeek: "MONDAY",
-    startTime: "08:00",
-    endTime: "09:00",
+    periodId: "",
     room: "",
   });
 
   useEffect(() => {
     getClassesForSelect().then(setClasses);
+    getPeriodsForSelect().then(setPeriods);
   }, []);
 
   useEffect(() => {
@@ -71,13 +64,8 @@ export function AddSlotForm({ teachers }: AddSlotFormProps) {
   }, [form.classId]);
 
   async function handleSubmit() {
-    if (!form.classId || !form.subjectId || !form.teacherId || !form.dayOfWeek) {
+    if (!form.classId || !form.subjectId || !form.teacherId || !form.dayOfWeek || !form.periodId) {
       toast.error("Please fill all required fields.");
-      return;
-    }
-
-    if (form.startTime >= form.endTime) {
-      toast.error("End time must be after start time.");
       return;
     }
 
@@ -141,28 +129,18 @@ export function AddSlotForm({ teachers }: AddSlotFormProps) {
             </select>
           </div>
 
-          <div className="space-y-1.5">
-            <Label className="text-xs">Start Time *</Label>
+          <div className="col-span-2 space-y-1.5">
+            <Label className="text-xs">Period *</Label>
             <select
-              value={form.startTime}
-              onChange={(e) => setForm({ ...form, startTime: e.target.value })}
+              value={form.periodId}
+              onChange={(e) => setForm({ ...form, periodId: e.target.value })}
               className="flex h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              {TIME_SLOTS.map((t) => (
-                <option key={t} value={t}>{t}</option>
-              ))}
-            </select>
-          </div>
-
-          <div className="space-y-1.5">
-            <Label className="text-xs">End Time *</Label>
-            <select
-              value={form.endTime}
-              onChange={(e) => setForm({ ...form, endTime: e.target.value })}
-              className="flex h-9 w-full rounded-md border border-input bg-background px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              {TIME_SLOTS.map((t) => (
-                <option key={t} value={t}>{t}</option>
+              <option value="">Select period</option>
+              {periods.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.name ?? `Period ${p.periodNo}`} ({p.startTime} - {p.endTime})
+                </option>
               ))}
             </select>
           </div>
