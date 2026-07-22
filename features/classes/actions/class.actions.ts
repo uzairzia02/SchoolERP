@@ -48,8 +48,37 @@ export async function getClasses(): Promise<ClassListItem[]> {
   const session = await auth();
   if (!session?.user) redirect("/login");
 
+  const role = session.user.role;
+  const schoolId = session.user.schoolId;
+
+  let classIdFilter: string[] | undefined;
+
+  if (role === "TEACHER" || role === "FACULTY") {
+    const teacher = await db.teacher.findFirst({
+      where: { userId: session.user.id, schoolId, deletedAt: null },
+      select: { id: true },
+    });
+
+    if (!teacher) return [];
+
+    // Teacher ki assigned classes uske timetable entries se nikalo
+    const timetableEntries = await db.timetable.findMany({
+      where: { teacherId: teacher.id, schoolId, isActive: true },
+      select: { classId: true },
+      distinct: ["classId"],
+    });
+
+    classIdFilter = timetableEntries.map((t) => t.classId);
+
+    if (classIdFilter.length === 0) return [];
+  }
+
   const classes = await db.class.findMany({
-    where: { schoolId: session.user.schoolId, deletedAt: null },
+    where: {
+      schoolId,
+      deletedAt: null,
+      ...(classIdFilter && { id: { in: classIdFilter } }),
+    },
     orderBy: { order: "asc" },
     select: {
       id: true,

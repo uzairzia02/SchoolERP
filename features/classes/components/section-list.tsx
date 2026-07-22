@@ -17,9 +17,10 @@ interface SectionListProps {
     isActive: boolean;
     _count: { students: number };
   }[];
+  canEdit?: boolean;
 }
 
-export function SectionList({ classId, sections }: SectionListProps) {
+export function SectionList({ classId, sections, canEdit = false }: SectionListProps) {
   const router = useRouter();
 
   async function handleDelete(sectionId: string, name: string) {
@@ -40,7 +41,7 @@ export function SectionList({ classId, sections }: SectionListProps) {
           <Layers className="h-4 w-4 text-muted-foreground" />
           <h3 className="font-semibold font-display text-sm">Sections</h3>
         </div>
-        <SectionFormDialog classId={classId} />
+        {canEdit && <SectionFormDialog classId={classId} />}
       </div>
 
       {sections.length === 0 ? (
@@ -48,7 +49,7 @@ export function SectionList({ classId, sections }: SectionListProps) {
           <Layers className="h-8 w-8 text-muted-foreground/40 mb-2" />
           <p className="text-sm text-muted-foreground">No sections yet</p>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Add a section to organize students
+            {canEdit ? "Add a section to organize students" : "No sections have been added"}
           </p>
         </div>
       ) : (
@@ -93,14 +94,16 @@ export function SectionList({ classId, sections }: SectionListProps) {
                     </div>
                   </div>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-8 w-8 text-muted-foreground hover:text-destructive"
-                  onClick={() => handleDelete(section.id, section.name)}
-                >
-                  <Trash2 className="h-3.5 w-3.5" />
-                </Button>
+                {canEdit && (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                    onClick={() => handleDelete(section.id, section.name)}
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </Button>
+                )}
               </div>
             );
           })}

@@ -6,6 +6,7 @@ if (!process.env.GEMINI_API_KEY) {
 
 export const gemini = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
+  vertexai: false,
 });
 
 // Free-tier friendly model. Check Google AI Studio for current free-tier

@@ -21,9 +21,10 @@ import {
 
 interface ClassTableProps {
   classes: ClassListItem[];
+  canEdit: boolean;
 }
 
-export function ClassTable({ classes }: ClassTableProps) {
+export function ClassTable({ classes, canEdit }: ClassTableProps) {
   const router = useRouter();
 
   async function handleDelete(cls: ClassListItem) {
@@ -43,27 +44,33 @@ export function ClassTable({ classes }: ClassTableProps) {
         <p className="text-sm text-muted-foreground">
           {classes.length} {classes.length === 1 ? "class" : "classes"} total
         </p>
-        <Button asChild>
-          <Link href="/dashboard/classes/new">
-            <Plus className="h-4 w-4 mr-2" />
-            Add Class
-          </Link>
-        </Button>
+        {canEdit && (
+          <Button asChild>
+            <Link href="/dashboard/classes/new">
+              <Plus className="h-4 w-4 mr-2" />
+              Add Class
+            </Link>
+          </Button>
+        )}
       </div>
 
       {classes.length === 0 ? (
         <div className="rounded-xl border bg-card flex flex-col items-center justify-center py-16 text-center">
           <BookOpen className="h-10 w-10 text-muted-foreground/40 mb-3" />
           <p className="font-medium text-muted-foreground">No classes yet</p>
-          <p className="text-xs text-muted-foreground mt-1 mb-4">
-            Add your first class to start organizing students
-          </p>
-          <Button asChild size="sm">
-            <Link href="/dashboard/classes/new">
-              <Plus className="h-4 w-4 mr-1" />
-              Add Class
-            </Link>
-          </Button>
+          {canEdit && (
+            <>
+              <p className="text-xs text-muted-foreground mt-1 mb-4">
+                Add your first class to start organizing students
+              </p>
+              <Button asChild size="sm">
+                <Link href="/dashboard/classes/new">
+                  <Plus className="h-4 w-4 mr-1" />
+                  Add Class
+                </Link>
+              </Button>
+            </>
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -93,35 +100,37 @@ export function ClassTable({ classes }: ClassTableProps) {
                   </div>
                 </div>
 
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <MoreHorizontal className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem asChild>
-                      <Link href={`/dashboard/classes/${cls.id}`}>
-                        <Eye className="h-4 w-4 mr-2" />
-                        View Details
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link href={`/dashboard/classes/${cls.id}/edit`}>
-                        <Pencil className="h-4 w-4 mr-2" />
-                        Edit
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={() => handleDelete(cls)}
-                      className="text-destructive focus:text-destructive"
-                    >
-                      <Trash2 className="h-4 w-4 mr-2" />
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                {canEdit && (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem asChild>
+                        <Link href={`/dashboard/classes/${cls.id}`}>
+                          <Eye className="h-4 w-4 mr-2" />
+                          View Details
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href={`/dashboard/classes/${cls.id}/edit`}>
+                          <Pencil className="h-4 w-4 mr-2" />
+                          Edit
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => handleDelete(cls)}
+                        className="text-destructive focus:text-destructive"
+                      >
+                        <Trash2 className="h-4 w-4 mr-2" />
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
               </div>
 
               <div className="grid grid-cols-3 gap-2 pt-3 border-t">

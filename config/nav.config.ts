@@ -181,7 +181,7 @@ export const NAV_CONFIG: Record<UserRole, NavGroup[]> = {
     {
       title: "My Portal",
       items: [
-        { title: "Attendance", href: "/dashboard/attendance/students", icon: "ClipboardCheck" },
+        { title: "Attendance", href: "/dashboard/student/attendance", icon: "ClipboardCheck" },
         { title: "Timetable", href: "/dashboard/timetable", icon: "Calendar" },
         { title: "Assignments", href: "/dashboard/student/assignments", icon: "ClipboardList" },
         { title: "Examinations", href: "/dashboard/student/exams", icon: "FileText" },

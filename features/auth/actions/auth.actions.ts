@@ -75,7 +75,8 @@ export async function loginAction(
 // Logout Action
 // ─────────────────────────────────────────────────────────────
 
-export async function logoutAction(): Promise<void> {
+export async function logoutAction() {
+  console.log("LOGOUT START");
   await signOut({ redirectTo: "/login" });
 }
 

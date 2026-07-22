@@ -29,10 +29,10 @@ export async function getPrincipalStats() {
     db.student.count({ where: { schoolId, isActive: true, deletedAt: null } }),
     db.teacher.count({ where: { schoolId, isActive: true, deletedAt: null } }),
     db.employee.count({ where: { schoolId, isActive: true, deletedAt: null } }),
-    db.attendance.count({ where: { schoolId, date: today, status: "PRESENT", studentId: { not: null } } }),
-    db.attendance.count({ where: { schoolId, date: today, studentId: { not: null } } }),
-    db.attendance.count({ where: { schoolId, date: today, status: "PRESENT", OR: [{ teacherId: { not: null } }, { employeeId: { not: null } }] } }),
-    db.attendance.count({ where: { schoolId, date: today, OR: [{ teacherId: { not: null } }, { employeeId: { not: null } }] } }),
+    db.studentAttendance.count({ where: { schoolId, date: today, status: "PRESENT" } }),
+    db.studentAttendance.count({ where: { schoolId, date: today } }),
+    db.staffAttendance.count({ where: { schoolId, date: today, status: "PRESENT", OR: [{ teacherId: { not: null } }, { employeeId: { not: null } }] } }),
+    db.staffAttendance.count({ where: { schoolId, date: today, OR: [{ teacherId: { not: null } }, { employeeId: { not: null } }] } }),
     db.leave.count({ where: { schoolId, status: "PENDING" } }),
     db.admission.count({ where: { schoolId, status: { in: ["APPLIED", "UNDER_REVIEW"] } } }),
     db.fee.count({ where: { schoolId, status: { in: ["UNPAID", "OVERDUE"] } } }),
@@ -120,8 +120,8 @@ export async function getHRStats() {
         startDate: { gte: new Date(currentYear, currentMonth - 1, 1) },
       },
     }),
-    db.attendance.count({ where: { schoolId, date: today, status: "PRESENT", OR: [{ teacherId: { not: null } }, { employeeId: { not: null } }] } }),
-    db.attendance.count({ where: { schoolId, date: today, OR: [{ teacherId: { not: null } }, { employeeId: { not: null } }] } }),
+    db.staffAttendance.count({ where: { schoolId, date: today, status: "PRESENT", OR: [{ teacherId: { not: null } }, { employeeId: { not: null } }] } }),
+    db.staffAttendance.count({ where: { schoolId, date: today, OR: [{ teacherId: { not: null } }, { employeeId: { not: null } }] } }),
     db.payroll.count({ where: { schoolId, month: currentMonth, year: currentYear } }),
     db.employee.count({ where: { schoolId, isActive: true, deletedAt: null } }),
     db.department.findMany({
@@ -294,12 +294,16 @@ export async function getTeacherStats() {
         dayOfWeek: ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"][today.getDay() === 0 ? 6 : today.getDay() - 1] as any,
         isActive: true,
       },
-      orderBy: { startTime: "asc" },
+      orderBy: {
+        period: { startTime: "asc" },
+      },
       select: {
-        id: true, startTime: true, endTime: true, room: true,
+        id: true,
+        room: true,
         class: { select: { displayName: true } },
         section: { select: { name: true } },
         subject: { select: { name: true } },
+        period: { select: { startTime: true, endTime: true } },
       },
     }),
     db.leave.count({ where: { schoolId, teacherId: teacher.id, status: "PENDING" } }),
@@ -315,7 +319,7 @@ export async function getTeacherStats() {
       take: 4,
       select: { id: true, name: true, type: true, startDate: true, class: { select: { displayName: true } } },
     }),
-    db.attendance.count({
+    db.staffAttendance.count({
       where: { schoolId, date: today, teacherId: teacher.id },
     }),
     db.assignment.count({
@@ -378,10 +382,10 @@ export async function getStudentStats() {
     pendingAssignments, timetableToday,
     myAnnouncements,
   ] = await Promise.all([
-    db.attendance.count({
+    db.studentAttendance.count({
       where: { schoolId, studentId: student.id, status: "PRESENT", date: { gte: monthStart } },
     }),
-    db.attendance.count({
+    db.studentAttendance.count({
       where: { schoolId, studentId: student.id, date: { gte: monthStart } },
     }),
     db.fee.findMany({
@@ -419,12 +423,14 @@ export async function getStudentStats() {
               today.getDay() === 0 ? 6 : today.getDay() - 1
             ] as any,
           },
-          orderBy: { startTime: "asc" },
-          select: {
-            id: true, startTime: true, endTime: true, room: true,
-            subject: { select: { name: true, code: true } },
-            teacher: { select: { firstName: true, lastName: true } },
-          },
+            orderBy: { period: { startTime: "asc" } },
+              select: {
+                id: true,
+                room: true,
+                subject: { select: { name: true, code: true } },
+                teacher: { select: { firstName: true, lastName: true } },
+                period: { select: { startTime: true, endTime: true } },
+              },
         })
       : Promise.resolve([]),
     db.announcement.findMany({
@@ -595,13 +601,13 @@ export async function getStaffStats() {
     myPayroll,
     myAnnouncements,
   ] = await Promise.all([
-    db.attendance.count({
+    db.staffAttendance.count({
       where: {
         schoolId, employeeId: employee.id, status: "PRESENT",
         date: { gte: new Date(currentYear, currentMonth - 1, 1) },
       },
     }),
-    db.attendance.count({
+    db.staffAttendance.count({
       where: {
         schoolId, employeeId: employee.id,
         date: { gte: new Date(currentYear, currentMonth - 1, 1) },

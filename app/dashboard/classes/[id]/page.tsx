@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { auth } from "@/lib/auth";
 import { getClassById } from "@/features/classes/actions/class.actions";
 import { SectionList } from "@/features/classes/components/section-list";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +12,8 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+const ADMIN_ROLES = ["SUPER_ADMIN", "PRINCIPAL"];
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const result = await getClassById(id);
@@ -19,6 +22,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export default async function ClassDetailPage({ params }: PageProps) {
+  const session = await auth();
+  if (!session?.user) redirect("/login");
+
+  const canEdit = ADMIN_ROLES.includes(session.user.role);
+
   const { id } = await params;
   const result = await getClassById(id);
 
@@ -37,12 +45,14 @@ export default async function ClassDetailPage({ params }: PageProps) {
           <h1 className="text-2xl font-bold font-display">{cls.displayName}</h1>
           <p className="text-sm text-muted-foreground">Class details and sections</p>
         </div>
-        <Button asChild variant="outline" size="sm">
-          <Link href={`/dashboard/classes/${id}/edit`}>
-            <Pencil className="h-4 w-4 mr-2" />
-            Edit
-          </Link>
-        </Button>
+        {canEdit && (
+          <Button asChild variant="outline" size="sm">
+            <Link href={`/dashboard/classes/${id}/edit`}>
+              <Pencil className="h-4 w-4 mr-2" />
+              Edit
+            </Link>
+          </Button>
+        )}
       </div>
 
       {/* Stats */}
@@ -89,7 +99,7 @@ export default async function ClassDetailPage({ params }: PageProps) {
       </div>
 
       {/* Sections */}
-      <SectionList classId={id} sections={cls.sections} />
+      <SectionList classId={id} sections={cls.sections} canEdit={canEdit} />
     </div>
   );
 }

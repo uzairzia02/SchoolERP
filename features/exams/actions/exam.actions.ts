@@ -399,7 +399,18 @@ export async function getStudentsForGradeEntry(examId: string) {
     },
   });
 
-  return { exam, students };
+  // Decimal fields ko plain numbers mein convert karo, taake Client Component ko pass ho sake
+  const formattedStudents = students.map((student) => ({
+    ...student,
+    grades: student.grades.map((g) => ({
+      ...g,
+      marksObt: Number(g.marksObt),
+      percentage: Number(g.percentage),
+      gpa: g.gpa !== null ? Number(g.gpa) : null,
+    })),
+  }));
+
+  return { exam, students: formattedStudents };
 }
 
 // ─────────────────────────────────────────────────────────────

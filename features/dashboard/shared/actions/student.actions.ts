@@ -50,7 +50,7 @@ export async function getStudentStats() {
             subject: { select: { name: true } },
             teacher: { select: { firstName: true, lastName: true } },
           },
-          orderBy: { startTime: "asc" },
+          orderBy: { id: "asc" },
         })
       : Promise.resolve([]),
 

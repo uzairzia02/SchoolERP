@@ -64,7 +64,14 @@ export default async function StudentDashboard() {
 
       {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={<ClipboardCheck className="h-5 w-5 text-emerald-600" />} label="My Attendance" value={`${attendancePercentage}%`} iconBg="bg-emerald-500/10" />
+        <Link href="/dashboard/student/attendance">
+  <StatCard
+    icon={<ClipboardCheck className="h-5 w-5 text-emerald-600" />}
+    label="My Attendance"
+    value={`${attendancePercentage}%`}
+    iconBg="bg-emerald-500/10"
+  />
+</Link>
         <StatCard icon={<FileText className="h-5 w-5 text-blue-600" />} label="Pending Assignments" value={pendingAssignments.length} iconBg="bg-blue-500/10" />
         <StatCard icon={<BookOpen className="h-5 w-5 text-purple-600" />} label="Upcoming Exams" value={upcomingExams.length} iconBg="bg-purple-500/10" />
         <StatCard icon={<Wallet className="h-5 w-5 text-red-600" />} label="Outstanding Fees" value={formatCurrency(totalOutstandingFees)} iconBg="bg-red-500/10" />

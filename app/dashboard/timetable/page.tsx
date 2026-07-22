@@ -28,23 +28,57 @@ export default async function TimetablePage({ searchParams }: PageProps) {
   const schoolId = session.user.schoolId;
   const role = session.user.role as UserRole;
   const canEdit = ADMIN_ROLES.includes(role);
+  const isStudent = role === "STUDENT";
+  const isTeacher = role === "TEACHER" || role === "FACULTY";
 
-  const classes = await getClassesForSelect();
+  let selectedClassId: string | undefined;
+  let selectedSectionId: string | undefined;
+  let selectedTeacherId: string | undefined;
+  let classes: { id: string; name: string; displayName: string }[] = [];
+  let sections: { id: string; name: string }[] = [];
+  let pageTitle = "Timetable";
 
-  const selectedClassId = params.classId ?? classes[0]?.id ?? "";
-  const selectedSectionId = params.sectionId;
+  if (isStudent) {
+    // Student ko sirf apni class/section ka timetable dikhana hai
+    const student = await db.student.findUnique({
+      where: { userId: session.user.id },
+      select: { classId: true, sectionId: true },
+    });
 
-  const sections = selectedClassId
-    ? await db.section.findMany({
-        where: { classId: selectedClassId, schoolId, isActive: true, deletedAt: null },
-        select: { id: true, name: true },
-        orderBy: { name: "asc" },
-      })
-    : [];
+    if (!student?.classId) redirect("/dashboard/student");
+
+    selectedClassId = student.classId;
+    selectedSectionId = student.sectionId ?? undefined;
+    pageTitle = "My Timetable";
+  } else if (isTeacher) {
+    // Teacher ko sirf uski apni assigned classes ka timetable dikhana hai
+    const teacher = await db.teacher.findFirst({
+      where: { userId: session.user.id, schoolId, deletedAt: null },
+      select: { id: true },
+    });
+
+    if (!teacher) redirect("/dashboard/teacher");
+
+    selectedTeacherId = teacher.id;
+    pageTitle = "My Timetable";
+  } else {
+    classes = await getClassesForSelect();
+    selectedClassId = params.classId ?? classes[0]?.id ?? "";
+    selectedSectionId = params.sectionId;
+
+    sections = selectedClassId
+      ? await db.section.findMany({
+          where: { classId: selectedClassId, schoolId, isActive: true, deletedAt: null },
+          select: { id: true, name: true },
+          orderBy: { name: "asc" },
+        })
+      : [];
+  }
 
   const timetable = await getTimetable({
     classId: selectedClassId || undefined,
     sectionId: selectedSectionId,
+    teacherId: selectedTeacherId,
   });
 
   const teachers = canEdit
@@ -65,7 +99,7 @@ export default async function TimetablePage({ searchParams }: PageProps) {
             <Calendar className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold font-display">Timetable</h1>
+            <h1 className="text-2xl font-bold font-display">{pageTitle}</h1>
             <p className="text-sm text-muted-foreground">
               Weekly class schedule — {totalPeriods} periods configured
             </p>
@@ -74,18 +108,21 @@ export default async function TimetablePage({ searchParams }: PageProps) {
         {canEdit && <AddSlotForm teachers={teachers} />}
       </div>
 
-      <TimetableFilters
-        classes={classes}
-        sections={sections}
-        selectedClassId={selectedClassId}
-        selectedSectionId={selectedSectionId}
-      />
+      {/* Sirf admin/staff ko filter dikhega — Student aur Teacher ko nahi */}
+      {!isStudent && !isTeacher && (
+        <TimetableFilters
+          classes={classes}
+          sections={sections}
+          selectedClassId={selectedClassId ?? ""}
+          selectedSectionId={selectedSectionId}
+        />
+      )}
 
       <TimetableGrid
         timetable={timetable}
         canEdit={canEdit}
-        showTeacher={true}
-        showClass={!selectedClassId || params.classId === "all"}
+        showTeacher={!isTeacher}
+        showClass={isTeacher}
       />
     </div>
   );
