@@ -43,13 +43,23 @@ export async function getChildTimetable(studentId: string) {
   }
 
   const slots = await db.timetable.findMany({
-    where: { sectionId: student.section.id, isActive: true },
-    include: {
-      subject: { select: { name: true } },
-      teacher: { select: { firstName: true, lastName: true } },
+  where: { sectionId: student.section.id, isActive: true },
+  include: {
+    subject: { select: { name: true } },
+    teacher: { select: { firstName: true, lastName: true } },
+    period: {                           // 🔥 Period include karo
+      select: {
+        startTime: true,
+        endTime: true,
+      },
     },
-    orderBy: { startTime: "asc" },
-  });
+  },
+  orderBy: {
+    period: {                           // 🔥 Period ke startTime se order
+      startTime: "asc",
+    },
+  },
+});
 
   const timetable: Record<string, { subject: string; teacher: string; time: string; room: string }[]> = {};
   for (const day of DAYS_ORDER) timetable[day] = [];
@@ -59,7 +69,7 @@ export async function getChildTimetable(studentId: string) {
     timetable[slot.dayOfWeek].push({
       subject: slot.subject.name,
       teacher: `${slot.teacher.firstName} ${slot.teacher.lastName}`,
-      time: `${slot.startTime} - ${slot.endTime}`,
+      time: `${slot.period.startTime} - ${slot.period.endTime}`,
       room: slot.room ?? "TBA",
     });
   }

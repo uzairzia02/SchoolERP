@@ -529,5 +529,66 @@ export async function getStaffReport(params: {
 }
 
 // ─────────────────────────────────────────────────────────────
-// User ID
+// Staff attendance report
 // ─────────────────────────────────────────────────────────────
+
+export async function getStaffAttendanceReport(params: {
+  startDate: string;
+  endDate: string;
+}) {
+  const session = await auth();
+  if (!session?.user) redirect("/login");
+
+  const schoolId = session.user.schoolId;
+  const startDate = new Date(params.startDate);
+  startDate.setHours(0, 0, 0, 0);
+  const endDate = new Date(params.endDate);
+  endDate.setHours(23, 59, 59, 999);
+
+  const data = await db.staffAttendance.findMany({
+    where: {
+      schoolId,
+      date: {
+        gte: startDate,
+        lte: endDate,
+      },
+      OR: [
+        { teacherId: { not: null } },
+        { employeeId: { not: null } },
+      ],
+    },
+    select: {
+      id: true,
+      status: true,
+      checkIn: true,
+      checkOut: true,
+      date: true,
+      teacher: {
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          employeeId: true,
+          department: { select: { name: true } },
+          designation: { select: { name: true } },
+        },
+      },
+      employee: {
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          employeeId: true,
+          department: { select: { name: true } },
+          designation: { select: { name: true } },
+        },
+      },
+    },
+    orderBy: [
+      { date: "desc" },
+      { status: "asc" },
+    ],
+  });
+
+  return data;
+}

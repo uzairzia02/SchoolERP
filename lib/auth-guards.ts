@@ -1,15 +1,15 @@
-import { auth } from "./auth"; 
+import { auth } from "./auth";
 import { redirect } from "next/navigation";
 
 export async function requireRoles(allowedRoles: string[]) {
   const session = await auth();
-  
+
   if (!session?.user) {
-    throw new Error("UNAUTHENTICATED: Please login first.");
+    redirect("/login?loggedOut=true");
   }
 
   if (!allowedRoles.includes(session.user.role)) {
-    throw new Error("UNAUTHORIZED: You do not have permission.");
+    redirect("/login?loggedOut=true");
   }
 
   return session.user;

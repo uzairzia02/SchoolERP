@@ -107,6 +107,8 @@ export async function getHRStats() {
     todayStaffPresent, totalStaffToday,
     payrollProcessedThisMonth, totalStaffOnPayroll,
     departments, recentLeaves,
+    // 🔥 Naya: Staff attendance detail
+    staffAttendanceToday,
   ] = await Promise.all([
     db.teacher.count({ where: { schoolId, deletedAt: null } }),
     db.teacher.count({ where: { schoolId, isActive: true, deletedAt: null } }),
@@ -147,6 +149,34 @@ export async function getHRStats() {
         employee: { select: { firstName: true, lastName: true } },
       },
     }),
+    // 🔥 Staff attendance detail query (Promise.all ke andar)
+    db.staffAttendance.findMany({
+      where: {
+        schoolId,
+        date: today,
+      },
+      include: {
+        teacher: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            photo: true,
+          },
+        },
+        employee: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+            photo: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    }),
   ]);
 
   return {
@@ -161,6 +191,7 @@ export async function getHRStats() {
     payrollProcessedThisMonth, totalStaffOnPayroll,
     departments,
     recentLeaves,
+    staffAttendanceToday,  // 🔥 Return mein add karo
   };
 }
 
@@ -280,6 +311,24 @@ export async function getTeacherStats() {
 
   if (!teacher) return null;
 
+  const fullTimetable = await db.timetable.findMany({
+    where: { schoolId, teacherId: teacher.id, isActive: true },
+    select: { classId: true, sectionId: true },
+    distinct: ["classId", "sectionId"],
+  });
+
+  const totalClasses = fullTimetable.length;
+  const totalStudents =
+    fullTimetable.length === 0
+      ? 0
+      : await db.student.count({
+          where: {
+            schoolId,
+            deletedAt: null,
+            OR: fullTimetable.map((t) => ({ classId: t.classId, sectionId: t.sectionId ?? undefined })),
+          },
+        });
+
   const [
     myTimetableToday,
     pendingLeave, myLeaves,
@@ -339,6 +388,8 @@ export async function getTeacherStats() {
   return {
     teacher,
     mySubjectsCount: teacher.subjects.length,
+    totalClasses,
+    totalStudents,
     myTimetableToday,
     periodsToday: myTimetableToday.length,
     pendingLeave,

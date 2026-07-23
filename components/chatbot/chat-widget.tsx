@@ -11,12 +11,18 @@ interface Message {
   text: string;
 }
 
-export function ChatWidget() {
+interface ChatWidgetProps {
+  greeting?: string;
+}
+
+export function ChatWidget({ greeting }: ChatWidgetProps = {}) {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "model",
-      text: "Hi! I'm your school assistant. Ask me about your attendance, grades, assignments, exams, or fees.",
+      text:
+        greeting ??
+        "Hi! I'm your school assistant. Ask me about your attendance, grades, assignments, exams, or fees.",
     },
   ]);
   const [input, setInput] = useState("");

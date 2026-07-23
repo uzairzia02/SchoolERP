@@ -15,27 +15,33 @@ export const authConfig: NextAuthConfig = {
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const isAuthPage = nextUrl.pathname.startsWith("/login");
+  const isLoggedIn = !!auth?.user;
+  const isAuthPage = nextUrl.pathname.startsWith("/login");
+  
+  const justLoggedOut = nextUrl.searchParams.get("loggedOut") === "true";
 
-      if (isAuthPage) {
-        if (isLoggedIn) {
-          const role = auth.user.role as UserRole;
-          const dest = ROLE_DASHBOARD_ROUTES[role] ?? "/dashboard";
-          return Response.redirect(new URL(dest, nextUrl));
-        }
-        return true;
-      }
-
-      if (!isLoggedIn) {
-        const callbackUrl = encodeURIComponent(nextUrl.pathname);
-        return Response.redirect(
-          new URL(`/login?callbackUrl=${callbackUrl}`, nextUrl)
-        );
-      }
-
+  if (isAuthPage) {
+    if (justLoggedOut) {
       return true;
-    },
+    }
+    
+    if (isLoggedIn) {
+      const role = auth.user.role as UserRole;
+      const dest = ROLE_DASHBOARD_ROUTES[role] ?? "/dashboard";
+      return Response.redirect(new URL(dest, nextUrl));
+    }
+    return true;
+  }
+
+  if (!isLoggedIn) {
+    const callbackUrl = encodeURIComponent(nextUrl.pathname);
+    return Response.redirect(
+      new URL(`/login?callbackUrl=${callbackUrl}`, nextUrl)
+    );
+  }
+
+  return true;
+},
     jwt({ token, user }) {
       if (user) {
         token.id = user.id;

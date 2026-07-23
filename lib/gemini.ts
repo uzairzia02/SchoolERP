@@ -11,4 +11,4 @@ export const gemini = new GoogleGenAI({
 
 // Free-tier friendly model. Check Google AI Studio for current free-tier
 // availability — swap this string if Google changes free-tier models.
-export const GEMINI_MODEL = "gemini-2.5-flash";
+export const GEMINI_MODEL = "gemini-2.0-flash";

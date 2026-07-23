@@ -52,15 +52,18 @@ export default async function TeacherDashboard() {
   }
 
   const {
-    teacherName,
+    teacher,
     totalClasses,
     totalStudents,
-    todayClasses = [],
-    pendingLeaveRequests = [],
+    myTimetableToday: todayClasses = [],
+    myLeaves: recentLeaves = [],
+    pendingLeave,
     upcomingExams = [],
-    recentAnnouncements = [],
-    attendanceMarkedToday = false,
+    myAnnouncements: recentAnnouncements = [],
+    isAttendanceMarkedToday: attendanceMarkedToday = false,
   } = stats;
+
+  const teacherName = `${teacher.firstName} ${teacher.lastName}`;
 
   return (
     <div className="space-y-6 p-4 md:p-6">
@@ -91,7 +94,7 @@ export default async function TeacherDashboard() {
         <StatCard
           icon={<CalendarOff className="h-5 w-5 text-amber-600" />}
           label="Pending Leave Requests"
-          value={pendingLeaveRequests.length}
+          value={pendingLeave}
           iconBg="bg-amber-500/10"
         />
         <StatCard
@@ -129,17 +132,19 @@ export default async function TeacherDashboard() {
                 >
                   <div className="flex items-center gap-3">
                     <div className="flex h-9 w-9 items-center justify-center rounded-md bg-blue-500/10 text-xs font-semibold text-blue-700">
-                      {getInitials(cls.className)}
+                      {getInitials(cls.class.displayName)}
                     </div>
                     <div>
-                      <p className="text-sm font-medium">{cls.subject}</p>
+                      <p className="text-sm font-medium">{cls.subject.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        {cls.className} • Room {cls.room}
+                        {cls.class.displayName}
+                        {cls.section?.name ? ` ${cls.section.name}` : ""}
+                        {cls.room ? ` • Room ${cls.room}` : ""}
                       </p>
                     </div>
                   </div>
                   <Badge variant="outline" className="font-normal">
-                    {cls.time}
+                    {cls.period.startTime}–{cls.period.endTime}
                   </Badge>
                 </div>
               ))}
@@ -152,26 +157,26 @@ export default async function TeacherDashboard() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-semibold flex items-center gap-2">
               <FileText className="h-4 w-4 text-muted-foreground" />
-              Leave Requests
+              My Recent Leaves
             </h2>
             <Button asChild variant="ghost" size="sm">
               <Link href="/dashboard/teacher/leave-requests">View All</Link>
             </Button>
           </div>
 
-          {pendingLeaveRequests.length === 0 ? (
+          {recentLeaves.length === 0 ? (
             <EmptyState
               icon={<CheckCircle className="h-8 w-8" />}
-              text="No pending requests"
+              text="No leave applications yet"
             />
           ) : (
             <div className="space-y-3">
-              {pendingLeaveRequests.slice(0, 5).map((req: any) => (
+              {recentLeaves.map((req: any) => (
                 <div key={req.id} className="flex items-start justify-between gap-2">
                   <div>
-                    <p className="text-sm font-medium">{req.studentName}</p>
+                    <p className="text-sm font-medium">{req.type}</p>
                     <p className="text-xs text-muted-foreground">
-                      {formatDate(req.fromDate)} – {formatDate(req.toDate)}
+                      {formatDate(req.startDate)} – {formatDate(req.endDate)}
                     </p>
                   </div>
                   <Badge
@@ -212,15 +217,15 @@ export default async function TeacherDashboard() {
                   className="flex items-center justify-between rounded-lg border p-3"
                 >
                   <div>
-                    <p className="text-sm font-medium">{exam.subject}</p>
-                    <p className="text-xs text-muted-foreground">{exam.className}</p>
+                    <p className="text-sm font-medium">{exam.name}</p>
+                    <p className="text-xs text-muted-foreground">{exam.class.displayName}</p>
                   </div>
                   <div className="text-right">
                     <Badge variant="secondary" className="font-normal mb-1">
                       {EXAM_TYPE_LABELS[exam.type] ?? exam.type}
                     </Badge>
                     <p className="text-xs text-muted-foreground">
-                      {formatDate(exam.date)}
+                      {formatDate(exam.startDate)}
                     </p>
                   </div>
                 </div>

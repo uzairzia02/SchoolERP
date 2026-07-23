@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getHRStats } from "@/features/dashboard/shared/actions/dashboard.actions";
+import { approveLeave, rejectLeave } from "@/features/leaves/actions/leave.actions";
 import { formatDate, formatRelative } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
@@ -139,47 +140,64 @@ export default async function HRDashboard() {
         </div>
 
         {/* Pending Leaves */}
-        <div className="rounded-xl border bg-card p-5">
-          <div className="flex items-center justify-between mb-4">
+        {/* Pending Leaves */}
+<div className="rounded-xl border bg-card p-5">
+  <div className="flex items-center justify-between mb-4">
+    <div className="flex items-center gap-2">
+      <CalendarOff className="h-4 w-4 text-muted-foreground" />
+      <h3 className="font-semibold font-display text-sm">Pending Leave Requests</h3>
+    </div>
+    <Link href="/dashboard/leaves?status=PENDING" className="text-xs text-primary hover:underline">
+      View All
+    </Link>
+  </div>
+  {stats.recentLeaves.length === 0 ? (
+    <p className="text-sm text-muted-foreground text-center py-4">No pending leaves</p>
+  ) : (
+    <div className="space-y-2">
+      {stats.recentLeaves.map((leave) => {
+        const staff = leave.teacher ?? leave.employee;
+        return (
+          <div key={leave.id} className="flex items-center justify-between rounded-lg border p-3">
+            <div>
+              <p className="text-sm font-medium">
+                {staff ? `${staff.firstName} ${staff.lastName}` : "—"}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {LEAVE_TYPE_LABELS[leave.type]} · {leave.totalDays} day(s)
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {formatDate(leave.startDate)} — {formatDate(leave.endDate)}
+              </p>
+            </div>
             <div className="flex items-center gap-2">
-              <CalendarOff className="h-4 w-4 text-muted-foreground" />
-              <h3 className="font-semibold font-display text-sm">Pending Leave Requests</h3>
+              {/* Approve Button */}
+              <form action={approveLeave.bind(null, leave.id)}>
+                <button
+                  type="submit"
+                  className="text-[10px] bg-emerald-500 text-white px-2 py-1 rounded hover:bg-emerald-600 transition-colors"
+                >
+                  Approve
+                </button>
+              </form>
+              {/* Reject Button */}
+              <form action={rejectLeave.bind(null, leave.id)}>
+                <button
+                  type="submit"
+                  className="text-[10px] bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition-colors"
+                >
+                  Reject
+                </button>
+              </form>
             </div>
-            <Link href="/dashboard/leaves?status=PENDING" className="text-xs text-primary hover:underline">
-              View All
-            </Link>
           </div>
-          {stats.recentLeaves.length === 0 ? (
-            <p className="text-sm text-muted-foreground text-center py-4">No pending leaves</p>
-          ) : (
-            <div className="space-y-2">
-              {stats.recentLeaves.map((leave) => {
-                const staff = leave.teacher ?? leave.employee;
-                return (
-                  <div key={leave.id} className="flex items-center justify-between rounded-lg border p-3">
-                    <div>
-                      <p className="text-sm font-medium">
-                        {staff ? `${staff.firstName} ${staff.lastName}` : "—"}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {LEAVE_TYPE_LABELS[leave.type]} · {leave.totalDays} day(s)
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {formatDate(leave.startDate)} — {formatDate(leave.endDate)}
-                      </p>
-                    </div>
-                    <Link href="/dashboard/leaves?status=PENDING">
-                      <Badge variant="outline" className="text-[10px] text-yellow-700 border-yellow-200">
-                        Pending
-                      </Badge>
-                    </Link>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
+        );
+      })}
+    </div>
+  )}
+</div>
       </div>
+
     </div>
   );
 }

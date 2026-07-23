@@ -937,6 +937,7 @@ model Leave {
   reason     String
   status     LeaveStatus @default(PENDING)
   approvedBy String?
+  approvedAt DateTime?
   remarks    String?
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt

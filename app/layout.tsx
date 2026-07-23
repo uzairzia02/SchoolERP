@@ -37,6 +37,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // 🔥 Session fetch karo lekin login page par null bhejo
   const session = await auth();
 
   return (

@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@/lib/auth";
 import { Sidebar } from "@/components/dashboard/sidebar";
 import { Header } from "@/components/dashboard/header";
+import { ClientAuthGuard } from "@/components/auth/ClientAuthGuard";
 import type { UserRole } from "@prisma/client";
 import type { AuthUser } from "@/types/globals.types";
 
@@ -13,20 +14,22 @@ export default async function DashboardLayout({
   const session = await auth();
 
   if (!session?.user) {
-    redirect("/login");
+    redirect("/login?loggedOut=true");
   }
 
   const user = session.user as AuthUser;
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
-      <Sidebar role={user.role as UserRole} />
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <Header user={user} />
-        <main className="flex-1 overflow-y-auto p-6 page-enter">
-          {children}
-        </main>
+    <ClientAuthGuard allowedRoles={["ADMIN", "TEACHER", "STUDENT", "PARENT", "HR", "SUPER_ADMIN"]}>
+      <div className="flex h-screen overflow-hidden bg-background">
+        <Sidebar role={user.role as UserRole} />
+        <div className="flex flex-col flex-1 overflow-hidden">
+          <Header user={user} />
+          <main className="flex-1 overflow-y-auto p-6 page-enter">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </ClientAuthGuard>
   );
 }

@@ -203,7 +203,7 @@ export const NAV_CONFIG: Record<UserRole, NavGroup[]> = {
     title: "My Family",
     items: [
       { title: "My Children", href: "/dashboard/parent/children", icon: "Users" },
-      { title: "Assignments", href: "/dashboard/parent/assignments", icon: "ClipboardList" },
+      { title: "Assignments", href: "/dashboard/parent/assignment", icon: "ClipboardList" },
       { title: "Announcements", href: "/dashboard/announcements", icon: "Megaphone" },
     ],
   },

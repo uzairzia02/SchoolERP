@@ -615,7 +615,19 @@ export async function getTeacherExams() {
 
   if (!teacher) return [];
 
-  const subjectIds = teacher.subjects.map((s) => s.subjectId);
+  // Pehle TeacherSubject se try karo
+  let subjectIds = teacher.subjects.map((s) => s.subjectId);
+
+  // Agar khaali hai, Timetable se subjects nikalo (fallback)
+  if (subjectIds.length === 0) {
+    const timetableSubjects = await db.timetable.findMany({
+      where: { teacherId: teacher.id, schoolId, isActive: true },
+      select: { subjectId: true },
+      distinct: ["subjectId"],
+    });
+    subjectIds = timetableSubjects.map((t) => t.subjectId);
+  }
+
   if (subjectIds.length === 0) return [];
 
   const exams = await db.exam.findMany({

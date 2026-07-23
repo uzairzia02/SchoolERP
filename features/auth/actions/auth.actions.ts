@@ -10,6 +10,8 @@ import type { UserRole } from "@prisma/client";
 import { AuthError } from "next-auth";
 import { db } from "@/lib/db";
 import { hash } from "bcryptjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 // ─────────────────────────────────────────────────────────────
 // Login Action
@@ -75,11 +77,17 @@ export async function loginAction(
 // Logout Action
 // ─────────────────────────────────────────────────────────────
 
-export async function logoutAction() {
+  export async function logoutAction() {
   console.log("LOGOUT START");
-  await signOut({ redirectTo: "/login" });
+  
+  // Server-side signOut — NextAuth khud cookies handle karega
+  await signOut({ 
+    redirect: true,
+    redirectTo: "/login?loggedOut=true" 
+  });
+  
+  console.log("LOGOUT END");
 }
-
 // ─────────────────────────────────────────────────────────────
 // Seed Super Admin (run once during setup)
 // ─────────────────────────────────────────────────────────────

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import { getAttendanceReport } from "@/features/reports/actions/report.actions";
+import { getAttendanceReport, getStaffAttendanceReport } from "@/features/reports/actions/report.actions";
 import { getClassesForSelect } from "@/features/students/actions/student.actions";
 import { AttendanceReport } from "@/features/reports/components/attendance-report";
+import { StaffAttendanceReport } from "@/features/reports/components/staff-attendance-report";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, GraduationCap, Users } from "lucide-react";
 import Link from "next/link";
 
 export const metadata: Metadata = { title: "Attendance Report" };
@@ -14,6 +16,7 @@ interface PageProps {
     sectionId?: string;
     startDate?: string;
     endDate?: string;
+    tab?: string;
   }>;
 }
 
@@ -27,11 +30,16 @@ export default async function AttendanceReportPage({ searchParams }: PageProps) 
 
   const startDate = params.startDate ?? firstDay;
   const endDate = params.endDate ?? today;
+  const activeTab = params.tab ?? "students";
 
-  const [data, classes] = await Promise.all([
+  const [studentData, staffData, classes] = await Promise.all([
     getAttendanceReport({
       classId: params.classId,
       sectionId: params.sectionId,
+      startDate,
+      endDate,
+    }),
+    getStaffAttendanceReport({
       startDate,
       endDate,
     }),
@@ -49,15 +57,44 @@ export default async function AttendanceReportPage({ searchParams }: PageProps) 
         <div>
           <h1 className="text-2xl font-bold font-display">Attendance Report</h1>
           <p className="text-sm text-muted-foreground">
-            Student attendance analysis with percentage breakdown
+            Student & Staff attendance analysis
           </p>
         </div>
       </div>
-      <AttendanceReport
-        data={data}
-        classes={classes}
-        params={{ classId: params.classId, sectionId: params.sectionId, startDate, endDate }}
-      />
+
+      <Tabs defaultValue={activeTab}>
+        <TabsList>
+          <TabsTrigger value="students">
+            <GraduationCap className="h-4 w-4 mr-2" />
+            Students
+          </TabsTrigger>
+          <TabsTrigger value="staff">
+            <Users className="h-4 w-4 mr-2" />
+            Staff
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="students" className="mt-4">
+          <AttendanceReport
+            data={studentData}
+            classes={classes}
+            params={{
+              classId: params.classId,
+              sectionId: params.sectionId,
+              startDate,
+              endDate,
+            }}
+          />
+        </TabsContent>
+
+        <TabsContent value="staff" className="mt-4">
+          <StaffAttendanceReport
+            data={staffData}
+            startDate={startDate}
+            endDate={endDate}
+          />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
