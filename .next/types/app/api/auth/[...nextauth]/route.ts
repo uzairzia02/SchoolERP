@@ -1,4 +1,4 @@
-// File: C:\Work\SMSyst\school-erp\app\api\auth\[...nextauth]\route.ts
+// File: /workspaces/SchoolERP/app/api/auth/[...nextauth]/route.ts
 import * as entry from '../../../../../../app/api/auth/[...nextauth]/route.js'
 import type { NextRequest } from 'next/server.js'
 

@@ -598,3 +598,62 @@ export async function getResultSheet(
 
   return { success: true, data: rows };
 }
+
+export async function getTeacherExams() {
+  const session = await auth();
+  if (!session?.user) redirect("/login");
+
+  const schoolId = session.user.schoolId;
+
+  const teacher = await db.teacher.findFirst({
+    where: { userId: session.user.id, schoolId, deletedAt: null },
+    select: {
+      id: true,
+      subjects: { select: { subjectId: true } },
+    },
+  });
+
+  if (!teacher) return [];
+
+  const subjectIds = teacher.subjects.map((s) => s.subjectId);
+  if (subjectIds.length === 0) return [];
+
+  const exams = await db.exam.findMany({
+    where: {
+      schoolId,
+      deletedAt: null,
+      subjects: { some: { subjectId: { in: subjectIds } } },
+    },
+    orderBy: { startDate: "desc" },
+    select: {
+      id: true,
+      name: true,
+      type: true,
+      startDate: true,
+      endDate: true,
+      isPublished: true,
+      class: { select: { displayName: true } },
+      subjects: {
+        where: { subjectId: { in: subjectIds } },
+        select: {
+          subject: { select: { id: true, name: true, code: true } },
+        },
+      },
+    },
+  });
+
+  const examsWithGradeCounts = await Promise.all(
+    exams.map(async (exam) => {
+      const gradesEntered = await db.grade.count({
+        where: {
+          examId: exam.id,
+          subjectId: { in: exam.subjects.map((s) => s.subject.id) },
+        },
+      });
+
+      return { ...exam, gradesEntered };
+    })
+  );
+
+  return examsWithGradeCounts;
+}
