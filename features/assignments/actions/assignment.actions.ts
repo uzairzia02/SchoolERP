@@ -30,7 +30,7 @@ export async function createAssignment(input: CreateAssignmentInput) {
 
   const parsed = createAssignmentSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0]?.message ?? "Invalid input" };
+    return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
   const teacher = await db.teacher.findUnique({
@@ -74,7 +74,7 @@ export async function updateAssignment(input: UpdateAssignmentInput) {
 
   const parsed = updateAssignmentSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0]?.message ?? "Invalid input" };
+    return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
   const { id, ...data } = parsed.data;
@@ -333,7 +333,7 @@ export async function submitAssignment(input: SubmitAssignmentInput) {
 
   const parsed = submitAssignmentSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0]?.message ?? "Invalid input" };
+    return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
   const student = await db.student.findUnique({ where: { userId: session.user.id } });
@@ -394,7 +394,7 @@ export async function gradeSubmission(input: GradeSubmissionInput) {
 
   const parsed = gradeSubmissionSchema.safeParse(input);
   if (!parsed.success) {
-    return { success: false, error: parsed.error.errors[0]?.message ?? "Invalid input" };
+    return { success: false, error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
   const submission = await db.assignmentSubmission.findUnique({
@@ -438,18 +438,18 @@ export async function getAssignmentFormOptions() {
   const teacher = TEACHING_ROLES.includes(session.user.role)
     ? await db.teacher.findUnique({
         where: { userId: session.user.id },
-        include: { subjects: { include: { subject: { include: { class: true } } } } },
+        include: { subjects: { include: { subject: { include: { classes: true } } } } },
       })
     : null;
 
   if (teacher) {
     const subjects = teacher.subjects.map((ts) => ts.subject);
     const classes = Array.from(
-      new Map(subjects.filter((s) => s.class).map((s) => [s.class!.id, s.class!])).values()
+      new Map(subjects.filter((s) => s.classes).map((s) => [s.classes[0].id, s.classes[0]])).values()
     );
     return {
       classes: classes.map((c) => ({ id: c.id, name: c.displayName })),
-      subjects: subjects.map((s) => ({ id: s.id, name: s.name, classId: s.classId })),
+      subjects: subjects.map((s) => ({ id: s.id, name: s.name, classId: s.classes[0]?.classId ?? '', })),
     };
   }
 

@@ -5,9 +5,7 @@ export const admissionSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(50),
   lastName: z.string().min(1, "Last name is required").max(50),
   dateOfBirth: z.string().min(1, "Date of birth is required"),
-  gender: z.enum(["MALE", "FEMALE", "OTHER"], {
-    required_error: "Gender is required",
-  }),
+  gender: z.enum(["MALE", "FEMALE", "OTHER"]),
   religion: z.string().optional(),
   nationality: z.string().optional(),
   phone: z.string().optional(),

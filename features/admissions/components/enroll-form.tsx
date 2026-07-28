@@ -47,7 +47,7 @@ export function EnrollForm({ admission }: EnrollFormProps) {
     setError,
     formState: { errors, isSubmitting },
   } = useForm<EnrollStudentInput>({
-    resolver: zodResolver(enrollStudentSchema),
+    resolver: zodResolver(enrollStudentSchema as any),
     defaultValues: {
       admissionId: admission.id,
       admissionDate: new Date().toISOString().split("T")[0],

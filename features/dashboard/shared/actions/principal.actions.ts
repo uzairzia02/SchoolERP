@@ -33,7 +33,7 @@ export async function getPrincipalStats() {
     db.employee.count({ where: { schoolId, isActive: true } }),
     db.class.count({ where: { schoolId, isActive: true } }),
 
-    db.attendance.groupBy({
+    db.studentAttendance.groupBy({
       by: ["status"],
       where: {
         schoolId,
@@ -87,8 +87,8 @@ export async function getPrincipalStats() {
   ]);
 
   const presentCount =
-    attendanceToday.find((a) => a.status === "PRESENT")?._count ?? 0;
-  const totalMarkedToday = attendanceToday.reduce((sum, a) => sum + a._count, 0);
+    attendanceToday.find((a: any) => a.status === "PRESENT")?._count ?? 0;
+  const totalMarkedToday = attendanceToday.reduce((sum: number, a: any) => sum + a._count, 0);
 
   const outstandingTotal = outstandingFees.reduce(
     (sum, f) =>
@@ -110,7 +110,7 @@ export async function getPrincipalStats() {
       totalMarked: totalMarkedToday,
       percentage: totalMarkedToday > 0 ? Math.round((presentCount / totalMarkedToday) * 100) : 0,
     },
-    pendingLeaves: pendingLeaves.map((l) => ({
+    pendingLeaves: pendingLeaves.map((l: any) => ({
       id: l.id,
       name: l.teacher
         ? `${l.teacher.firstName} ${l.teacher.lastName}`
@@ -124,7 +124,7 @@ export async function getPrincipalStats() {
     })),
     feeCollectedThisMonth: Number(feeCollectedThisMonth._sum.paidAmount ?? 0),
     outstandingFees: outstandingTotal,
-    recentAdmissions: recentAdmissions.map((a) => ({
+    recentAdmissions: recentAdmissions.map((a: any) => ({
       id: a.id,
       name: `${a.firstName} ${a.lastName}`,
       applyingForClass: a.applyingForClass,

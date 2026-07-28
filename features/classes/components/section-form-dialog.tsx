@@ -29,7 +29,7 @@ export function SectionFormDialog({ classId }: SectionFormDialogProps) {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<SectionInput>({
-    resolver: zodResolver(sectionSchema),
+    resolver: zodResolver(sectionSchema) as any,
     defaultValues: { classId, capacity: 40 },
   });
 

@@ -29,7 +29,7 @@ export function ClassForm({ classData }: ClassFormProps) {
     setError,
     formState: { errors, isSubmitting },
   } = useForm<ClassInput>({
-    resolver: zodResolver(classSchema),
+    resolver: zodResolver(classSchema) as any,
     defaultValues: classData
       ? {
           name: classData.name,

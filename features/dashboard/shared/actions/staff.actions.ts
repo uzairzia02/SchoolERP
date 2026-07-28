@@ -25,7 +25,7 @@ export async function getStaffStats() {
 
   const [attendanceToday, myLeaveRequests, latestPayroll, upcomingHolidays, recentAnnouncements] =
     await Promise.all([
-      db.attendance.findFirst({
+      db.staffAttendance.findFirst({
         where: { employeeId: employee.id, date: { gte: startOfDay, lte: endOfDay } },
       }),
 
@@ -61,7 +61,7 @@ export async function getStaffStats() {
     department: employee.department?.name ?? "N/A",
     designation: employee.designation?.name ?? "N/A",
     attendanceMarkedToday: !!attendanceToday,
-    myLeaveRequests: myLeaveRequests.map((l) => ({
+    myLeaveRequests: myLeaveRequests.map((l: any) => ({
       id: l.id,
       type: l.type,
       fromDate: l.startDate,
@@ -76,12 +76,12 @@ export async function getStaffStats() {
           paidDate: latestPayroll.paidDate,
         }
       : null,
-    upcomingHolidays: upcomingHolidays.map((h) => ({
+    upcomingHolidays: upcomingHolidays.map((h: any) => ({
       id: h.id,
       name: h.name,
       date: h.date,
     })),
-    recentAnnouncements: recentAnnouncements.map((a) => ({
+    recentAnnouncements: recentAnnouncements.map((a: any) => ({
       id: a.id,
       title: a.title,
       createdAt: a.createdAt,

@@ -9,7 +9,8 @@ export const classSchema = z.object({
     .string()
     .min(1, "Display name is required")
     .max(50, "Display name too long"),
-  order: z.coerce.number().int().min(0).default(0),
+  order: z.coerce.number().default(1),
+
 });
 
 export const classUpdateSchema = classSchema.partial().extend({

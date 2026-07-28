@@ -63,7 +63,7 @@ export function AnnouncementForm({ announcement }: AnnouncementFormProps) {
     setError,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema) as any,
     defaultValues: {
       title: announcement?.title ?? "",
       content: announcement?.content ?? "",

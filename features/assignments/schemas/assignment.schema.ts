@@ -5,7 +5,7 @@ export const createAssignmentSchema = z.object({
   classId: z.string().min(1, "Class is required"),
   title: z.string().min(3, "Title must be at least 3 characters").max(150),
   description: z.string().max(2000).optional(),
-  dueDate: z.coerce.date({ required_error: "Due date is required" }),
+  dueDate: z.coerce.date(),
   totalMarks: z.coerce.number().int().positive().optional(),
   attachments: z.array(z.string().url("Must be a valid URL")).default([]),
 });
