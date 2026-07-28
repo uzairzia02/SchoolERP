@@ -51,10 +51,10 @@ export function FeeChart({ data }: FeeChartProps) {
               fontSize: "12px",
             }}
             labelStyle={{ color: "hsl(var(--foreground))", fontWeight: 600 }}
-            formatter={(value: number) => [
-              `PKR ${value.toLocaleString()}`,
-              "Collected",
-            ]}
+          formatter={((value: number | undefined) => {
+          if (value === undefined) return ["PKR 0", "Collected"];
+          return [`PKR ${value.toLocaleString()}`, "Collected"];
+        }) as any}
           />
           <Bar
             dataKey="collected"

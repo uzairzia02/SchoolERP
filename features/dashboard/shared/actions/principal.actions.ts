@@ -38,7 +38,7 @@ export async function getPrincipalStats() {
       where: {
         schoolId,
         date: { gte: startOfDay, lte: endOfDay },
-        studentId: { not: null },
+        studentId: { not: "" },
       },
       _count: true,
     }),

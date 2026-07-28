@@ -34,9 +34,6 @@ export async function getStudentStats() {
     pendingFees,
     recentAnnouncements,
   ] = await Promise.all([
-    // Some Prisma schemas may use a different model name for attendance.
-    // Use a dynamic lookup to support various possible model names without
-    // causing a TypeScript error if a property does not exist on the client.
     (async () => {
       const attendanceModel = (db as any).attendanceRecord ?? (db as any).attendance ?? (db as any).attendanceRecords ?? (db as any).attendance_records;
       if (!attendanceModel) return [];
@@ -49,6 +46,7 @@ export async function getStudentStats() {
           include: {
             subject: { select: { name: true } },
             teacher: { select: { firstName: true, lastName: true } },
+            period: { select: { startTime: true, endTime: true } }
           },
           orderBy: { id: "asc" },
         })
@@ -123,7 +121,7 @@ export async function getStudentStats() {
       id: t.id,
       subject: t.subject.name,
       teacher: `${t.teacher.firstName} ${t.teacher.lastName}`,
-      time: `${t.startTime} - ${t.endTime}`,
+      time: `${t.period.startTime} - ${t.period.endTime}`,
       room: t.room ?? "TBA",
     })),
     upcomingExams: upcomingExams.map((e) => ({
