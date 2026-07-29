@@ -45,7 +45,7 @@ export function EmployeeForm({ employee }: EmployeeFormProps) {
     setError,
     formState: { errors, isSubmitting },
   } = useForm<EmployeeInput>({
-    resolver: zodResolver(employeeSchema),
+    resolver: zodResolver(employeeSchema) as any,
     defaultValues: employee
       ? {
           firstName: employee.firstName,

@@ -136,6 +136,7 @@ export async function getMyProfile(): Promise<ActionResult<ProfileData>> {
       profile: profile
         ? {
             ...profile,
+            phone: (profile as any).phone ?? "",
             gender: "gender" in profile ? profile.gender : undefined,
             dateOfBirth: "dateOfBirth" in profile ? profile.dateOfBirth : undefined,
             address: "address" in profile ? profile.address : undefined,
@@ -150,7 +151,7 @@ export async function getMyProfile(): Promise<ActionResult<ProfileData>> {
             class: "class" in profile ? (profile as any).class : undefined,
             section: "section" in profile ? (profile as any).section : undefined,
             rollNumber: "rollNumber" in profile ? (profile as any).rollNumber : undefined,
-          }
+          } as any
         : null,
     },
   };

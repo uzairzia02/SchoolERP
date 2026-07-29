@@ -34,7 +34,7 @@ export function FeeSettings({ settings }: FeeSettingsProps) {
     handleSubmit,
     formState: { errors, isSubmitting, isDirty },
   } = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(schema) as any,
     defaultValues: {
       bankName: settings.bankName ?? "",
       bankAccountNumber: settings.bankAccountNumber ?? "",

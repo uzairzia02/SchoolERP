@@ -30,8 +30,8 @@ export function SubjectDetailView({ subject }: SubjectDetailProps) {
                 <Badge variant={subject.isActive ? "default" : "secondary"}>
                   {subject.isActive ? "Active" : "Inactive"}
                 </Badge>
-                {subject.class && (
-                  <Badge variant="outline">{subject.class.displayName}</Badge>
+                {subject.classes.length > 0 && subject.classes[0]?.class && (
+                  <Badge variant="outline">{subject.classes[0]?.class.displayName}</Badge>
                 )}
               </div>
             </div>
@@ -87,11 +87,11 @@ export function SubjectDetailView({ subject }: SubjectDetailProps) {
               <GraduationCap className="h-4 w-4 text-muted-foreground" />
               <h3 className="font-semibold font-display text-sm">Class Assignment</h3>
             </div>
-            {subject.class ? (
+            {subject.classes[0] ? (
               <div className="flex items-center gap-2">
-                <Badge variant="outline">{subject.class.displayName}</Badge>
+                <Badge variant="outline">{subject.classes[0]?.class.displayName}</Badge>
                 <span className="text-xs text-muted-foreground">
-                  This subject is assigned to {subject.class.displayName}
+                  This subject is assigned to {subject.classes[0]?.class.displayName}
                 </span>
               </div>
             ) : (

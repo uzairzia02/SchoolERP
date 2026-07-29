@@ -33,7 +33,7 @@ export function CollectFeeForm({ fee, onClose }: CollectFeeFormProps) {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<CollectFeeInput>({
-    resolver: zodResolver(collectFeeSchema),
+    resolver: zodResolver(collectFeeSchema)as any,
     defaultValues: {
       feeId: fee.id,
       paidAmount: remaining,

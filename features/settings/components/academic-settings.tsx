@@ -76,7 +76,7 @@ export function AcademicSettings({ settings, terms, houses }: AcademicSettingsPr
     handleSubmit,
     formState: { errors, isSubmitting, isDirty },
   } = useForm<AcademicFormData>({
-    resolver: zodResolver(academicSchema),
+    resolver: zodResolver(academicSchema) as any,
     defaultValues: {
       currentSession: settings.currentSession,
       sessionStartDate: settings.sessionStartDate

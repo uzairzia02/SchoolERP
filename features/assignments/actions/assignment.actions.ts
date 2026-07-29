@@ -448,7 +448,7 @@ export async function getAssignmentFormOptions() {
       new Map(subjects.filter((s) => s.classes).map((s) => [s.classes[0].id, s.classes[0]])).values()
     );
     return {
-      classes: classes.map((c) => ({ id: c.id, name: c.displayName })),
+      classes: classes.map((c) => ({ id: c.id, name: c.id })),
       subjects: subjects.map((s) => ({ id: s.id, name: s.name, classId: s.classes[0]?.classId ?? '', })),
     };
   }

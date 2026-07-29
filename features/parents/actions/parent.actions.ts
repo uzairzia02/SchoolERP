@@ -157,7 +157,7 @@ export async function getParentById(
               attendance: {
                 where: {
                   date: { gte: firstDay, lte: today },
-                  studentId: { not: null },
+                  studentId: { not: "" },
                 },
                 select: { status: true },
               },

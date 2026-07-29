@@ -31,7 +31,7 @@ export function FeeTypeForm({ feeType, onSuccess }: FeeTypeFormProps) {
     setError,
     formState: { errors, isSubmitting },
   } = useForm<FeeTypeInput>({
-    resolver: zodResolver(feeTypeSchema),
+    resolver: zodResolver(feeTypeSchema)as any,
     defaultValues: feeType
       ? {
           name: feeType.name,

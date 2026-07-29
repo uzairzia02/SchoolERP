@@ -50,7 +50,7 @@ export function ProcessPayrollForm({
     watch,
     formState: { errors, isSubmitting },
   } = useForm<ProcessPayrollInput>({
-    resolver: zodResolver(processPayrollSchema),
+    resolver: zodResolver(processPayrollSchema) as any,
     defaultValues: {
       employeeId: employee.id,
       month,

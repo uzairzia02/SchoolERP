@@ -99,12 +99,14 @@ const columns: ColumnDef<SubjectListItem>[] = [
     accessorKey: "class",
     header: "Class",
     cell: ({ row }) => (
-      <span className="text-sm">
-        {row.original.class?.displayName ?? (
-          <span className="text-muted-foreground">All Classes</span>
-        )}
-      </span>
-    ),
+  <span className="text-sm">
+    {row.original.classes[0]?.class.displayName ? (
+      row.original.classes[0].class.displayName
+    ) : (
+      <span className="text-muted-foreground">All Classes</span>
+    )}
+  </span>
+),
   },
   {
     accessorKey: "creditHours",
