@@ -8,6 +8,8 @@ const nextConfig: NextConfig = {
         "localhost:3000",
         "musical-xylophone-4jq74x4x4jw93p9j-3000.app.github.dev",
         "*.app.github.dev",
+        "school-erp-mu-orcin.vercel.app",
+        "*.vercel.app",
       ],
     },
   },
